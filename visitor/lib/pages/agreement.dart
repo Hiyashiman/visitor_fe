@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:visitor/pages/business.dart';
 
 void main() => runApp(const Agreement());
 
@@ -120,7 +121,10 @@ class _PersonalDataConsentScreenState extends State<PersonalDataConsentScreen> {
                           backgroundColor: Colors.blue,
                           textStyle: const TextStyle(color: Colors.white)),
                       onPressed: () {
-                        // Handle "Agree" action
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => MyHomePage()),
+                        );
                       },
                       child: const Text('ตกลง'),
                     ),
