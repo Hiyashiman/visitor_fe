@@ -25,6 +25,27 @@ class PersonalDataConsentScreen extends StatefulWidget {
 class _PersonalDataConsentScreenState extends State<PersonalDataConsentScreen> {
   int _currentStep = 0;
 
+  // ignore: unused_element
+  void _showDoNotConsentAlert() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text(''),
+          content: const Text('กรุณาติดต่อพนักงานแผนกต้อนรับ'),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('ตกลง'),
+              onPressed: () {
+                Navigator.of(context).pop(); // Dismiss the dialog
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,14 +84,14 @@ class _PersonalDataConsentScreenState extends State<PersonalDataConsentScreen> {
           const Padding(
             padding: EdgeInsets.all(16.0),
             child: Text(
-              'Personal Data Consent',
+              'ข้อตกลง การใช้บริการPersonal Data Consent',
               style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
             ),
           ),
           const Padding(
             padding: EdgeInsets.all(16.0),
             child: Text(
-              'Detailed description text goes here...',
+              'ข้าพเจ้ายินยอมให้ไว้ซึ่งข้อมูลอันเป็นข้อมูลส่วนนุคคดของข้าพเจ้าแก่ผู้รับหน้าที่จัดเก็บข้อมูลและประมวลผลของระมนี้เพื่อใช้ประโยชน์ในงานรักษาความปลอดภัยของอาคารสถานที่แห่งนี้ โดยการจัดเก็บเป็นไปตามข้อกําหนดและผู้จัดเก็บสามารถลมท่าลายข้อมูลทั่งหมดหรือบางส่วนของข้าพเจ้าโดยไม่ต้องแจ้งให้ข้าพเจ้าทราบล่วงหน้า',
               style: TextStyle(fontSize: 16),
             ),
           ),
@@ -86,9 +107,7 @@ class _PersonalDataConsentScreenState extends State<PersonalDataConsentScreen> {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.red,
                       ),
-                      onPressed: () {
-                        // Handle "Do Not Consent" action
-                      },
+                      onPressed: _showDoNotConsentAlert,
                       child: const Text('ไม่ยินยอม'),
                     ),
                   ),
@@ -104,6 +123,20 @@ class _PersonalDataConsentScreenState extends State<PersonalDataConsentScreen> {
                         // Handle "Agree" action
                       },
                       child: const Text('ตกลง'),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.blueGrey,
+                          textStyle: const TextStyle(color: Colors.white)),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: const Text('back'),
                     ),
                   ),
                 ),
