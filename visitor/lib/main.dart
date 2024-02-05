@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:visitor/pages/register.dart';
+import 'package:visitor/pages/business.dart';
 
 void main() {
-  runApp(const MaterialApp(
+  runApp(MaterialApp(
     title: 'Navigation Basics',
-    home: MyApp(),
+    home: Mybusiness(),
   ));
 }
