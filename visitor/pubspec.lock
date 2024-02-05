@@ -73,6 +73,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.6"
+  easy_stepper:
+    dependency: "direct main"
+    description:
+      name: easy_stepper
+      sha256: d25a7823b6f473b33b012c47d12e54a0a6538f10441da578269d0381cba5def2
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.8.3"
   fake_async:
     dependency: transitive
     description:
@@ -99,7 +107,10 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+<<<<<<< HEAD
 
+=======
+>>>>>>> StepUp
   js:
     dependency: transitive
     description:
@@ -108,7 +119,10 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.7.0"
+<<<<<<< HEAD
 >>>>>>> b74b6f816fb1700df384c3e23da431b83523bac6
+=======
+>>>>>>> StepUp
   lints:
     dependency: transitive
     description:
@@ -118,6 +132,7 @@ packages:
     source: hosted
     version: "2.1.1"
   lottie:
+<<<<<<< HEAD
     dependency: "direct main"
     description:
       name: lottie
@@ -125,6 +140,15 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.0"
+=======
+    dependency: transitive
+    description:
+      name: lottie
+      sha256: a93542cc2d60a7057255405f62252533f8e8956e7e06754955669fd32fb4b216
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.7.0"
+>>>>>>> StepUp
   matcher:
     dependency: transitive
     description:
@@ -244,4 +268,8 @@ packages:
     version: "0.3.0"
 sdks:
   dart: ">=3.2.6 <4.0.0"
+<<<<<<< HEAD
   flutter: ">=3.16.0"
+=======
+  flutter: ">=3.13.0"
+>>>>>>> StepUp
