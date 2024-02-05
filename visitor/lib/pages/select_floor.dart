@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:visitor/pages/agreement.dart';
+import 'package:visitor/pages/personalData.dart';
 
 void main() => runApp(const SelectFloor());
 
@@ -96,7 +96,7 @@ class _KeypadState extends State<Keypad> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const Agreement()),
+                MaterialPageRoute(builder: (context) => const PersonalData()),
               );
             },
             child: const Text('ตกลง'), // 'OK' or 'Confirm' button
