@@ -7,7 +7,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:visitor/pages/register.dart';
+import 'package:visitor/pages/registration.dart';
 
 // import 'package:visitor/main.dart';
 
