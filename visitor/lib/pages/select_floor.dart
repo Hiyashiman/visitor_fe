@@ -96,7 +96,8 @@ class _KeypadState extends State<Keypad> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const PersonalData()),
+                MaterialPageRoute(
+                    builder: (context) => const PersonalDataConsentScreen()),
               );
             },
             child: const Text('ตกลง'), // 'OK' or 'Confirm' button
