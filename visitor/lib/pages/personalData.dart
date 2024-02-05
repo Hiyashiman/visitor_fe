@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:visitor/utils/style/style.dart';
+import 'package:visitor/pages/business.dart';
 
-void main() => runApp(const PersonalData());
+void main() => runApp(const Agreement());
 
-class PersonalData extends StatelessWidget {
-  const PersonalData({Key? key}) : super(key: key);
+class Agreement extends StatelessWidget {
+  const Agreement({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -82,19 +82,19 @@ class _PersonalDataConsentScreenState extends State<PersonalDataConsentScreen> {
               );
             },
           ),
-          Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Text('ข้อตกลง การใช้บริการPersonal Data Consent',
-                style: AppTextStyle
-                    .heading //TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                ),
-          ),
-          Padding(
+          const Padding(
             padding: EdgeInsets.all(16.0),
             child: Text(
-                'ข้าพเจ้ายินยอมให้ไว้ซึ่งข้อมูลอันเป็นข้อมูลส่วนบุคคดของข้าพเจ้าแก่ผู้รับหน้าที่จัดเก็บข้อมูลและประมวลผลของระมนี้เพื่อใช้ประโยชน์ในงานรักษาความปลอดภัยของอาคารสถานที่แห่งนี้ โดยการจัดเก็บเป็นไปตามข้อกําหนดและผู้จัดเก็บสามารถลมท่าลายข้อมูลทั่งหมดหรือบางส่วนของข้าพเจ้าโดยไม่ต้องแจ้งให้ข้าพเจ้าทราบล่วงหน้า',
-                style: AppTextStyle.body //TextStyle(fontSize: 16),
-                ),
+              'ข้อตกลง การใช้บริการPersonal Data Consent',
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+            ),
+          ),
+          const Padding(
+            padding: EdgeInsets.all(16.0),
+            child: Text(
+              'ข้าพเจ้ายินยอมให้ไว้ซึ่งข้อมูลอันเป็นข้อมูลส่วนนุคคดของข้าพเจ้าแก่ผู้รับหน้าที่จัดเก็บข้อมูลและประมวลผลของระมนี้เพื่อใช้ประโยชน์ในงานรักษาความปลอดภัยของอาคารสถานที่แห่งนี้ โดยการจัดเก็บเป็นไปตามข้อกําหนดและผู้จัดเก็บสามารถลมท่าลายข้อมูลทั่งหมดหรือบางส่วนของข้าพเจ้าโดยไม่ต้องแจ้งให้ข้าพเจ้าทราบล่วงหน้า',
+              style: TextStyle(fontSize: 16),
+            ),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -121,7 +121,10 @@ class _PersonalDataConsentScreenState extends State<PersonalDataConsentScreen> {
                           backgroundColor: Colors.blue,
                           textStyle: const TextStyle(color: Colors.white)),
                       onPressed: () {
-                        // Handle "Agree" action
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => MyHomePage()),
+                        );
                       },
                       child: const Text('ตกลง'),
                     ),
@@ -137,7 +140,7 @@ class _PersonalDataConsentScreenState extends State<PersonalDataConsentScreen> {
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      child: const Text('Go back'),
+                      child: const Text('back'),
                     ),
                   ),
                 ),
