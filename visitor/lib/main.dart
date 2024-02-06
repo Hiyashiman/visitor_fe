@@ -3,7 +3,7 @@ import 'package:visitor/pages/registration-system.dart';
 
 void main() {
   runApp(MaterialApp(
-    title: 'Navigation Basics',
+    title: 'Visitor',
     home: MyApp(),
   ));
 }
