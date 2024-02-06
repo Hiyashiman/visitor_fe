@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:visitor/pages/personalData.dart';
+import 'package:visitor/pages/personalDataCS.dart';
 import 'package:visitor/pages/stepper.dart';
 
 void main() => runApp(const SelectFloor());
