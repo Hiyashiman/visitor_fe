@@ -47,7 +47,7 @@ int count = 0;
             ),
            )   
            ,
-
+            
             Text(statusText[0],style: AppTextStyle.heading,),
             const SizedBox(height: 30),
             LottieBuilder.asset(
@@ -62,7 +62,7 @@ int count = 0;
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) =>Mybusiness()),
+                  MaterialPageRoute(builder: (context) =>MyBusiness()),
                 );
               },
             ),
