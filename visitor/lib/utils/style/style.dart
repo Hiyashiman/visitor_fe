@@ -22,6 +22,12 @@ class AppTextStyle {
     color: Appcolors.title
 
   );
+  static TextStyle textsuccess = TextStyle(
+    fontSize: 15,
+    fontWeight: FontWeight.bold,
+    fontFamily: 'inter',
+    color: Appcolors.title
+  );
 
 
 
