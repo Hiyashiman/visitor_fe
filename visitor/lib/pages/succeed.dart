@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:visitor/pages/registration-system.dart';
 import 'package:visitor/pages/select_floor.dart';
 import 'package:visitor/pages/stepper.dart';
 
@@ -36,15 +37,15 @@ class _PagesucceedState extends State<Pagesucceed> {
             const SizedBox(height: 30),
             const Text('สแกนหน้าหน้าเข้าอาคารได้เลย'),
             const SizedBox(height: 30),
-            // ElevatedButton(
-            //   child: const Text('เริ่มรายการ'),
-            //   onPressed: () {
-            //     Navigator.push(
-            //       context,
-            //       MaterialPageRoute(builder: (context) => const SelectFloor()),
-            //     );
-            //   },
-            // ),
+            ElevatedButton(
+              child: const Text('เริ่มรายการ'),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const MyApp()),
+                );
+              },
+            ),
           ],
         ),
       ),
