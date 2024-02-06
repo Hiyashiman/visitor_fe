@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
-import 'package:visitor/pages/registration-system.dart';
-=======
 import 'package:visitor/pages/business.dart';
->>>>>>> origin/main
+import 'package:visitor/pages/registration-system.dart';
+import 'package:visitor/pages/select_floor.dart';
+import 'package:visitor/pages/stepper.dart';
 
 void main() => runApp(const Agreement());
 
@@ -42,7 +41,11 @@ class _PersonalDataConsentScreenState extends State<PersonalDataConsentScreen> {
             TextButton(
               child: const Text('ตกลง'),
               onPressed: () {
-                Navigator.of(context).pop(); // Dismiss the dialog
+                Navigator.push (
+                context,
+                MaterialPageRoute (builder: (context) => const SelectFloor()),// Dismiss the dialog
+                );
+                
               },
             ),
           ],
@@ -54,39 +57,16 @@ class _PersonalDataConsentScreenState extends State<PersonalDataConsentScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Personal Data Consent'),
-      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Stepper(
-            steps: [
-              Step(
-                title: const Text('Step 1'),
-                content: Container(),
-                isActive: _currentStep == 0,
-              ),
-              // ... other steps
-            ],
-            currentStep: _currentStep,
-            onStepTapped: (step) => setState(() => _currentStep = step),
-            controlsBuilder: (BuildContext context, ControlsDetails details) {
-              return Row(
-                children: <Widget>[
-                  TextButton(
-                    onPressed: details.onStepContinue,
-                    child: const Text('Next'),
-                  ),
-                  TextButton(
-                    onPressed: details.onStepCancel,
-                    child: const Text('Back'),
-                  ),
-                ],
-              );
-            },
-          ),
-          const Padding(
+          SizedBox(
+        child: Container(
+        height: 150, // Example: Enforce a height constraint
+        child: MyStepper(initialStep: 2),
+      ),
+     )  ,
+           Padding(
             padding: EdgeInsets.all(16.0),
             child: Text(
               'ข้อตกลง การใช้บริการPersonal Data Consent',
@@ -127,28 +107,10 @@ class _PersonalDataConsentScreenState extends State<PersonalDataConsentScreen> {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => MyHomePage()),
+                          MaterialPageRoute(builder: (context) => Mybusiness()),
                         );
                       },
                       child: const Text('ตกลง'),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.blueGrey,
-                          textStyle: const TextStyle(color: Colors.white)),
-                      onPressed: () {
-                        Navigator.push(
-                          context ,
-                            MaterialPageRoute(builder: (context) => const MyApp()),        
-                        
-                        );
-                      },
-                      child: const Text('back'),
                     ),
                   ),
                 ),

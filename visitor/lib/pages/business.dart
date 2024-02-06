@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:visitor/pages/registration-system.dart';
+import 'package:visitor/pages/stepper.dart';
 
 void main() {
   runApp(Mybusiness());
@@ -22,16 +24,17 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Your App Titlee'), // Replace with your app title
-        backgroundColor: Colors.white,
-        elevation: 0,
-      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
+            SizedBox(
+              child: Container(
+                height: 150, // Example: Enforce a height constraint
+                child: MyStepper(initialStep: 4),
+              ),
+            ),
             // Step Progress Indicator
             _buildStepProgressIndicator(),
             SizedBox(height: 32),
@@ -68,7 +71,6 @@ class MyHomePage extends StatelessWidget {
   }
 
   Widget _buildButtonGrid() {
-    // TODO: Replace with your actual buttons and their callbacks
     List<String> buttonLabels = [
       'ส่งเอกสาร',
       'สัมภาษณ์งาน',
@@ -122,16 +124,14 @@ class MyHomePage extends StatelessWidget {
   Widget _buildFooterButton(BuildContext context) {
     return ElevatedButton(
       onPressed: () {
-        Navigator.pop(context);
+        Navigator.push(context, 
+         MaterialPageRoute(builder: (context) => const MyApp()),
+         );
       },
-      child: Text('ยกเลิกddd'), // Your footer button text
+      child: Text('ยกเลิก'), // Your footer button text
       style: ElevatedButton.styleFrom(
-        primary: Colors.red, // Background color
-        onPrimary: Colors.black, // Text Color
-        padding: EdgeInsets.symmetric(vertical: 8), // Reduced vertical padding
-        minimumSize: Size(30, 36), // Sets a smaller minimum size for the button
+        padding: EdgeInsets.symmetric(vertical: 8), // Reduced vertical padding/ Sets a smaller minimum size for the button
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(5),
         ),
       ),
     );
