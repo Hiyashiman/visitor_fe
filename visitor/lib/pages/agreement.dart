@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:visitor/pages/business.dart';
+import 'package:visitor/pages/camera.dart';
 
 void main() => runApp(const Agreement());
 
@@ -123,7 +124,7 @@ class _PersonalDataConsentScreenState extends State<PersonalDataConsentScreen> {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => MyHomePage()),
+                          MaterialPageRoute(builder: (context) => Mycamera()),
                         );
                       },
                       child: const Text('ตกลง'),
