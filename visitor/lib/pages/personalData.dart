@@ -1,5 +1,9 @@
+// ignore: file_names
 import 'package:flutter/material.dart';
 import 'package:visitor/pages/business.dart';
+import 'package:visitor/pages/registration-system.dart';
+import 'dart:async';
+// import 'package:visitor/pages/register-system';
 
 void main() => runApp(const Agreement());
 
@@ -25,9 +29,39 @@ class PersonalDataConsentScreen extends StatefulWidget {
 
 class _PersonalDataConsentScreenState extends State<PersonalDataConsentScreen> {
   int _currentStep = 0;
+  // ignore: unused_field
+  Timer? _inactivityTimer;
+
+  @override
+  void initState() {
+    super.initState();
+    _resetInactivityTimer();
+  }
+
+  void _resetInactivityTimer() {
+    _inactivityTimer?.cancel(); // ยกเลิก Timer เก่าก่อนสร้างใหม่
+    _inactivityTimer = Timer(const Duration(seconds: 5), _navigateToHomePage);
+  }
+
+  void _navigateToHomePage() {
+    if (Navigator.canPop(context)) {
+      Navigator.pop(context); // ปิด AlertDialog หรือหน้าต่างที่เปิดอยู่
+    }
+    // ตรวจสอบ path และ class ให้ถูกต้องสำหรับหน้าแรกของแอปพลิเคชันของคุณ
+    Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (context) => const MyApp()),
+        (Route<dynamic> route) => false);
+  }
+
+  @override
+  void dispose() {
+    _inactivityTimer?.cancel(); // ยกเลิก Timer เมื่อ widget นี้ถูก dispose
+    super.dispose();
+  }
 
   // ignore: unused_element
   void _showDoNotConsentAlert() {
+    _resetInactivityTimer();
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -38,7 +72,9 @@ class _PersonalDataConsentScreenState extends State<PersonalDataConsentScreen> {
             TextButton(
               child: const Text('ตกลง'),
               onPressed: () {
-                Navigator.of(context).pop(); // Dismiss the dialog
+                Navigator.of(context)
+                    .pop(); // ปิด AlertDialog นี้ก่อนกลับหน้าแรก
+                _navigateToHomePage();
               },
             ),
           ],
@@ -71,11 +107,17 @@ class _PersonalDataConsentScreenState extends State<PersonalDataConsentScreen> {
               return Row(
                 children: <Widget>[
                   TextButton(
-                    onPressed: details.onStepContinue,
+                    onPressed: () {
+                      _resetInactivityTimer(); // รีเซ็ต Timer ทุกครั้งที่ผู้ใช้คลิก Next หรือ Back
+                      details.onStepContinue!();
+                    },
                     child: const Text('Next'),
                   ),
                   TextButton(
-                    onPressed: details.onStepCancel,
+                    onPressed: () {
+                      _resetInactivityTimer(); // รีเซ็ต Timer ทุกครั้งที่ผู้ใช้คลิก Next หรือ Back
+                      details.onStepCancel!();
+                    },
                     child: const Text('Back'),
                   ),
                 ],
@@ -107,6 +149,7 @@ class _PersonalDataConsentScreenState extends State<PersonalDataConsentScreen> {
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.red,
+                        foregroundColor: Colors.white,
                       ),
                       onPressed: _showDoNotConsentAlert,
                       child: const Text('ไม่ยินยอม'),
@@ -119,7 +162,7 @@ class _PersonalDataConsentScreenState extends State<PersonalDataConsentScreen> {
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.blue,
-                          textStyle: const TextStyle(color: Colors.white)),
+                          foregroundColor: Colors.white),
                       onPressed: () {
                         Navigator.push(
                           context,
@@ -136,6 +179,7 @@ class _PersonalDataConsentScreenState extends State<PersonalDataConsentScreen> {
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.blueGrey,
+                          foregroundColor: Colors.white,
                           textStyle: const TextStyle(color: Colors.white)),
                       onPressed: () {
                         Navigator.pop(context);
