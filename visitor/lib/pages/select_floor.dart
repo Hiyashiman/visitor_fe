@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:visitor/pages/personalData.dart';
+import 'package:visitor/pages/stepper.dart';
 
 void main() => runApp(const SelectFloor());
 
@@ -61,8 +62,14 @@ class _KeypadState extends State<Keypad> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
+        SizedBox(
+          child: Container(
+            height: 150,
+            child: const MyStepper(initialStep: 1),
+          ),
+        ),
         Padding(
-          padding: const EdgeInsets.all(100.0),
+          padding: const EdgeInsets.all(20.0),
           child: Text(
             'กรุณาเลือกชั้นที่ต้องการทำธุระ',
             style: Theme.of(context).textTheme.bodyLarge,
@@ -70,32 +77,28 @@ class _KeypadState extends State<Keypad> {
         ),
         Expanded(
           child: GridView.builder(
-            padding: const EdgeInsets.all(300.0),
+            padding: const EdgeInsets.all(60.0),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 5, //จำนวนปุ่ม
-              childAspectRatio: 1.0, // Aspect ratio for the buttons
-              crossAxisSpacing: 130, // Horizontal space between buttons
-              mainAxisSpacing: 20, // Vertical space between buttons
+              crossAxisCount: 5,
+              childAspectRatio: 2.0,
+              crossAxisSpacing: 100,
+              mainAxisSpacing: 10,
             ),
             itemCount: _keyLabels.length,
             itemBuilder: (BuildContext context, int index) {
               bool isSelected = _selectedKey == _keyLabels[index]; //
               return ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: isSelected
-                      ? Colors.blue
-                      : Colors.grey[300], // Button background color
+                  backgroundColor: isSelected ? Colors.blue : Colors.grey[300],
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                 ),
                 onPressed: () => _onKeypadTap(_keyLabels[index]),
                 child: Text(
-                  _keyLabels[index], //
+                  _keyLabels[index],
                   style: TextStyle(
-                    color: isSelected
-                        ? Colors.white
-                        : Colors.black, // เปลี่ยนสีตัวอักษรของปุ่มที่ถูกกด
+                    color: isSelected ? Colors.white : Colors.black,
                   ),
                 ),
               );

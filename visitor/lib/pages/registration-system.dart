@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+// import 'package:visitor/pages/personalData.dart';
 import 'package:visitor/pages/select_floor.dart'; // ตรวจสอบให้แน่ใจว่าไฟล์นี้มีการนิยาม SecondRoute หรือเปลี่ยนไปใช้
 
 class MyApp extends StatefulWidget {

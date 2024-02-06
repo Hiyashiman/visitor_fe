@@ -1,7 +1,7 @@
 // ignore: file_names
 import 'package:flutter/material.dart';
-import 'package:visitor/pages/business.dart';
 import 'package:visitor/pages/registration-system.dart';
+import 'package:visitor/pages/business.dart';
 import 'dart:async';
 // import 'package:visitor/pages/register-system';
 
@@ -182,7 +182,11 @@ class _PersonalDataConsentScreenState extends State<PersonalDataConsentScreen> {
                           foregroundColor: Colors.white,
                           textStyle: const TextStyle(color: Colors.white)),
                       onPressed: () {
-                        Navigator.pop(context);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const MyApp()),
+                        );
                       },
                       child: const Text('back'),
                     ),
