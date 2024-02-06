@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:visitor/pages/stepper.dart';
 
 void main() {
   runApp(MyBusiness());
@@ -42,6 +43,12 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
+            SizedBox(
+              child: Container(
+                height: 150, // Example: Enforce a height constraint
+                child: MyStepper(initialStep: 4),
+              ),
+            ),
             _buildStepProgressIndicator(),
             SizedBox(height: 32),
             Expanded(child: _buildButtonGrid()),

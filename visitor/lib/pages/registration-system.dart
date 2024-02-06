@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:visitor/pages/select_floor.dart'; // ตรวจสอบให้แน่ใจว่าไฟล์นี้มีการนิยาม SecondRoute หรือเปลี่ยนไปใช้
+import 'package:visitor/pages/stepper.dart';
 
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
