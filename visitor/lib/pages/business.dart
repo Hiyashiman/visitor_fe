@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:visitor/pages/registration-system.dart';
 import 'package:visitor/pages/stepper.dart';
+import 'package:visitor/pages/succeed.dart';
 
 void main() {
   runApp(MyBusiness());
@@ -88,43 +89,39 @@ class _MyHomePageState extends State<MyHomePage> {
       'ทำโปรเจค',
       'ผู้รับเหมา',
       'มาร่วมงาน Event'
-
       // Add all button labels
     ];
 
-    return GridView.builder(
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 4,
-        crossAxisSpacing: 20,
-        mainAxisSpacing: 16,
-        childAspectRatio: 3, // Adjust for your layout needs
-      ),
-      itemCount: buttonLabels.length,
-      itemBuilder: (context, index) {
-        bool isSelected =
-            _selectedButtonIndex == index; // Check if this button is selected
-        return ElevatedButton(
-          onPressed: () {
-            setState(() {
-              _hasButtonBeenPressed = true; // Update button press state
-              _selectedButtonIndex = index; // Update the selected button index
-            });
-          },
-          child: Text(buttonLabels[index]),
-          style: ElevatedButton.styleFrom(
-            primary: isSelected
-                ? Colors.blue[800]
-                : Colors.grey[300], // Darken if selected
-            onPrimary:
-                isSelected ? Colors.white : Colors.black, // Text color contrast
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
-            ),
+     return GridView.builder(
+    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+      crossAxisCount: 4,
+      crossAxisSpacing: 20,
+      mainAxisSpacing: 16,
+      childAspectRatio: 3, // Adjust for your layout needs
+    ),
+    itemCount: buttonLabels.length,
+    itemBuilder: (context, index) {
+      bool isSelected = _selectedButtonIndex == index; // Check if this button is selected
+      return ElevatedButton(
+        onPressed: () {
+          setState(() {
+            _hasButtonBeenPressed = true; // Update button press state
+            _selectedButtonIndex = index; // Update the selected button index
+          });
+          Navigator.push(context, MaterialPageRoute(builder: (context) => const Pagesucceed()));
+        },
+        child: Text(buttonLabels[index]),
+        style: ElevatedButton.styleFrom(
+          primary: isSelected ? Colors.blue[800] : Colors.grey[300], // Darken if selected
+          onPrimary: isSelected ? Colors.white : Colors.black, // Text color contrast
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8),
           ),
-        );
-      },
-    );
-  }
+        ),
+      );
+    },
+  );
+}
 
   Widget _Text() {
     return Container(

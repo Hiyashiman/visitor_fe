@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:visitor/pages/business.dart';
+import 'package:visitor/pages/face_comparison.dart';
 import 'package:visitor/pages/registration-system.dart';
 import 'package:visitor/pages/select_floor.dart';
 import 'package:visitor/pages/stepper.dart';
-
 void main() => runApp(const Agreement());
 
 class Agreement extends StatelessWidget {
@@ -107,7 +107,7 @@ class _PersonalDataConsentScreenState extends State<PersonalDataConsentScreen> {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => MyBusiness()),
+                          MaterialPageRoute(builder: (context) => MyFaceScanPage()),
                         );
                       },
                       child: const Text('ตกลง'),

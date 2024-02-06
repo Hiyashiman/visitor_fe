@@ -11,7 +11,8 @@ MyStepper(initialStep: <int 0-6>),
 
 
 example  
-*SizedBox(
+*
+SizedBox(
         child: Container(
         height: 150, // Example: Enforce a height constraint
         child: MyStepper(initialStep: 1),
