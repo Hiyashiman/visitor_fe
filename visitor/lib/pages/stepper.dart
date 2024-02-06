@@ -71,8 +71,8 @@ class _MyStepperState extends State<MyStepper> {
                       lineSpace: 3,
                       lineWidth: 2,
                       unreachedLineType: LineType.normal,
-                      activeLineColor: Colors.black,
-                      defaultLineColor: Colors.black,
+                      activeLineColor: Colors.amberAccent,
+                      defaultLineColor: Colors.amberAccent,
                       finishedLineColor: Colors.green
                       
                       
@@ -80,8 +80,8 @@ class _MyStepperState extends State<MyStepper> {
                     defaultStepBorderType: BorderType.normal,
                     stepBorderRadius: 10,
 
-                    borderThickness: 2,//ปรับความกว้างของ ขอบ
-                    internalPadding: 0, //ปรับความห่างของกล่อง 
+                    borderThickness: 5,//ปรับความกว้างของ ขอบ
+                    internalPadding: 10, //ปรับความห่างของกล่อง 
                     
                     padding: const EdgeInsetsDirectional.symmetric(
                       horizontal: 30,
@@ -89,12 +89,12 @@ class _MyStepperState extends State<MyStepper> {
                     ),
                     stepRadius: 30, //ความใหญ่ของกล่อง 
                     activeStepTextColor: Colors.black,
-                    activeStepBorderColor: Colors.black,
+                    activeStepBorderColor: Colors.amberAccent,
+                    activeStepBackgroundColor: Colors.amberAccent,
                     activeStepIconColor: Colors.black,
                     finishedStepBorderColor: Colors.green,
                     finishedStepTextColor: Colors.green,
                     finishedStepBackgroundColor: Colors.green,
-                    
                     finishedStepIconColor: Colors.white,
                     showLoadingAnimation: false,
 
