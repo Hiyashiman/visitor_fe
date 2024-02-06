@@ -6,21 +6,14 @@ import 'package:flutter/material.dart';
 /*
 How to Use
 
-import 'package:visitor/pages/stepper.dart';
+import 'package:visitor/widget/stepper.dart';
 MyStepper(initialStep: <int 0-6>),
 
 
 example  
-*SizedBox(
-        child: Container(
-        height: 150, // Example: Enforce a height constraint
-        child: MyStepper(initialStep: 1),
-      ),
-     )   
+MyStepper(initialStep: 1),
 
 */ 
-
-
 
 class MyStepper extends StatefulWidget {
 
@@ -60,15 +53,14 @@ class _MyStepperState extends State<MyStepper> {
         child: SingleChildScrollView(
           child: IgnorePointer(
             child: Column(
-              
               children: [
                 EasyStepper(
                     activeStep: activeStep,
                     lineStyle: const LineStyle(
-                      lineLength: 100,
+                      lineLength: 50,
                       lineType: LineType.normal,
-                      lineThickness: 3,
-                      lineSpace: 3,
+                      lineThickness: 2,
+                      lineSpace: 0,
                       lineWidth: 2,
                       unreachedLineType: LineType.normal,
                       activeLineColor: Colors.black,
@@ -78,7 +70,7 @@ class _MyStepperState extends State<MyStepper> {
                       
                     ),
                     defaultStepBorderType: BorderType.normal,
-                    stepBorderRadius: 10,
+                    stepBorderRadius: 8,
 
                     borderThickness: 2,//ปรับความกว้างของ ขอบ
                     internalPadding: 0, //ปรับความห่างของกล่อง 
@@ -101,27 +93,21 @@ class _MyStepperState extends State<MyStepper> {
                     steps:  const [
                       EasyStep(
                         icon: Icon(CupertinoIcons.creditcard),
-                        title: "Insert Id Card"
                       ),
                       EasyStep(
                         icon: Icon(CupertinoIcons.square_stack_3d_up_fill),
-                        title: "Select floor"
                       ), 
                       EasyStep(
                         icon: Icon(CupertinoIcons.info),
-                        title:"Info"
                       ),
                        EasyStep(
                         icon: Icon(CupertinoIcons.person),
-                        title:"Verify person"
                       ),
                        EasyStep(
                         icon: Icon(CupertinoIcons.search),
-                        title:"Select the business "
                       ),
                        EasyStep(
                         icon: Icon(CupertinoIcons.check_mark_circled),
-                        title:"Success"
                       ),
                     ],
                     onStepReached: (index) => setState(() => activeStep = index),

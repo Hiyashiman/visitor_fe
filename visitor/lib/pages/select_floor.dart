@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:visitor/pages/agreement.dart';
+import 'package:visitor/pages/stepper.dart';
 
 void main() => runApp(const SelectFloor());
 
@@ -55,6 +56,12 @@ class _KeypadState extends State<Keypad> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
+      SizedBox(
+        child: Container(
+        height: 150, // Example: Enforce a height constraint
+        child: MyStepper(initialStep: 1),
+      ),
+     )    , 
         Padding(
           padding: const EdgeInsets.all(16.0),
           child: Text(
