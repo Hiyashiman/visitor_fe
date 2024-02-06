@@ -3,10 +3,10 @@ import 'package:visitor/pages/registration-system.dart';
 import 'package:visitor/pages/stepper.dart';
 
 void main() {
-  runApp(Mybusiness());
+  runApp(MyBusiness());
 }
 
-class Mybusiness extends StatelessWidget {
+class MyBusiness extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -20,7 +20,17 @@ class Mybusiness extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget {
+// Convert MyHomePage to a StatefulWidget to manage the button press state
+class MyHomePage extends StatefulWidget {
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  // Initialize a variable to track if any button has been pressed
+  bool _hasButtonBeenPressed = false;
+  int? _selectedButtonIndex;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,10 +48,8 @@ class MyHomePage extends StatelessWidget {
             // Step Progress Indicator
             _buildStepProgressIndicator(),
             SizedBox(height: 32),
-            // Grid of Buttons
             Expanded(child: _buildButtonGrid()),
             SizedBox(height: 32),
-            // Footer Button
             _Text(),
             SizedBox(height: 32),
             _buildFooterButton(context),
@@ -79,26 +87,36 @@ class MyHomePage extends StatelessWidget {
       'อบรม',
       'ทำโปรเจค',
       'ผู้รับเหมา',
-      'มาร่วมงาน Event',
+      'มาร่วมงาน Event'
+
       // Add all button labels
     ];
+
     return GridView.builder(
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 4,
         crossAxisSpacing: 20,
         mainAxisSpacing: 16,
-        childAspectRatio: 5,
+        childAspectRatio: 3, // Adjust for your layout needs
       ),
       itemCount: buttonLabels.length,
       itemBuilder: (context, index) {
+        bool isSelected =
+            _selectedButtonIndex == index; // Check if this button is selected
         return ElevatedButton(
           onPressed: () {
-            // Handle your button tap
+            setState(() {
+              _hasButtonBeenPressed = true; // Update button press state
+              _selectedButtonIndex = index; // Update the selected button index
+            });
           },
           child: Text(buttonLabels[index]),
           style: ElevatedButton.styleFrom(
-            primary: Colors.grey[300], // Background color
-            onPrimary: Colors.black, // Text Color
+            primary: isSelected
+                ? Colors.blue[800]
+                : Colors.grey[300], // Darken if selected
+            onPrimary:
+                isSelected ? Colors.white : Colors.black, // Text color contrast
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8),
             ),
@@ -110,7 +128,7 @@ class MyHomePage extends StatelessWidget {
 
   Widget _Text() {
     return Container(
-      child: Center(
+      child: const Center(
         child: Text(
           'ธุระอื่นๆนอกจากรายการข้างต้น  กรุณากดปุ่ม ยกเลิก',
           textAlign: TextAlign
@@ -122,6 +140,7 @@ class MyHomePage extends StatelessWidget {
   }
 
   Widget _buildFooterButton(BuildContext context) {
+    // Modify onPressed to check _hasButtonBeenPressed
     return ElevatedButton(
       onPressed: () {
         Navigator.push(context, 
