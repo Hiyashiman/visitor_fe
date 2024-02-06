@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
 import 'package:visitor/pages/registration-system.dart';
-=======
-import 'package:visitor/pages/business.dart';
->>>>>>> origin/main
-
 void main() => runApp(const Agreement());
 
 class Agreement extends StatelessWidget {
