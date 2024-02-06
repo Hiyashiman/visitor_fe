@@ -122,7 +122,7 @@ class _PersonalDataConsentScreenState extends State<PersonalDataConsentScreen> {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => MyHomePage()),
+                          MaterialPageRoute(builder: (context) => MyApp()),
                         );
                       },
                       child: const Text('ตกลง'),
