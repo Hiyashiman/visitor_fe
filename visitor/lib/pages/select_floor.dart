@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
-import 'package:visitor/pages/agreement.dart';
-import 'package:visitor/pages/personalData.dart';
-=======
 import 'package:visitor/pages/personalDataCS.dart';
->>>>>>> select_floor
 import 'package:visitor/pages/stepper.dart';
 
 void main() => runApp(const SelectFloor());
