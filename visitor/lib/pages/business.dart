@@ -1,9 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:visitor/pages/registration-system.dart';
-import 'package:visitor/pages/stepper.dart';
-import 'package:visitor/pages/succeed.dart';
+import 'package:visitor/pages/registration-system.dart'; // Update with correct import path
+import 'package:visitor/pages/stepper.dart'; // Update with correct import path
+import 'package:visitor/pages/succeed.dart'; // Update with correct import path
+import 'package:visitor/utils/style/style.dart'; // Update with correct import path
 
 void main() {
   runApp(MyBusiness());
@@ -23,13 +24,11 @@ class MyBusiness extends StatelessWidget {
   }
 }
 
-// Convert MyHomePage to a StatefulWidget to manage the button press state
 class MyHomePage extends StatefulWidget {
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-// Initialize a variable to track if any button has been pressed
 class _MyHomePageState extends State<MyHomePage> {
   bool _hasButtonBeenPressed = false;
   int? _selectedButtonIndex;
@@ -107,7 +106,6 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  // Add all button labels
   Widget _buildButtonGrid() {
     List<String> buttonLabels = [
       'ส่งเอกสาร',
@@ -118,6 +116,7 @@ class _MyHomePageState extends State<MyHomePage> {
       'ทำโปรเจค',
       'ผู้รับเหมา',
       'มาร่วมงาน Event'
+      // Add all button labels
     ];
 
     return GridView.builder(
@@ -161,10 +160,8 @@ class _MyHomePageState extends State<MyHomePage> {
     return Container(
       child: const Center(
         child: Text(
-          'ธุระอื่นๆนอกจากรายการข้างต้น'
-          'กรุณากดปุ่ม ยกเลิก',
+          'ธุระอื่นๆนอกจากรายการข้างต้น  กรุณากดปุ่ม ยกเลิก',
           textAlign: TextAlign
-              // This ensures the text is centered if it wraps to a new line
               .center,
           style: TextStyle(fontSize: 20, color: Colors.red),
         ),
@@ -177,12 +174,11 @@ class _MyHomePageState extends State<MyHomePage> {
     return ElevatedButton(
       child: Text('ยกเลิก'),
       onPressed: () {
-        _inactivityTimer?.cancel();
-        // Your footer button text
+        _inactivityTimer?.cancel(); // ยกเลิก Timer ก่อนการนำทาง
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const MyApp()),
-        ).then((_) => _resetInactivityTimer());
+        );
       },
     );
   }
