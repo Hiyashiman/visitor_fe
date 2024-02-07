@@ -3,12 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:visitor/pages/face_comparison.dart';
 import 'package:visitor/pages/registration-system.dart';
 import 'package:visitor/pages/stepper.dart';
-<<<<<<< HEAD
-// import 'dart:async';
 
 void main() => runApp(const Agreement());
-=======
->>>>>>> main
 
 class Agreement extends StatelessWidget {
   const Agreement({Key? key}) : super(key: key);
@@ -157,91 +153,4 @@ class _PersonalDataConsentScreenState extends State<PersonalDataConsentScreen> {
       },
     );
   }
-<<<<<<< HEAD
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(
-            child: SizedBox(
-              height: 150,
-              child: MyStepper(initialStep: 2),
-            ),
-          ),
-          const SizedBox(
-              height: 16), // Add some space between the stepper and the text
-          const Center(
-            // Center widget added
-            child: Padding(
-              padding: EdgeInsets.all(16.0),
-              child: Text(
-                'ข้อตกลง การใช้บริการPersonal Data Consent',
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                textAlign: TextAlign.center, // Text alignment set to center
-              ),
-            ),
-          ),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 100.0),
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                'ข้าพเจ้ายินยอมให้ไว้ซึ่งข้อมูลอันเป็นข้อมูลส่วนนุคคดของข้าพเจ้าแก่ผู้รับหน้าที่จัดเก็บข้อมูลและประมวลผลของระมนี้เพื่อใช้ประโยชน์ในงานรักษาความปลอดภัยของอาคารสถานที่แห่งนี้ โดยการจัดเก็บเป็นไปตามข้อกําหนดและผู้จัดเก็บสามารถลมท่าลายข้อมูลทั่งหมดหรือบางส่วนของข้าพเจ้าโดยไม่ต้องแจ้งให้ข้าพเจ้าทราบล่วงหน้า',
-                style: TextStyle(fontSize: 16),
-                textAlign: TextAlign.center, // Text alignment set to center
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 200.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.red,
-                      ),
-                      onPressed: _showDoNotConsentAlert,
-                      child: const Text(
-                        'ไม่ยินยอม',
-                        style: TextStyle(fontSize: 16, color: Colors.white),
-                      ),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.blue,
-                          textStyle: const TextStyle(color: Colors.white)),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => Mybusiness()),
-                        );
-                      },
-                      child: const Text(
-                        'ยินยอม',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-=======
->>>>>>> main
 }
