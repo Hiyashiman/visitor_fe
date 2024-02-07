@@ -154,7 +154,15 @@ class _KeypadState extends State<Keypad> {
               ).then((_) => _resetInactivityTimer());
             },
             // ใช้ _isButtonSelected เพื่อควบคุมการเปิดใช้งานของปุ่ม
+<<<<<<< HEAD
             child: const Text('ตกลง'), 
+=======
+<<<<<<< Updated upstream
+            child: const Text('ตกลง'), // 'OK' or 'Confirm' button
+=======
+            child: const Text('ตกลง'),
+>>>>>>> Stashed changes
+>>>>>>> origin/Registration
           ),
         ),
       ],
