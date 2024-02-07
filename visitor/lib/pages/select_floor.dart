@@ -27,7 +27,12 @@ class Keypad extends StatefulWidget {
 }
 
 class _KeypadState extends State<Keypad> {
+<<<<<<< HEAD
   final List<String> _keyLabels = [
+=======
+  // You can use a list to manage the keypad labels
+  final List<String> _floor = [
+>>>>>>> 0a7ce981eaa67d5b093f4585f2ece69554a5d530
     'B',
     'G',
     'M',
@@ -74,7 +79,7 @@ class _KeypadState extends State<Keypad> {
     super.dispose();
   }
 
-  void _onKeypadTap(String label) {
+  void _onFloorTap(String label) {
     setState(() {
       _isButtonSelected = true;
       _selectedKey = label;
@@ -88,14 +93,14 @@ class _KeypadState extends State<Keypad> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        SizedBox(
-          child: Container(
+        const SizedBox(
+          child: SizedBox(
             height: 150,
             child: MyStepper(initialStep: 1),
           ),
         ),
         Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.all(80.0),
           child: Text(
             'กรุณาเลือกชั้นที่ต้องการทำธุระ',
             style: Theme.of(context).textTheme.bodyLarge,
@@ -103,26 +108,32 @@ class _KeypadState extends State<Keypad> {
         ),
         Expanded(
           child: GridView.builder(
-            padding: const EdgeInsets.all(60.0),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 5,
+            padding: EdgeInsets.symmetric(
+                horizontal: MediaQuery.of(context).size.width * 0.1),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount:
+                  MediaQuery.of(context).orientation == Orientation.portrait
+                      ? 3
+                      : 5, // ปรับจำนวนปุ่มในแนวนอนตามแนวนอนหรือแนวตั้งของหน้าจอ
               childAspectRatio: 2.0,
-              crossAxisSpacing: 100,
+              crossAxisSpacing: MediaQuery.of(context).size.width *
+                  0.1, // ปรับระยะห่างในแนวนอนของปุ่ม
               mainAxisSpacing: 10,
             ),
-            itemCount: _keyLabels.length,
+            itemCount: _floor.length,
             itemBuilder: (BuildContext context, int index) {
-              bool isSelected = _selectedKey == _keyLabels[index]; //
+              bool isSelected = _selectedKey == _floor[index];
+
               return ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: isSelected ? Colors.blue : Colors.grey[300],
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8.0),
+                    borderRadius: BorderRadius.circular(20.0),
                   ),
                 ),
-                onPressed: () => _onKeypadTap(_keyLabels[index]),
+                onPressed: () => _onFloorTap(_floor[index]),
                 child: Text(
-                  _keyLabels[index],
+                  _floor[index],
                   style: TextStyle(
                     color: isSelected ? Colors.white : Colors.black,
                   ),
@@ -132,7 +143,7 @@ class _KeypadState extends State<Keypad> {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.all(30.0),
+          padding: const EdgeInsets.only(bottom: 100.0),
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.blue,
