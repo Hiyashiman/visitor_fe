@@ -62,12 +62,8 @@ flutter:
 
   assets:
     - assets/animations/animation.json
-<<<<<<< HEAD
-    - assets/animations/penson.json
-=======
     - assets/animations/animationscan.json
 
->>>>>>> main
 
   fonts:
     - family: Inter

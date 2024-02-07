@@ -1,17 +1,45 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:visitor/pages/registration-system.dart';
+import 'package:visitor/pages/registration-system.dart'; // ตรวจสอบ path ที่ถูกต้อง
 import 'package:visitor/pages/stepper.dart';
+import 'package:visitor/utils/style/style.dart';
 
-class Pagesucceed extends StatefulWidget {
-  const Pagesucceed({Key? key}) : super(key: key);
+class PageSucceed extends StatefulWidget {
+  const PageSucceed({Key? key}) : super(key: key);
 
   @override
-  // ignore: library_private_types_in_public_api
-  _PagesucceedState createState() => _PagesucceedState();
+  _PageSucceedState createState() => _PageSucceedState();
 }
 
-class _PagesucceedState extends State<Pagesucceed> {
+class _PageSucceedState extends State<PageSucceed> {
+  Timer? _navigationTimer;
+
+  @override
+  void initState() {
+    super.initState();
+    _startNavigationTimer();
+  }
+
+  void _startNavigationTimer() {
+    _navigationTimer = Timer(const Duration(seconds: 60), _navigateToStart);
+  }
+
+  void _navigateToStart() {
+    if (!mounted) return;
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (context) => const MyApp()), // อัพเดตตามหน้าเริ่มต้นของคุณ
+      (Route<dynamic> route) => false,
+    );
+  }
+
+  @override
+  void dispose() {
+    _navigationTimer?.cancel();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,13 +49,11 @@ class _PagesucceedState extends State<Pagesucceed> {
           children: [
             SizedBox(
               child: Container(
-                height: 150, // Example: Enforce a height constraint
+                height: 150,
                 child: const MyStepper(initialStep: 6),
               ),
             ),
-            // MyStepper(initialStep: 0),
-
-            const Text("ลงทะเบียนสำเร็จกรุณาดึงบัตรประชาชนออก"),
+            Text("ลงทะเบียนสำเร็จกรุณาดึงบัตรประชาชนออก", style: AppTextStyle.textsuccess),
             const SizedBox(height: 30),
             LottieBuilder.asset(
               'assets/animations/animation.json',
@@ -38,15 +64,11 @@ class _PagesucceedState extends State<Pagesucceed> {
             const Text('สแกนหน้าหน้าเข้าอาคารได้เลย'),
             const SizedBox(height: 30),
             ElevatedButton(
-              child: const Text('เริ่มรายการ'),
+              child: const Text('เริ่มรายการใหม่'),
               onPressed: () {
                 Navigator.push(
                   context,
-<<<<<<< HEAD
-                  MaterialPageRoute(builder: (context) => const SelectFloor()),
-=======
-                  MaterialPageRoute(builder: (context) => const MyApp()),
->>>>>>> main
+                  MaterialPageRoute(builder: (context) => const MyApp()), // อัพเดตตามหน้าเริ่มต้นของคุณ
                 );
               },
             ),

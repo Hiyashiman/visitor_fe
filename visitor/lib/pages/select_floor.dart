@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:visitor/pages/personalDataCS.dart';
 import 'package:visitor/pages/stepper.dart';
@@ -7,7 +8,7 @@ void main() => runApp(const SelectFloor());
 class SelectFloor extends StatelessWidget {
   const SelectFloor({Key? key}) : super(key: key);
 
-  @override
+ @override
   Widget build(BuildContext context) {
     return const MaterialApp(
       home: Scaffold(
@@ -21,12 +22,10 @@ class Keypad extends StatefulWidget {
   const Keypad({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
   _KeypadState createState() => _KeypadState();
 }
 
 class _KeypadState extends State<Keypad> {
-  // You can use a list to manage the keypad labels
   final List<String> _keyLabels = [
     'B',
     'G',
@@ -45,15 +44,38 @@ class _KeypadState extends State<Keypad> {
     '12'
   ];
   bool _isButtonSelected = false;
-  String _selectedKey = ''; //
+  String _selectedKey = '';
+  Timer? _inactivityTimer;
+
+  @override
+  void initState() {
+    super.initState();
+    _startInactivityTimer();
+  }
+
+  void _startInactivityTimer() {
+    _inactivityTimer?.cancel(); // ยกเลิก Timer ก่อนหน้าถ้ามี
+    _inactivityTimer = Timer(const Duration(seconds: 60), () {
+      // ใช้ Navigator.pushReplacement หรือ Navigator.push ตามความเหมาะสม
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const PersonalDataConsentScreen()),
+      );
+    });
+  }
+
+  @override
+  void dispose() {
+    _inactivityTimer?.cancel(); // ยกเลิก Timer เมื่อ widget ถูกทิ้ง
+    super.dispose();
+  }
 
   void _onKeypadTap(String label) {
     setState(() {
-      _isButtonSelected = true; //อัปเดตสถานะเมื่อมีการกดปุ่ม
-      _selectedKey = label; //
+      _isButtonSelected = true;
+      _selectedKey = label;
     });
-    // Handle the keypad button tap
-    // ignore: avoid_print
+    _startInactivityTimer(); // รีเซ็ต Timer เมื่อมีการโต้ตอบ
     print('Button $label tapped');
   }
 

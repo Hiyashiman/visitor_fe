@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:visitor/pages/select_floor.dart';
+import 'package:visitor/utils/style/style.dart';
 
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -19,7 +20,7 @@ class _HomePageState extends State<MyApp> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             // MyStepper(initialStep: 0),
-            const Text("ระบบลงทะเบียนเข้าอาคารด้วยตนเอง"),
+            Text("ระบบลงทะเบียนเข้าอาคารด้วยตนเอง", style: AppTextStyle.heading),
             const SizedBox(height: 30),
             LottieBuilder.asset(
               'assets/animations/animation.json',
@@ -27,7 +28,7 @@ class _HomePageState extends State<MyApp> {
               width: 250,
             ),
             const SizedBox(height: 30),
-            const Text('กรุณาเสียบบัตรประชาชน'),
+             Text('กรุณาเสียบบัตรประชาชน', style: AppTextStyle.getbody),
             const SizedBox(height: 30),
             ElevatedButton(
               child: const Text('เริ่มรายการ'),

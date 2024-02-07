@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:visitor/pages/registration-system.dart';
 import 'package:visitor/pages/stepper.dart';
@@ -31,6 +33,28 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   bool _hasButtonBeenPressed = false;
   int? _selectedButtonIndex;
+  Timer? _inactivityTimer;
+
+  @override
+  void initState() {
+    super.initState();
+    _startInactivityTimer();
+  }
+
+  void _startInactivityTimer() {
+    _inactivityTimer = Timer(const Duration(seconds: 60), () {
+      if (mounted) {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const MyApp()));
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _inactivityTimer?.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -79,6 +103,7 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+  // Add all button labels
   Widget _buildButtonGrid() {
     List<String> buttonLabels = [
       'ส่งเอกสาร',
@@ -89,7 +114,6 @@ class _MyHomePageState extends State<MyHomePage> {
       'ทำโปรเจค',
       'ผู้รับเหมา',
       'มาร่วมงาน Event'
-      // Add all button labels
     ];
 
     return GridView.builder(
@@ -110,7 +134,7 @@ class _MyHomePageState extends State<MyHomePage> {
               _selectedButtonIndex = index; // Update the selected button index
             });
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const Pagesucceed()));
+                MaterialPageRoute(builder: (context) => const PageSucceed()));
           },
           child: Text(buttonLabels[index]),
           style: ElevatedButton.styleFrom(
