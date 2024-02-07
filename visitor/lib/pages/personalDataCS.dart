@@ -35,7 +35,7 @@ class _PersonalDataConsentScreenState extends State<PersonalDataConsentScreen> {
 
   void _resetInactivityTimer() {
     _inactivityTimer?.cancel();
-    _inactivityTimer = Timer(const Duration(seconds: 60), _navigateToHomePage);
+    _inactivityTimer = Timer(const Duration(seconds: 10), _navigateToHomePage);
   }
 
   void _navigateToHomePage() {
@@ -75,7 +75,8 @@ class _PersonalDataConsentScreenState extends State<PersonalDataConsentScreen> {
             const Padding(
               padding: EdgeInsets.all(16.0),
               child: Text(
-                'ข้าพเจ้ายินยอมให้ไว้ซึ่งข้อมูลอันเป็นข้อมูลส่วนนุคคดของข้าพเจ้าแก่ผู้รับหน้าที่จัดเก็บข้อมูลและประมวลผลของระมนี้เพื่อใช้ประโยชน์ในงานรักษาความปลอดภัยของอาคารสถานที่แห่งนี้ โดยการจัดเก็บเป็นไปตามข้อกําหนดและผู้จัดเก็บสามารถลมท่าลายข้อมูลทั่งหมดหรือบางส่วนของข้าพเจ้าโดยไม่ต้องแจ้งให้ข้าพเจ้าทราบล่วงหน้า',
+                'ข้าพเจ้ายินยอมให้ไว้ซึ่งข้อมูลอันเป็นข้อมูลส่วนนุคคดของข้าพเจ้าแก่ผู้รับหน้าที่จัดเก็บข้อมูลและประมวลผลของระมนี้เพื่อใช้ประโยชน์ในงานรักษาความปลอดภัยของอาคารสถานที่แห่งนี้'
+                'โดยการจัดเก็บเป็นไปตามข้อกําหนดและผู้จัดเก็บสามารถลมท่าลายข้อมูลทั่งหมดหรือบางส่วนของข้าพเจ้าโดยไม่ต้องแจ้งให้ข้าพเจ้าทราบล่วงหน้า',
                 style: TextStyle(fontSize: 16),
               ),
             ),
@@ -108,8 +109,10 @@ class _PersonalDataConsentScreenState extends State<PersonalDataConsentScreen> {
                           _inactivityTimer?.cancel(); // ยกเลิก Timer ก่อนนำทาง
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => const MyFaceScanPage()),
-                          ).then((_) => _resetInactivityTimer()); // รีเซ็ต Timer เมื่อกลับมา
+                            MaterialPageRoute(
+                                builder: (context) => const MyFaceScanPage()),
+                          ).then((_) =>
+                              _resetInactivityTimer()); // รีเซ็ต Timer เมื่อกลับมา
                         },
                         child: const Text('ยินยอม'),
                       ),
@@ -136,9 +139,11 @@ class _PersonalDataConsentScreenState extends State<PersonalDataConsentScreen> {
               child: const Text('ตกลง'),
               onPressed: () {
                 _inactivityTimer?.cancel(); // ยกเลิก Timer ก่อนนำทาง
-                Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => const MyApp()),
-                );
+                Navigator.of(context)
+                    .pushReplacement(
+                      MaterialPageRoute(builder: (context) => const MyApp()),
+                    )
+                    .then((_) => _resetInactivityTimer());
               },
             ),
           ],

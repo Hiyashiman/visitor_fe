@@ -13,30 +13,30 @@ class PageSucceed extends StatefulWidget {
 }
 
 class _PageSucceedState extends State<PageSucceed> {
-  Timer? _navigationTimer;
+  Timer? _inactivityTimer;
 
   @override
   void initState() {
     super.initState();
-    _startNavigationTimer();
+    _resetInactivityTimer();
   }
 
-  void _startNavigationTimer() {
-    _navigationTimer = Timer(const Duration(seconds: 60), _navigateToStart);
+  void _resetInactivityTimer() {
+    _inactivityTimer?.cancel();
+    _inactivityTimer = Timer(const Duration(seconds: 10), _navigateToHomePage);
   }
 
-  void _navigateToStart() {
+  void _navigateToHomePage() {
     if (!mounted) return;
-    Navigator.pushAndRemoveUntil(
-      context,
-      MaterialPageRoute(builder: (context) => const MyApp()), // อัพเดตตามหน้าเริ่มต้นของคุณ
+    Navigator.of(context).pushAndRemoveUntil(
+      MaterialPageRoute(builder: (context) => const MyApp()),
       (Route<dynamic> route) => false,
     );
   }
 
   @override
   void dispose() {
-    _navigationTimer?.cancel();
+    _inactivityTimer?.cancel();
     super.dispose();
   }
 
@@ -53,7 +53,8 @@ class _PageSucceedState extends State<PageSucceed> {
                 child: const MyStepper(initialStep: 6),
               ),
             ),
-            Text("ลงทะเบียนสำเร็จกรุณาดึงบัตรประชาชนออก", style: AppTextStyle.textsuccess),
+            Text("ลงทะเบียนสำเร็จกรุณาดึงบัตรประชาชนออก",
+                style: AppTextStyle.textsuccess),
             const SizedBox(height: 30),
             LottieBuilder.asset(
               'assets/animations/animation.json',
@@ -61,15 +62,18 @@ class _PageSucceedState extends State<PageSucceed> {
               width: 250,
             ),
             const SizedBox(height: 30),
-            const Text('สแกนหน้าหน้าเข้าอาคารได้เลย'),
+            Text('สแกนหน้าหน้าเข้าอาคารได้เลย', style: AppTextStyle.getbody),
             const SizedBox(height: 30),
             ElevatedButton(
               child: const Text('เริ่มรายการใหม่'),
               onPressed: () {
+                _inactivityTimer?.cancel();
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const MyApp()), // อัพเดตตามหน้าเริ่มต้นของคุณ
-                );
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          const MyApp()), // อัพเดตตามหน้าเริ่มต้นของคุณ
+                ).then((_) => _resetInactivityTimer());
               },
             ),
           ],

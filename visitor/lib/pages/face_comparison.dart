@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:visitor/pages/registration-system.dart';
 import 'package:visitor/utils/style/style.dart';
 import 'package:visitor/pages/stepper.dart';
 import 'package:lottie/lottie.dart';
@@ -39,18 +40,21 @@ class _MyFaceScanState extends State<MyFaceScan> {
   }
 
   void _resetInactivityTimer() {
-    _inactivityTimer?.cancel(); // ยกเลิก Timer ที่กำลังทำงาน
-    _inactivityTimer = Timer(const Duration(seconds: 60), _navigateToHomePage); // ตั้งเวลาใหม่
+    _inactivityTimer?.cancel();
+    _inactivityTimer = Timer(const Duration(seconds: 5), _navigateToHomePage);
   }
 
   void _navigateToHomePage() {
-    if (!mounted) return; 
-
+    if (!mounted) return;
+    Navigator.of(context).pushAndRemoveUntil(
+      MaterialPageRoute(builder: (context) => const MyApp()),
+      (Route<dynamic> route) => false,
+    );
   }
 
   @override
   void dispose() {
-    _inactivityTimer?.cancel(); // ยกเลิก Timer เมื่อหน้าจอถูกทิ้ง
+    _inactivityTimer?.cancel();
     super.dispose();
   }
 

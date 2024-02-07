@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:visitor/pages/personalDataCS.dart';
+import 'package:visitor/pages/registration-system.dart';
 import 'package:visitor/pages/stepper.dart';
 
 void main() => runApp(const SelectFloor());
@@ -8,7 +9,7 @@ void main() => runApp(const SelectFloor());
 class SelectFloor extends StatelessWidget {
   const SelectFloor({Key? key}) : super(key: key);
 
- @override
+  @override
   Widget build(BuildContext context) {
     return const MaterialApp(
       home: Scaffold(
@@ -50,18 +51,21 @@ class _KeypadState extends State<Keypad> {
   @override
   void initState() {
     super.initState();
-    _startInactivityTimer();
+    // _startInactivityTimer();
+    _resetInactivityTimer();
   }
 
-  void _startInactivityTimer() {
-    _inactivityTimer?.cancel(); // ยกเลิก Timer ก่อนหน้าถ้ามี
-    _inactivityTimer = Timer(const Duration(seconds: 60), () {
-      // ใช้ Navigator.pushReplacement หรือ Navigator.push ตามความเหมาะสม
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const PersonalDataConsentScreen()),
-      );
-    });
+  void _resetInactivityTimer() {
+    _inactivityTimer?.cancel();
+    _inactivityTimer = Timer(const Duration(seconds: 10), _navigateToHomePage);
+  }
+
+  void _navigateToHomePage() {
+    if (!mounted) return;
+    Navigator.of(context).pushAndRemoveUntil(
+      MaterialPageRoute(builder: (context) => const MyApp()),
+      (Route<dynamic> route) => false,
+    );
   }
 
   @override
@@ -75,7 +79,7 @@ class _KeypadState extends State<Keypad> {
       _isButtonSelected = true;
       _selectedKey = label;
     });
-    _startInactivityTimer(); // รีเซ็ต Timer เมื่อมีการโต้ตอบ
+    _resetInactivityTimer(); // รีเซ็ต Timer เมื่อมีการโต้ตอบ
     print('Button $label tapped');
   }
 
@@ -134,16 +138,15 @@ class _KeypadState extends State<Keypad> {
               backgroundColor: Colors.blue,
               foregroundColor: Colors.white,
             ),
-            onPressed: _isButtonSelected
-                ? () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              const PersonalDataConsentScreen()),
-                    );
-                  }
-                : null, // ใช้ _isButtonSelected เพื่อควบคุมการเปิดใช้งานของปุ่ม
+            onPressed: () {
+              _inactivityTimer?.cancel();
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const PersonalDataConsentScreen()),
+              ).then((_) => _resetInactivityTimer());
+            },
+            // ใช้ _isButtonSelected เพื่อควบคุมการเปิดใช้งานของปุ่ม
             child: const Text('ตกลง'), // 'OK' or 'Confirm' button
           ),
         ),

@@ -12,34 +12,56 @@ class MyApp extends StatefulWidget {
 }
 
 class _HomePageState extends State<MyApp> {
+  int _tapCount = 0; // สร้างตัวแปรเพื่อนับจำนวนการกด
+
+  void _incrementTap() {
+    setState(() {
+      _tapCount++;
+    });
+    if (_tapCount > 15) {
+      // ถ้าการกดมากกว่า 10 ครั้ง
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => const SelectFloor()), // ไปยังหน้า....
+      );
+      _tapCount = 0;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // MyStepper(initialStep: 0),
-            Text("ระบบลงทะเบียนเข้าอาคารด้วยตนเอง", style: AppTextStyle.heading),
-            const SizedBox(height: 30),
-            LottieBuilder.asset(
-              'assets/animations/animation.json',
-              height: 250,
-              width: 250,
-            ),
-            const SizedBox(height: 30),
-             Text('กรุณาเสียบบัตรประชาชน', style: AppTextStyle.getbody),
-            const SizedBox(height: 30),
-            ElevatedButton(
-              child: const Text('เริ่มรายการ'),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const SelectFloor()),
-                );
-              },
-            ),
-          ],
+      body: GestureDetector(
+        // ใช้ GestureDetector เพื่อจับการกด
+        onTap: _incrementTap, // เพิ่มการนับทุกครั้งที่มีการกด
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text("ระบบลงทะเบียนเข้าอาคารด้วยตนเอง",
+                  style: AppTextStyle.heading),
+              const SizedBox(height: 30),
+              LottieBuilder.asset(
+                'assets/animations/animation.json',
+                height: 250,
+                width: 250,
+              ),
+              const SizedBox(height: 30),
+              Text('กรุณาเสียบบัตรประชาชน', style: AppTextStyle.getbody),
+              const SizedBox(height: 30),
+              ElevatedButton(
+                child: const Text('เริ่มรายการ'),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const SelectFloor()),
+                  );
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

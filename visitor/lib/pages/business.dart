@@ -38,16 +38,20 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    _startInactivityTimer();
+    _resetInactivityTimer();
   }
 
-  void _startInactivityTimer() {
-    _inactivityTimer = Timer(const Duration(seconds: 60), () {
-      if (mounted) {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const MyApp()));
-      }
-    });
+  void _resetInactivityTimer() {
+    _inactivityTimer?.cancel();
+    _inactivityTimer = Timer(const Duration(seconds: 10), _navigateToHomePage);
+  }
+
+  void _navigateToHomePage() {
+    if (!mounted) return;
+    Navigator.of(context).pushAndRemoveUntil(
+      MaterialPageRoute(builder: (context) => const MyApp()),
+      (Route<dynamic> route) => false,
+    );
   }
 
   @override
@@ -129,6 +133,7 @@ class _MyHomePageState extends State<MyHomePage> {
             _selectedButtonIndex == index; // Check if this button is selected
         return ElevatedButton(
           onPressed: () {
+            _inactivityTimer?.cancel();
             setState(() {
               _hasButtonBeenPressed = true; // Update button press state
               _selectedButtonIndex = index; // Update the selected button index
@@ -156,7 +161,8 @@ class _MyHomePageState extends State<MyHomePage> {
     return Container(
       child: const Center(
         child: Text(
-          'ธุระอื่นๆนอกจากรายการข้างต้น  กรุณากดปุ่ม ยกเลิก',
+          'ธุระอื่นๆนอกจากรายการข้างต้น'
+          'กรุณากดปุ่ม ยกเลิก',
           textAlign: TextAlign
               // This ensures the text is centered if it wraps to a new line
               .center,
@@ -171,11 +177,12 @@ class _MyHomePageState extends State<MyHomePage> {
     return ElevatedButton(
       child: Text('ยกเลิก'),
       onPressed: () {
+        _inactivityTimer?.cancel();
         // Your footer button text
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const MyApp()),
-        );
+        ).then((_) => _resetInactivityTimer());
       },
     );
   }
