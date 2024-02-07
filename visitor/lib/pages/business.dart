@@ -161,8 +161,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Container(
       child: const Center(
         child: Text(
-          'ธุระอื่นๆนอกจากรายการข้างต้น'
-          'กรุณากดปุ่ม ยกเลิก',
+          'ธุระอื่นๆนอกจากรายการข้างต้น  กรุณากดปุ่ม ยกเลิก',
           textAlign: TextAlign
               // This ensures the text is centered if it wraps to a new line
               .center,
