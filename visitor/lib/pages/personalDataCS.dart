@@ -1,9 +1,10 @@
+// ignore: file_names
 import 'package:flutter/material.dart';
 import 'package:visitor/pages/business.dart';
+import 'package:visitor/pages/face_comparison.dart';
 import 'package:visitor/pages/registration-system.dart';
-import 'package:visitor/pages/select_floor.dart';
 import 'package:visitor/pages/stepper.dart';
-void main() => runApp(const Agreement());
+import 'dart:async';
 
 class Agreement extends StatelessWidget {
   const Agreement({Key? key}) : super(key: key);
@@ -26,9 +27,36 @@ class PersonalDataConsentScreen extends StatefulWidget {
 }
 
 class _PersonalDataConsentScreenState extends State<PersonalDataConsentScreen> {
-  int _currentStep = 0;
+  // ignore: unused_field
+  final int _currentStep = 0;
+  // Timer? _inactivityTimer;
 
-  // ignore: unused_element
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _resetInactivityTimer();
+  // }
+
+  // void _resetInactivityTimer() {
+  //   _inactivityTimer?.cancel();
+  //   _inactivityTimer = Timer(const Duration(seconds: 5), _navigateToHomePage);
+  // }
+
+  void _navigateToHomePage() {
+    if (Navigator.canPop(context)) {
+      Navigator.pop(context);
+    }
+    Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (context) => const MyApp()),
+        (Route<dynamic> route) => false);
+  }
+
+  // @override
+  // void dispose() {
+  //   _inactivityTimer?.cancel();
+  //   super.dispose();
+  // }
+
   void _showDoNotConsentAlert() {
     showDialog(
       context: context,
@@ -40,11 +68,10 @@ class _PersonalDataConsentScreenState extends State<PersonalDataConsentScreen> {
             TextButton(
               child: const Text('ตกลง'),
               onPressed: () {
-                Navigator.push (
-                context,
-                MaterialPageRoute (builder: (context) => const SelectFloor()),// Dismiss the dialog
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const MyApp()),
                 );
-                
               },
             ),
           ],
@@ -59,13 +86,13 @@ class _PersonalDataConsentScreenState extends State<PersonalDataConsentScreen> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(
-        child: Container(
-        height: 150, // Example: Enforce a height constraint
-        child: MyStepper(initialStep: 2),
-      ),
-     )  ,
-           Padding(
+          const SizedBox(
+            child: SizedBox(
+              height: 150,
+              child: MyStepper(initialStep: 2),
+            ),
+          ),
+          const Padding(
             padding: EdgeInsets.all(16.0),
             child: Text(
               'ข้อตกลง การใช้บริการPersonal Data Consent',
@@ -106,10 +133,11 @@ class _PersonalDataConsentScreenState extends State<PersonalDataConsentScreen> {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => MyBusiness()),
+                          MaterialPageRoute(
+                              builder: (context) => MyFaceScanPage()),
                         );
                       },
-                      child: const Text('ตกลง'),
+                      child: const Text('ยินยอม'),
                     ),
                   ),
                 ),

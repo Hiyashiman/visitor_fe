@@ -47,7 +47,7 @@ int count = 0;
             ),
            )   
            ,
-
+            
             Text(statusText[0],style: AppTextStyle.heading,),
             const SizedBox(height: 30),
             LottieBuilder.asset(

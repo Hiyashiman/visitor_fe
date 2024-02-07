@@ -27,8 +27,8 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
+// Initialize a variable to track if any button has been pressed
 class _MyHomePageState extends State<MyHomePage> {
-  // Initialize a variable to track if any button has been pressed
   bool _hasButtonBeenPressed = false;
   int? _selectedButtonIndex;
 
@@ -67,7 +67,7 @@ class _MyHomePageState extends State<MyHomePage> {
         color: Colors.white,
         borderRadius: BorderRadius.circular(3),
       ),
-      child: Center(
+      child: const Center(
         // This will center the Text widget within the Container
         child: Text(
           'กรุณาเลือกธุระที่มาติดต่อ',
@@ -92,36 +92,41 @@ class _MyHomePageState extends State<MyHomePage> {
       // Add all button labels
     ];
 
-     return GridView.builder(
-    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-      crossAxisCount: 4,
-      crossAxisSpacing: 20,
-      mainAxisSpacing: 16,
-      childAspectRatio: 3, // Adjust for your layout needs
-    ),
-    itemCount: buttonLabels.length,
-    itemBuilder: (context, index) {
-      bool isSelected = _selectedButtonIndex == index; // Check if this button is selected
-      return ElevatedButton(
-        onPressed: () {
-          setState(() {
-            _hasButtonBeenPressed = true; // Update button press state
-            _selectedButtonIndex = index; // Update the selected button index
-          });
-          Navigator.push(context, MaterialPageRoute(builder: (context) => const Pagesucceed()));
-        },
-        child: Text(buttonLabels[index]),
-        style: ElevatedButton.styleFrom(
-          primary: isSelected ? Colors.blue[800] : Colors.grey[300], // Darken if selected
-          onPrimary: isSelected ? Colors.white : Colors.black, // Text color contrast
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
+    return GridView.builder(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 4,
+        crossAxisSpacing: 20,
+        mainAxisSpacing: 16,
+        childAspectRatio: 3, // Adjust for your layout needs
+      ),
+      itemCount: buttonLabels.length,
+      itemBuilder: (context, index) {
+        bool isSelected =
+            _selectedButtonIndex == index; // Check if this button is selected
+        return ElevatedButton(
+          onPressed: () {
+            setState(() {
+              _hasButtonBeenPressed = true; // Update button press state
+              _selectedButtonIndex = index; // Update the selected button index
+            });
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const Pagesucceed()));
+          },
+          child: Text(buttonLabels[index]),
+          style: ElevatedButton.styleFrom(
+            primary: isSelected
+                ? Colors.blue[800]
+                : Colors.grey[300], // Darken if selected
+            onPrimary:
+                isSelected ? Colors.white : Colors.black, // Text color contrast
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
           ),
-        ),
-      );
-    },
-  );
-}
+        );
+      },
+    );
+  }
 
   Widget _Text() {
     return Container(
@@ -129,27 +134,25 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Text(
           'ธุระอื่นๆนอกจากรายการข้างต้น  กรุณากดปุ่ม ยกเลิก',
           textAlign: TextAlign
-              .center, // This ensures the text is centered if it wraps to a new line
+              // This ensures the text is centered if it wraps to a new line
+              .center,
           style: TextStyle(fontSize: 20, color: Colors.red),
         ),
       ),
     );
   }
 
+  // Modify onPressed to check _hasButtonBeenPressed
   Widget _buildFooterButton(BuildContext context) {
-    // Modify onPressed to check _hasButtonBeenPressed
     return ElevatedButton(
+      child: Text('ยกเลิก'),
       onPressed: () {
-        Navigator.push(context, 
-         MaterialPageRoute(builder: (context) => const MyApp()),
-         );
+        // Your footer button text
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const MyApp()),
+        );
       },
-      child: Text('ยกเลิก'), // Your footer button text
-      style: ElevatedButton.styleFrom(
-        padding: EdgeInsets.symmetric(vertical: 8), // Reduced vertical padding/ Sets a smaller minimum size for the button
-        shape: RoundedRectangleBorder(
-        ),
-      ),
     );
   }
 }
