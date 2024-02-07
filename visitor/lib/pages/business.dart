@@ -1,64 +1,60 @@
 import 'package:flutter/material.dart';
+import 'package:visitor/pages/registration-system.dart';
 import 'package:visitor/pages/stepper.dart';
+// Make sure to import your pages correctly
 
-void main() {
-  runApp(MyBusiness());
-}
-
-class MyBusiness extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: MyHomePage(),
-    );
-  }
-}
-
-// Convert MyHomePage to a StatefulWidget to manage the button press state
 class MyHomePage extends StatefulWidget {
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  // Initialize a variable to track if any button has been pressed
   bool _hasButtonBeenPressed = false;
   int? _selectedButtonIndex;
 
   @override
   Widget build(BuildContext context) {
+    // Using MediaQuery to get screen width
+    double screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       appBar: AppBar(),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            SizedBox(
-              child: Container(
-                height: 150, // Example: Enforce a height constraint
-                child: MyStepper(initialStep: 4),
+      body: SingleChildScrollView(
+        // Added to make the layout scrollable on small devices
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              SizedBox(
+                child: Container(
+                  height: 150,
+                  child: MyStepper(
+                      initialStep:
+                          4), // Assuming this is a custom widget you've defined
+                ),
               ),
-            ),
-            _buildStepProgressIndicator(),
-            SizedBox(height: 32),
-            Expanded(child: _buildButtonGrid()),
-            SizedBox(height: 32),
-            _Text(),
-            SizedBox(height: 32),
-            _buildFooterButton(context),
-          ],
+              _buildStepProgressIndicator(),
+              SizedBox(height: 32),
+              // Adjusting the grid layout based on screen width
+              Expanded(
+                child: _buildButtonGrid(screenWidth > 600
+                    ? 4
+                    : 2), // If screen width is greater than 600px, use 4 columns; otherwise, use 2
+              ),
+              SizedBox(height: 32),
+              _Text(),
+              SizedBox(height: 4),
+              _buildFooterButton(context),
+            ],
+          ),
         ),
       ),
     );
   }
 
   Widget _buildStepProgressIndicator() {
+    // Text size can be made responsive as well, but keeping it simple for now
     return Container(
       padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -66,20 +62,16 @@ class _MyHomePageState extends State<MyHomePage> {
         borderRadius: BorderRadius.circular(3),
       ),
       child: Center(
-        // This will center the Text widget within the Container
         child: Text(
           'กรุณาเลือกธุระที่มาติดต่อ',
-          textAlign: TextAlign
-              .center, // This ensures the text is centered if it wraps to a new line
+          textAlign: TextAlign.center,
           style: TextStyle(fontSize: 20),
         ),
       ),
     );
   }
 
-  Widget _buildButtonGrid() {
-    // Your existing Button Grid widget
-    // Add setState call inside onPressed to update _hasButtonBeenPressed
+  Widget _buildButtonGrid(int crossAxisCount) {
     List<String> buttonLabels = [
       'ส่งเอกสาร',
       'สัมภาษณ์งาน',
@@ -89,35 +81,32 @@ class _MyHomePageState extends State<MyHomePage> {
       'ทำโปรเจค',
       'ผู้รับเหมา',
       'มาร่วมงาน Event'
-
-      // Add all button labels
     ];
 
     return GridView.builder(
+      shrinkWrap: true, // Added to make GridView work in SingleChildScrollView
+      physics:
+          NeverScrollableScrollPhysics(), // Disable scrolling within the GridView
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 4,
+        crossAxisCount: crossAxisCount,
         crossAxisSpacing: 20,
         mainAxisSpacing: 16,
-        childAspectRatio: 3, // Adjust for your layout needs
+        childAspectRatio: 3,
       ),
       itemCount: buttonLabels.length,
       itemBuilder: (context, index) {
-        bool isSelected =
-            _selectedButtonIndex == index; // Check if this button is selected
+        bool isSelected = _selectedButtonIndex == index;
         return ElevatedButton(
           onPressed: () {
             setState(() {
-              _hasButtonBeenPressed = true; // Update button press state
-              _selectedButtonIndex = index; // Update the selected button index
+              _hasButtonBeenPressed = true;
+              _selectedButtonIndex = index;
             });
           },
           child: Text(buttonLabels[index]),
           style: ElevatedButton.styleFrom(
-            primary: isSelected
-                ? Colors.blue[800]
-                : Colors.grey[300], // Darken if selected
-            onPrimary:
-                isSelected ? Colors.white : Colors.black, // Text color contrast
+            primary: isSelected ? Colors.blue[800] : Colors.grey[300],
+            onPrimary: isSelected ? Colors.white : Colors.black,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8),
             ),
@@ -129,11 +118,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget _Text() {
     return Container(
-      child: const Center(
+      child: Center(
         child: Text(
-          'ธุระอื่นๆนอกจากรายการข้างต้น  กรุณากดปุ่ม ยกเลิก',
-          textAlign: TextAlign
-              .center, // This ensures the text is centered if it wraps to a new line
+          'ธุระอื่นๆนอกจากรายการข้างต้น กรุณากดปุ่ม ยกเลิก',
+          textAlign: TextAlign.center,
           style: TextStyle(fontSize: 20, color: Colors.red),
         ),
       ),
@@ -141,24 +129,16 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget _buildFooterButton(BuildContext context) {
-    // Modify onPressed to check _hasButtonBeenPressed
     return ElevatedButton(
-      onPressed: _hasButtonBeenPressed
-          ? () {
-              // Perform your navigation or action here
-              Navigator.pop(context); // Example action
-            }
-          : null, // Disable button if no button has been pressed
-      child: Text('ยกเลิก'), // Corrected text
-      style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.red,
-        onPrimary: Colors.white, // Changed for better visibility
-        padding: EdgeInsets.symmetric(vertical: 8),
-        minimumSize: Size(30, 36),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(5),
-        ),
-      ),
+      child: Text('ยกเลิก'),
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  const MyApp()), // Update with the correct navigation if MyApp is not the target
+        );
+      },
     );
   }
 }

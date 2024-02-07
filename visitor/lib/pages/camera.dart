@@ -35,7 +35,7 @@ class _HomeState extends State<Mycamer> {
             SizedBox(
               child: Container(
                 height: 150, // Example: Enforce a height constraint
-                child: MyStepper(initialStep: 1),
+                child: const MyStepper(initialStep: 1),
               ),
             ),
             if (imageFile != null)
@@ -80,12 +80,12 @@ class _HomeState extends State<Mycamer> {
                 const SizedBox(
                   width: 20,
                 ),
-                Expanded(
-                  child: ElevatedButton(
-                      onPressed: () => getImage(source: ImageSource.gallery),
-                      child: const Text('Select Image',
-                          style: TextStyle(fontSize: 18))),
-                )
+                // Expanded(
+                //   child: ElevatedButton(
+                //       onPressed: () => getImage(source: ImageSource.gallery),
+                //       child: const Text('Select Image',
+                //           style: TextStyle(fontSize: 18))),
+                // )
               ],
             ),
           ],
