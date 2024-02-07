@@ -28,15 +28,15 @@ class _HomePageState extends State<MyApp> {
             const SizedBox(height: 30),
             const Text('สแกนหน้าหน้าเข้าอาคารได้เลย'),
             const SizedBox(height: 30),
-            // ElevatedButton(
-            //   child: const Text('เริ่มรายการ'),
-            //   onPressed: () {
-            //     Navigator.push(
-            //       context,
-            //       MaterialPageRoute(builder: (context) => const SelectFloor()),
-            //     );
-            //   },
-            // ),
+            ElevatedButton(
+              child: const Text('เริ่มรายการ'),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const SelectFloor()),
+                );
+              },
+            ),
           ],
         ),
       ),
