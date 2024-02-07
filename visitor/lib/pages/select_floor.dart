@@ -27,12 +27,8 @@ class Keypad extends StatefulWidget {
 }
 
 class _KeypadState extends State<Keypad> {
-<<<<<<< HEAD
-  final List<String> _keyLabels = [
-=======
   // You can use a list to manage the keypad labels
   final List<String> _floor = [
->>>>>>> 0a7ce981eaa67d5b093f4585f2ece69554a5d530
     'B',
     'G',
     'M',
