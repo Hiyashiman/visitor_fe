@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:visitor/pages/select_floor.dart';
+import 'package:visitor/pages/registration-system.dart';
+import 'package:visitor/pages/stepper.dart';
 
-class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+class Pagesucceed extends StatefulWidget {
+  const Pagesucceed({Key? key}) : super(key: key);
 
   @override
-  _HomePageState createState() => _HomePageState();
+  // ignore: library_private_types_in_public_api
+  _PagesucceedState createState() => _PagesucceedState();
 }
 
-class _HomePageState extends State<MyApp> {
+class _PagesucceedState extends State<Pagesucceed> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,7 +19,14 @@ class _HomePageState extends State<MyApp> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            SizedBox(
+              child: Container(
+                height: 150, // Example: Enforce a height constraint
+                child: const MyStepper(initialStep: 6),
+              ),
+            ),
             // MyStepper(initialStep: 0),
+
             const Text("ลงทะเบียนสำเร็จกรุณาดึงบัตรประชาชนออก"),
             const SizedBox(height: 30),
             LottieBuilder.asset(
@@ -33,7 +42,11 @@ class _HomePageState extends State<MyApp> {
               onPressed: () {
                 Navigator.push(
                   context,
+<<<<<<< HEAD
                   MaterialPageRoute(builder: (context) => const SelectFloor()),
+=======
+                  MaterialPageRoute(builder: (context) => const MyApp()),
+>>>>>>> main
                 );
               },
             ),

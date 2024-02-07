@@ -9,12 +9,17 @@ import 'package:visitor/utils/style/color.dart';
 
 
 class AppTextStyle {
-  static  TextStyle heading  =  TextStyle(
+  static TextStyle get heading {
+    var  textStyle = TextStyle(
     fontSize: 25,
     fontWeight: FontWeight.bold,
     fontFamily: 'inter',
-    color: Appcolors.title
+    color: Appcolors.heading,
+
+  
   );
+    return textStyle;
+  }
   static TextStyle body =  TextStyle(
     fontSize: 15,
     fontWeight: FontWeight.normal,

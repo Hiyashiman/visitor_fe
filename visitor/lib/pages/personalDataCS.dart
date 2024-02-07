@@ -1,6 +1,10 @@
+// ignore: file_names
 import 'package:flutter/material.dart';
+import 'package:visitor/pages/business.dart';
+import 'package:visitor/pages/face_comparison.dart';
 import 'package:visitor/pages/registration-system.dart';
-void main() => runApp(const Agreement());
+import 'package:visitor/pages/stepper.dart';
+import 'dart:async';
 
 class Agreement extends StatelessWidget {
   const Agreement({Key? key}) : super(key: key);
@@ -23,9 +27,36 @@ class PersonalDataConsentScreen extends StatefulWidget {
 }
 
 class _PersonalDataConsentScreenState extends State<PersonalDataConsentScreen> {
-  int _currentStep = 0;
+  // ignore: unused_field
+  final int _currentStep = 0;
+  // Timer? _inactivityTimer;
 
-  // ignore: unused_element
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _resetInactivityTimer();
+  // }
+
+  // void _resetInactivityTimer() {
+  //   _inactivityTimer?.cancel();
+  //   _inactivityTimer = Timer(const Duration(seconds: 5), _navigateToHomePage);
+  // }
+
+  void _navigateToHomePage() {
+    if (Navigator.canPop(context)) {
+      Navigator.pop(context);
+    }
+    Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (context) => const MyApp()),
+        (Route<dynamic> route) => false);
+  }
+
+  // @override
+  // void dispose() {
+  //   _inactivityTimer?.cancel();
+  //   super.dispose();
+  // }
+
   void _showDoNotConsentAlert() {
     showDialog(
       context: context,
@@ -37,7 +68,10 @@ class _PersonalDataConsentScreenState extends State<PersonalDataConsentScreen> {
             TextButton(
               child: const Text('ตกลง'),
               onPressed: () {
-                Navigator.of(context).pop(); // Dismiss the dialog
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const MyApp()),
+                );
               },
             ),
           ],
@@ -49,37 +83,14 @@ class _PersonalDataConsentScreenState extends State<PersonalDataConsentScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Personal Data Consent'),
-      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Stepper(
-            steps: [
-              Step(
-                title: const Text('Step 1'),
-                content: Container(),
-                isActive: _currentStep == 0,
-              ),
-              // ... other steps
-            ],
-            currentStep: _currentStep,
-            onStepTapped: (step) => setState(() => _currentStep = step),
-            controlsBuilder: (BuildContext context, ControlsDetails details) {
-              return Row(
-                children: <Widget>[
-                  TextButton(
-                    onPressed: details.onStepContinue,
-                    child: const Text('Next'),
-                  ),
-                  TextButton(
-                    onPressed: details.onStepCancel,
-                    child: const Text('Back'),
-                  ),
-                ],
-              );
-            },
+          const SizedBox(
+            child: SizedBox(
+              height: 150,
+              child: MyStepper(initialStep: 2),
+            ),
           ),
           const Padding(
             padding: EdgeInsets.all(16.0),
@@ -122,28 +133,15 @@ class _PersonalDataConsentScreenState extends State<PersonalDataConsentScreen> {
                       onPressed: () {
                         Navigator.push(
                           context,
+<<<<<<< HEAD:visitor/lib/pages/agreement.dart
                           MaterialPageRoute(builder: (context) => MyApp()),
+=======
+                          MaterialPageRoute(
+                              builder: (context) => MyFaceScanPage()),
+>>>>>>> main:visitor/lib/pages/personalDataCS.dart
                         );
                       },
-                      child: const Text('ตกลง'),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.blueGrey,
-                          textStyle: const TextStyle(color: Colors.white)),
-                      onPressed: () {
-                        Navigator.push(
-                          context ,
-                            MaterialPageRoute(builder: (context) => const MyApp()),        
-                        
-                        );
-                      },
-                      child: const Text('back'),
+                      child: const Text('ยินยอม'),
                     ),
                   ),
                 ),

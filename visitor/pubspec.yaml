@@ -62,13 +62,18 @@ flutter:
 
   assets:
     - assets/animations/animation.json
+<<<<<<< HEAD
     - assets/animations/penson.json
+=======
+    - assets/animations/animationscan.json
+
+>>>>>>> main
 
   fonts:
     - family: Inter
       fonts:
         - asset: assets/fonts/inter/static/Inter-Regular.ttf
-    
+        
 
 
   # To add assets to your application, add an assets section, like this:
