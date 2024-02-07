@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:visitor/pages/registration-system.dart';
 
 void main() {
-  runApp(MaterialApp(
+  runApp(const MaterialApp(
     title: 'Visitor',
     home: MyApp(),
   ));

@@ -1,5 +1,7 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:visitor/pages/personalDataCS.dart';
+import 'package:visitor/pages/registration-system.dart';
 import 'package:visitor/pages/stepper.dart';
 
 void main() => runApp(const SelectFloor());
@@ -21,13 +23,16 @@ class Keypad extends StatefulWidget {
   const Keypad({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
   _KeypadState createState() => _KeypadState();
 }
 
 class _KeypadState extends State<Keypad> {
+<<<<<<< HEAD
   // You can use a list to manage the keypad labels
   final List<String> _floor = [
+=======
+  final List<String> _keyLabels = [
+>>>>>>> main
     'B',
     'G',
     'M',
@@ -45,15 +50,41 @@ class _KeypadState extends State<Keypad> {
     '12'
   ];
   bool _isButtonSelected = false;
-  String _selectedKey = ''; //
+  String _selectedKey = '';
+  Timer? _inactivityTimer;
+
+  @override
+  void initState() {
+    super.initState();
+    // _startInactivityTimer();
+    _resetInactivityTimer();
+  }
+
+  void _resetInactivityTimer() {
+    _inactivityTimer?.cancel();
+    _inactivityTimer = Timer(const Duration(seconds: 10), _navigateToHomePage);
+  }
+
+  void _navigateToHomePage() {
+    if (!mounted) return;
+    Navigator.of(context).pushAndRemoveUntil(
+      MaterialPageRoute(builder: (context) => const MyApp()),
+      (Route<dynamic> route) => false,
+    );
+  }
+
+  @override
+  void dispose() {
+    _inactivityTimer?.cancel(); // ยกเลิก Timer เมื่อ widget ถูกทิ้ง
+    super.dispose();
+  }
 
   void _onFloorTap(String label) {
     setState(() {
-      _isButtonSelected = true; //อัปเดตสถานะเมื่อมีการกดปุ่ม
-      _selectedKey = label; //
+      _isButtonSelected = true;
+      _selectedKey = label;
     });
-    // Handle the keypad button tap
-    // ignore: avoid_print
+    _resetInactivityTimer(); // รีเซ็ต Timer เมื่อมีการโต้ตอบ
     print('Button $label tapped');
   }
 
@@ -118,17 +149,16 @@ class _KeypadState extends State<Keypad> {
               backgroundColor: Colors.blue,
               foregroundColor: Colors.white,
             ),
-            onPressed: _isButtonSelected
-                ? () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              const PersonalDataConsentScreen()),
-                    );
-                  }
-                : null, // ใช้ _isButtonSelected เพื่อควบคุมการเปิดใช้งานของปุ่ม
-            child: const Text('ตกลง'), // 'OK' or 'Confirm' button
+            onPressed: () {
+              _inactivityTimer?.cancel();
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const PersonalDataConsentScreen()),
+              ).then((_) => _resetInactivityTimer());
+            },
+            // ใช้ _isButtonSelected เพื่อควบคุมการเปิดใช้งานของปุ่ม
+            child: const Text('ตกลง'), 
           ),
         ),
       ],

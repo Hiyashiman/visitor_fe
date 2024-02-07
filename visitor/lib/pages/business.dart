@@ -1,10 +1,15 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:visitor/pages/registration-system.dart';
+import 'package:visitor/pages/stepper.dart';
+import 'package:visitor/pages/succeed.dart';
 
 void main() {
-  runApp(Mybusiness());
+  runApp(MyBusiness());
 }
 
-class Mybusiness extends StatelessWidget {
+class MyBusiness extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -18,27 +23,62 @@ class Mybusiness extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget {
+// Convert MyHomePage to a StatefulWidget to manage the button press state
+class MyHomePage extends StatefulWidget {
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+// Initialize a variable to track if any button has been pressed
+class _MyHomePageState extends State<MyHomePage> {
+  bool _hasButtonBeenPressed = false;
+  int? _selectedButtonIndex;
+  Timer? _inactivityTimer;
+
+  @override
+  void initState() {
+    super.initState();
+    _resetInactivityTimer();
+  }
+
+  void _resetInactivityTimer() {
+    _inactivityTimer?.cancel();
+    _inactivityTimer = Timer(const Duration(seconds: 10), _navigateToHomePage);
+  }
+
+  void _navigateToHomePage() {
+    if (!mounted) return;
+    Navigator.of(context).pushAndRemoveUntil(
+      MaterialPageRoute(builder: (context) => const MyApp()),
+      (Route<dynamic> route) => false,
+    );
+  }
+
+  @override
+  void dispose() {
+    _inactivityTimer?.cancel();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Your App Titlee'), // Replace with your app title
-        backgroundColor: Colors.white,
-        elevation: 0,
-      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
+            SizedBox(
+              child: Container(
+                height: 150, // Example: Enforce a height constraint
+                child: MyStepper(initialStep: 4),
+              ),
+            ),
             // Step Progress Indicator
             _buildStepProgressIndicator(),
             SizedBox(height: 32),
-            // Grid of Buttons
             Expanded(child: _buildButtonGrid()),
             SizedBox(height: 32),
-            // Footer Button
             _Text(),
             SizedBox(height: 32),
             _buildFooterButton(context),
@@ -55,7 +95,7 @@ class MyHomePage extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(3),
       ),
-      child: Center(
+      child: const Center(
         // This will center the Text widget within the Container
         child: Text(
           'กรุณาเลือกธุระที่มาติดต่อ',
@@ -67,8 +107,8 @@ class MyHomePage extends StatelessWidget {
     );
   }
 
+  // Add all button labels
   Widget _buildButtonGrid() {
-    // TODO: Replace with your actual buttons and their callbacks
     List<String> buttonLabels = [
       'ส่งเอกสาร',
       'สัมภาษณ์งาน',
@@ -77,26 +117,37 @@ class MyHomePage extends StatelessWidget {
       'อบรม',
       'ทำโปรเจค',
       'ผู้รับเหมา',
-      'มาร่วมงาน Event',
-      // Add all button labels
+      'มาร่วมงาน Event'
     ];
+
     return GridView.builder(
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 4,
         crossAxisSpacing: 20,
         mainAxisSpacing: 16,
-        childAspectRatio: 5,
+        childAspectRatio: 3, // Adjust for your layout needs
       ),
       itemCount: buttonLabels.length,
       itemBuilder: (context, index) {
+        bool isSelected =
+            _selectedButtonIndex == index; // Check if this button is selected
         return ElevatedButton(
           onPressed: () {
-            // Handle your button tap
+            _inactivityTimer?.cancel();
+            setState(() {
+              _hasButtonBeenPressed = true; // Update button press state
+              _selectedButtonIndex = index; // Update the selected button index
+            });
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const PageSucceed()));
           },
           child: Text(buttonLabels[index]),
           style: ElevatedButton.styleFrom(
-            primary: Colors.grey[300], // Background color
-            onPrimary: Colors.black, // Text Color
+            primary: isSelected
+                ? Colors.blue[800]
+                : Colors.grey[300], // Darken if selected
+            onPrimary:
+                isSelected ? Colors.white : Colors.black, // Text color contrast
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8),
             ),
@@ -108,32 +159,30 @@ class MyHomePage extends StatelessWidget {
 
   Widget _Text() {
     return Container(
-      child: Center(
+      child: const Center(
         child: Text(
           'ธุระอื่นๆนอกจากรายการข้างต้น  กรุณากดปุ่ม ยกเลิก',
           textAlign: TextAlign
-              .center, // This ensures the text is centered if it wraps to a new line
+              // This ensures the text is centered if it wraps to a new line
+              .center,
           style: TextStyle(fontSize: 20, color: Colors.red),
         ),
       ),
     );
   }
 
+  // Modify onPressed to check _hasButtonBeenPressed
   Widget _buildFooterButton(BuildContext context) {
     return ElevatedButton(
+      child: Text('ยกเลิก'),
       onPressed: () {
-        Navigator.pop(context);
+        _inactivityTimer?.cancel();
+        // Your footer button text
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const MyApp()),
+        ).then((_) => _resetInactivityTimer());
       },
-      child: Text('ยกเลิกddd'), // Your footer button text
-      style: ElevatedButton.styleFrom(
-        primary: Colors.red, // Background color
-        onPrimary: Colors.black, // Text Color
-        padding: EdgeInsets.symmetric(vertical: 8), // Reduced vertical padding
-        minimumSize: Size(30, 36), // Sets a smaller minimum size for the button
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(5),
-        ),
-      ),
     );
   }
 }
