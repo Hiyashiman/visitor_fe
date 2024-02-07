@@ -87,7 +87,7 @@ class _PersonalDataConsentScreenState extends State<PersonalDataConsentScreen> {
         behavior: HitTestBehavior.opaque,
         onTap: _resetInactivityTimer, // รีเซ็ต Timer เมื่อมีการแตะหน้าจอ
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const SizedBox(
               child: SizedBox(
@@ -96,7 +96,7 @@ class _PersonalDataConsentScreenState extends State<PersonalDataConsentScreen> {
               ),
             ),
             const SizedBox(
-                height: 16), // Add some space between the stepper and the text
+                height: 170), // Add some space between the stepper and the text
             const Center(
               // Center widget added
               child: Padding(
@@ -112,14 +112,19 @@ class _PersonalDataConsentScreenState extends State<PersonalDataConsentScreen> {
               padding: EdgeInsets.symmetric(horizontal: 100.0),
               child: Align(
                 alignment: Alignment.centerLeft,
-                child: Text(
-                  'ข้าพเจ้ายินยอมให้ไว้ซึ่งข้อมูลอันเป็นข้อมูลส่วนนุคคดของข้าพเจ้าแก่ผู้รับหน้าที่จัดเก็บข้อมูลและประมวลผลของระมนี้เพื่อใช้ประโยชน์ในงานรักษาความปลอดภัยของอาคารสถานที่แห่งนี้'
-                  'โดยการจัดเก็บเป็นไปตามข้อกําหนดและผู้จัดเก็บสามารถลมท่าลายข้อมูลทั่งหมดหรือบางส่วนของข้าพเจ้าโดยไม่ต้องแจ้งให้ข้าพเจ้าทราบล่วงหน้า',
-                  style: TextStyle(fontSize: 16),
-                  textAlign: TextAlign.center, // Text alignment set to center
+                child: Center(child: Column(
+                    children: [
+                    Text('ข้าพเจ้ายินยอมให้ไว้ซึ่งข้อมูลอันเป็นข้อมูลส่วนนุคคดของข้าพเจ้าแก่ผู้รับหน้าที่จัดเก็บข้อมูล', style: TextStyle(fontSize: 16),textAlign: TextAlign.center,),
+                    Text('และประมวลผลของระมนี้เพื่อใช้ประโยชน์ในงานรักษาความปลอดภัยของอาคารสถานที่แห่งนี้โดยการจัดเก็บเป็นไปตามข้อกําหนด', style: TextStyle(fontSize: 16),textAlign: TextAlign.center,),
+                    Text('และผู้จัดเก็บสามารถลมท่าลายข้อมูลทั่งหมดหรือบางส่วนของข้าพเจ้าโดยไม่ต้องแจ้งให้ข้าพเจ้าทราบล่วงหน้า',style: TextStyle(fontSize: 16),textAlign: TextAlign.center,)
+                  ],
+//
                 ),
+                 
+                )
               ),
             ),
+
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 200.0),
               child: Row(

@@ -47,6 +47,7 @@ class _PageSucceedState extends State<PageSucceed> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+          
             SizedBox(
               child: Container(
                 height: 150,
@@ -54,7 +55,7 @@ class _PageSucceedState extends State<PageSucceed> {
               ),
             ),
             Text("ลงทะเบียนสำเร็จกรุณาดึงบัตรประชาชนออก",
-                style: AppTextStyle.textsuccess),
+            style: AppTextStyle.textsuccess),
             const SizedBox(height: 30),
             LottieBuilder.asset(
               'assets/animations/animation.json',

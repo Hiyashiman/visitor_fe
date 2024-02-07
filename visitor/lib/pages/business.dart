@@ -67,6 +67,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
+            
             SizedBox(
               child: Container(
                 height: 150, // Example: Enforce a height constraint

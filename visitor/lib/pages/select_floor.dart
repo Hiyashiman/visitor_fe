@@ -89,6 +89,7 @@ class _KeypadState extends State<Keypad> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
+        const SizedBox(height: 30),
         const SizedBox(
           child: SizedBox(
             height: 150,
@@ -154,12 +155,8 @@ class _KeypadState extends State<Keypad> {
               ).then((_) => _resetInactivityTimer());
             },
             // ใช้ _isButtonSelected เพื่อควบคุมการเปิดใช้งานของปุ่ม
-<<<<<<< HEAD
-            child: const Text('ตกลง'),
-=======
             child: const Text('ตกลง'), 
 
->>>>>>> main
           ),
         ),
       ],

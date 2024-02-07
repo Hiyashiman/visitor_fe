@@ -11,7 +11,7 @@ class MyFaceScanPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       home: Scaffold(
         body: MyFaceScan(),
       ),
@@ -60,18 +60,21 @@ class _MyFaceScanState extends State<MyFaceScan> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const SizedBox(
-              height: 150,
-              child: MyStepper(initialStep: 3),
-            ),
-            Text(
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        const SizedBox(
+          child: SizedBox(
+            height: 150,
+            child: MyStepper(initialStep: 1),
+          ),
+        ),
+           Padding(
+             padding: const EdgeInsets.all(80.0),
+            child: Text(
               statusText[0],
               style: AppTextStyle.heading,
+            ),
             ),
             const SizedBox(height: 30),
             LottieBuilder.asset(
@@ -79,7 +82,6 @@ class _MyFaceScanState extends State<MyFaceScan> {
               height: 250,
               width: 250,
             ),
-            const SizedBox(height: 30),
             ElevatedButton(
               child: const Text('ตกลง'),
               onPressed: () {
@@ -91,8 +93,7 @@ class _MyFaceScanState extends State<MyFaceScan> {
               },
             ),
           ],
-        ),
-      ),
-    );
+        );
+  
   }
 }
