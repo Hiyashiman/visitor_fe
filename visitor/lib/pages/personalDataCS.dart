@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:visitor/pages/business.dart';
 import 'package:visitor/pages/registration-system.dart';
 import 'package:visitor/pages/stepper.dart';
-import 'dart:async';
+// import 'dart:async';
 
 void main() => runApp(const Agreement());
 
@@ -91,22 +91,32 @@ class _PersonalDataConsentScreenState extends State<PersonalDataConsentScreen> {
               child: MyStepper(initialStep: 2),
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Text(
-              'ข้อตกลง การใช้บริการPersonal Data Consent',
-              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+          const SizedBox(
+              height: 16), // Add some space between the stepper and the text
+          const Center(
+            // Center widget added
+            child: Padding(
+              padding: EdgeInsets.all(16.0),
+              child: Text(
+                'ข้อตกลง การใช้บริการPersonal Data Consent',
+                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center, // Text alignment set to center
+              ),
             ),
           ),
           const Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Text(
-              'ข้าพเจ้ายินยอมให้ไว้ซึ่งข้อมูลอันเป็นข้อมูลส่วนนุคคดของข้าพเจ้าแก่ผู้รับหน้าที่จัดเก็บข้อมูลและประมวลผลของระมนี้เพื่อใช้ประโยชน์ในงานรักษาความปลอดภัยของอาคารสถานที่แห่งนี้ โดยการจัดเก็บเป็นไปตามข้อกําหนดและผู้จัดเก็บสามารถลมท่าลายข้อมูลทั่งหมดหรือบางส่วนของข้าพเจ้าโดยไม่ต้องแจ้งให้ข้าพเจ้าทราบล่วงหน้า',
-              style: TextStyle(fontSize: 16),
+            padding: EdgeInsets.symmetric(horizontal: 100.0),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'ข้าพเจ้ายินยอมให้ไว้ซึ่งข้อมูลอันเป็นข้อมูลส่วนนุคคดของข้าพเจ้าแก่ผู้รับหน้าที่จัดเก็บข้อมูลและประมวลผลของระมนี้เพื่อใช้ประโยชน์ในงานรักษาความปลอดภัยของอาคารสถานที่แห่งนี้ โดยการจัดเก็บเป็นไปตามข้อกําหนดและผู้จัดเก็บสามารถลมท่าลายข้อมูลทั่งหมดหรือบางส่วนของข้าพเจ้าโดยไม่ต้องแจ้งให้ข้าพเจ้าทราบล่วงหน้า',
+                style: TextStyle(fontSize: 16),
+                textAlign: TextAlign.center, // Text alignment set to center
+              ),
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            padding: const EdgeInsets.symmetric(horizontal: 200.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -118,7 +128,10 @@ class _PersonalDataConsentScreenState extends State<PersonalDataConsentScreen> {
                         backgroundColor: Colors.red,
                       ),
                       onPressed: _showDoNotConsentAlert,
-                      child: const Text('ไม่ยินยอม'),
+                      child: const Text(
+                        'ไม่ยินยอม',
+                        style: TextStyle(fontSize: 16, color: Colors.white),
+                      ),
                     ),
                   ),
                 ),
@@ -135,7 +148,10 @@ class _PersonalDataConsentScreenState extends State<PersonalDataConsentScreen> {
                           MaterialPageRoute(builder: (context) => Mybusiness()),
                         );
                       },
-                      child: const Text('ยินยอม'),
+                      child: const Text(
+                        'ยินยอม',
+                        style: TextStyle(color: Colors.white),
+                      ),
                     ),
                   ),
                 ),
