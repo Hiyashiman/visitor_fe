@@ -1,20 +1,34 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:visitor/pages/registration-system.dart';
-import 'package:visitor/pages/stepper.dart';
-<<<<<<< HEAD
-import 'package:visitor/pages/succeed.dart';
-=======
-// Make sure to import your pages correctly
->>>>>>> business
+import 'package:visitor/pages/registration-system.dart'; // Update with correct import path
+import 'package:visitor/pages/stepper.dart'; // Update with correct import path
+import 'package:visitor/pages/succeed.dart'; // Update with correct import path
+import 'package:visitor/utils/style/style.dart'; // Update with correct import path
+
+void main() {
+  runApp(MyBusiness());
+}
+
+class MyBusiness extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
+      home: MyHomePage(),
+    );
+  }
+}
 
 class MyHomePage extends StatefulWidget {
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-// Initialize a variable to track if any button has been pressed
 class _MyHomePageState extends State<MyHomePage> {
   bool _hasButtonBeenPressed = false;
   int? _selectedButtonIndex;
@@ -47,74 +61,52 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // Using MediaQuery to get screen width
-    double screenWidth = MediaQuery.of(context).size.width;
-
     return Scaffold(
-      appBar: AppBar(),
-      body: SingleChildScrollView(
-        // Added to make the layout scrollable on small devices
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              SizedBox(
-                child: Container(
-                  height: 150,
-                  child: MyStepper(
-                      initialStep:
-                          4), // Assuming this is a custom widget you've defined
-                ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            SizedBox(
+              child: Container(
+                height: 150, // Example: Enforce a height constraint
+                child: MyStepper(initialStep: 4),
               ),
-              _buildStepProgressIndicator(),
-              SizedBox(height: 32),
-              // Adjusting the grid layout based on screen width
-              Expanded(
-                child: _buildButtonGrid(screenWidth > 600
-                    ? 4
-                    : 2), // If screen width is greater than 600px, use 4 columns; otherwise, use 2
-              ),
-              SizedBox(height: 32),
-              _Text(),
-              SizedBox(height: 4),
-              _buildFooterButton(context),
-            ],
-          ),
+            ),
+            // Step Progress Indicator
+            _buildStepProgressIndicator(),
+            SizedBox(height: 32),
+            Expanded(child: _buildButtonGrid()),
+            SizedBox(height: 32),
+            _Text(),
+            SizedBox(height: 32),
+            _buildFooterButton(context),
+          ],
         ),
       ),
     );
   }
 
   Widget _buildStepProgressIndicator() {
-    // Text size can be made responsive as well, but keeping it simple for now
     return Container(
       padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(3),
       ),
-<<<<<<< HEAD
       child: const Center(
         // This will center the Text widget within the Container
-=======
-      child: Center(
->>>>>>> business
         child: Text(
           'กรุณาเลือกธุระที่มาติดต่อ',
-          textAlign: TextAlign.center,
+          textAlign: TextAlign
+              .center, // This ensures the text is centered if it wraps to a new line
           style: TextStyle(fontSize: 20),
         ),
       ),
     );
   }
 
-<<<<<<< HEAD
-  // Add all button labels
   Widget _buildButtonGrid() {
-=======
-  Widget _buildButtonGrid(int crossAxisCount) {
->>>>>>> business
     List<String> buttonLabels = [
       'ส่งเอกสาร',
       'สัมภาษณ์งาน',
@@ -124,40 +116,37 @@ class _MyHomePageState extends State<MyHomePage> {
       'ทำโปรเจค',
       'ผู้รับเหมา',
       'มาร่วมงาน Event'
+      // Add all button labels
     ];
 
     return GridView.builder(
-<<<<<<< HEAD
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 4,
-=======
-      shrinkWrap: true, // Added to make GridView work in SingleChildScrollView
-      physics:
-          NeverScrollableScrollPhysics(), // Disable scrolling within the GridView
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: crossAxisCount,
->>>>>>> business
         crossAxisSpacing: 20,
         mainAxisSpacing: 16,
-        childAspectRatio: 3,
+        childAspectRatio: 3, // Adjust for your layout needs
       ),
       itemCount: buttonLabels.length,
       itemBuilder: (context, index) {
-        bool isSelected = _selectedButtonIndex == index;
+        bool isSelected =
+            _selectedButtonIndex == index; // Check if this button is selected
         return ElevatedButton(
           onPressed: () {
             _inactivityTimer?.cancel();
             setState(() {
-              _hasButtonBeenPressed = true;
-              _selectedButtonIndex = index;
+              _hasButtonBeenPressed = true; // Update button press state
+              _selectedButtonIndex = index; // Update the selected button index
             });
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => const PageSucceed()));
           },
           child: Text(buttonLabels[index]),
           style: ElevatedButton.styleFrom(
-            primary: isSelected ? Colors.blue[800] : Colors.grey[300],
-            onPrimary: isSelected ? Colors.white : Colors.black,
+            primary: isSelected
+                ? Colors.blue[800]
+                : Colors.grey[300], // Darken if selected
+            onPrimary:
+                isSelected ? Colors.white : Colors.black, // Text color contrast
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8),
             ),
@@ -169,17 +158,11 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget _Text() {
     return Container(
-      child: Center(
+      child: const Center(
         child: Text(
-<<<<<<< HEAD
           'ธุระอื่นๆนอกจากรายการข้างต้น  กรุณากดปุ่ม ยกเลิก',
           textAlign: TextAlign
-              // This ensures the text is centered if it wraps to a new line
               .center,
-=======
-          'ธุระอื่นๆนอกจากรายการข้างต้น กรุณากดปุ่ม ยกเลิก',
-          textAlign: TextAlign.center,
->>>>>>> business
           style: TextStyle(fontSize: 20, color: Colors.red),
         ),
       ),
@@ -191,21 +174,11 @@ class _MyHomePageState extends State<MyHomePage> {
     return ElevatedButton(
       child: Text('ยกเลิก'),
       onPressed: () {
-<<<<<<< HEAD
-        _inactivityTimer?.cancel();
-        // Your footer button text
+        _inactivityTimer?.cancel(); // ยกเลิก Timer ก่อนการนำทาง
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const MyApp()),
-        ).then((_) => _resetInactivityTimer());
-=======
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) =>
-                  const MyApp()), // Update with the correct navigation if MyApp is not the target
         );
->>>>>>> business
       },
     );
   }
