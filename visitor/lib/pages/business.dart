@@ -33,6 +33,7 @@ class _MyHomePageState extends State<MyHomePage> {
   bool _hasButtonBeenPressed = false;
   int? _selectedButtonIndex;
   Timer? _inactivityTimer;
+  String _SelectedBook = '';
 
   @override
   void initState() {
@@ -57,6 +58,12 @@ class _MyHomePageState extends State<MyHomePage> {
   void dispose() {
     _inactivityTimer?.cancel();
     super.dispose();
+  }
+
+  void mockSaveSelectedbuttonLabels(String buttonLabels) {
+    // ที่นี่คุณสามารถจำลองการบันทึกข้อมูลไปยังฐานข้อมูลหรือการเรียกใช้งาน API
+    _SelectedBook = buttonLabels;
+    print('selected : $_SelectedBook');
   }
 
   @override
@@ -136,6 +143,7 @@ class _MyHomePageState extends State<MyHomePage> {
             setState(() {
               _hasButtonBeenPressed = true; // Update button press state
               _selectedButtonIndex = index; // Update the selected button index
+              mockSaveSelectedbuttonLabels(buttonLabels[index]);
             });
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => const PageSucceed()));
@@ -161,8 +169,7 @@ class _MyHomePageState extends State<MyHomePage> {
       child: const Center(
         child: Text(
           'ธุระอื่นๆนอกจากรายการข้างต้น  กรุณากดปุ่ม ยกเลิก',
-          textAlign: TextAlign
-              .center,
+          textAlign: TextAlign.center,
           style: TextStyle(fontSize: 20, color: Colors.red),
         ),
       ),

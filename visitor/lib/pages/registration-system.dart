@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:visitor/pages/select_floor.dart';
+import 'package:visitor/pages/succeed.dart';
 import 'package:visitor/utils/style/style.dart';
 
 class MyApp extends StatefulWidget {
@@ -13,6 +14,27 @@ class MyApp extends StatefulWidget {
 
 class _HomePageState extends State<MyApp> {
   int _tapCount = 0; // สร้างตัวแปรเพื่อนับจำนวนการกด
+  String? identificationNumber = '1234567890';
+  String? firstName = 'John';
+  String? lastName = 'Doe';
+  String? birthday = '01-01-1990';
+  String? address = '123 Main Street, City, Country';
+  String? cardIssueDate = '01-01-2020';
+  String? cardExpirationDate = '01-01-2030';
+  String? cardholderPhoto = 'assets/images/cardholder_photo.png';
+
+  Map<String, String> createIdCardData() {
+    return {
+      'IdNumber': identificationNumber!,
+      'FirstName': firstName!,
+      'LastName': lastName!,
+      'Birthday': birthday!,
+      'Address': address!,
+      'CardIssueDate': cardIssueDate!,
+      'CardExpirationDate': cardExpirationDate!,
+      'CardholderPhoto': cardholderPhoto!,
+    };
+  }
 
   void _incrementTap() {
     setState(() {
@@ -23,7 +45,7 @@ class _HomePageState extends State<MyApp> {
       Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => const SelectFloor()), // ไปยังหน้า....
+            builder: (context) =>  PageSucceed()), // ไปยังหน้า....
       );
       _tapCount = 0;
     }
@@ -53,10 +75,12 @@ class _HomePageState extends State<MyApp> {
               ElevatedButton(
                 child: const Text('เริ่มรายการ'),
                 onPressed: () {
+                  Map<String, String> data = createIdCardData();
+                  // ส่ง data map ไปยัง SelectFloor
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const SelectFloor()),
+                        builder: (context) =>  SelectFloor(data: data)),
                   );
                 },
               ),
