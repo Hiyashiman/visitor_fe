@@ -42,7 +42,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _resetInactivityTimer() {
     _inactivityTimer?.cancel();
-    _inactivityTimer = Timer(const Duration(seconds: 10), _navigateToHomePage);
+    _inactivityTimer = Timer(const Duration(seconds: 60), _navigateToHomePage);
   }
 
   void _navigateToHomePage() {
