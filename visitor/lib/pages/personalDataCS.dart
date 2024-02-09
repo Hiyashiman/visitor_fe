@@ -114,17 +114,34 @@ class _PersonalDataConsentScreenState extends State<PersonalDataConsentScreen> {
             ),
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 300.0),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'ข้าพเจ้ายินยอมให้ไว้ซึ่งข้อมูลอันเป็นข้อมูลส่วนบุคคลของข้าพเจ้าแก่ผู้รับหน้าที่จัดเก็บข้อมูล'
-                  'และประมวลผลของระบบนี้เพื่อใช้ประโยชน์ในงานรักษาความปลอดภัยของอาคารสถานที่แห่งนี้'
-                  'โดยการจัดเก็บเป็นไปตามข้อกําหนดและผู้จัดเก็บสามารถลมทำลายข้อมูลทั้งหมดหรือบางส่วนของข้าพเจ้า'
-                  'โดยไม่ต้องแจ้งให้ข้าพเจ้าทราบล่วงหน้า',
-                  style: TextStyle(fontSize: 20),
-                  textAlign: TextAlign.center,
-                ),
-              ),
+             child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Center(
+                    child: Column(
+                      children: [
+                        Text(
+                          'ข้าพเจ้ายินยอมให้ไว้ซึ่งข้อมูลอันเป็นข้อมูลส่วนบุคคลของข้าพเจ้าแก่ผู้รับหน้าที่จัดเก็บข้อมูล',
+                          style: TextStyle(fontSize: 20),
+                          textAlign: TextAlign.center,
+                        ),
+                        Text(
+                          'และประมวลผลของระบบนี้เพื่อใช้ประโยชน์ในงานรักษาความปลอดภัยของอาคารสถานที่แห่งนี้',
+                          style: TextStyle(fontSize: 20),
+                          textAlign: TextAlign.center,
+                        ),
+                        Text(
+                          'โดยการจัดเก็บเป็นไปตามข้อกําหนดและผู้จัดเก็บสามารถลบทำลายข้อมูลทั้งหมดหรือบางส่วน',
+                          style: TextStyle(fontSize: 20),
+                          textAlign: TextAlign.center,
+                        ),
+                        Text(
+                          'ของข้าพเจ้าโดยไม่ต้องแจ้งให้ข้าพเจ้าทราบล่วงหน้า',
+                          style: TextStyle(fontSize: 20),
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
+                  )),
             ),
             Expanded(
               child: Padding(
