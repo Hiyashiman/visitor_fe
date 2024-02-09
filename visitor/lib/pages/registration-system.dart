@@ -24,7 +24,6 @@ class _HomePageState extends State<MyApp> {
   String? cardExpirationDate = '01-01-2030';
   String? cardholderPhoto = 'assets/images/cardholder_photo.png';
 
-
   //mapค่าในdata
   Map<String, String> createIdCardData() {
     return {
@@ -45,11 +44,10 @@ class _HomePageState extends State<MyApp> {
     });
     if (_tapCount > 15) {
       // ถ้าการกดมากกว่า 15 ครั้ง
-       // ไปยังหน้า....
+      // ไปยังหน้า....
       Navigator.push(
         context,
-        MaterialPageRoute(
-            builder: (context) =>  PageSucceed()),
+        MaterialPageRoute(builder: (context) => PageSucceed()),
       );
       _tapCount = 0;
     }
@@ -58,40 +56,58 @@ class _HomePageState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // ใช้ GestureDetector เพื่อจับการกด
-      body: GestureDetector(
-        // เพิ่มการนับทุกครั้งที่มีการกด
-        onTap: _incrementTap,
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text("ระบบลงทะเบียนเข้าอาคารด้วยตนเอง",
-                  style: AppTextStyle.heading),
-              const SizedBox(height: 30),
-              LottieBuilder.asset(
-                'assets/animations/animation.json',
-                height: 250,
-                width: 250,
+      body: Stack(
+        children: [
+          Positioned(
+            top: 0, // ยึดจากด้านบนของ Stack
+            left: 0, // ยึดจากด้านซ้ายของ Stack
+            child: Padding(
+              padding: const EdgeInsets.all(8.0), // ระยะห่างจากขอบ
+              child: SizedBox(
+                height: 200, // ความสูงของรูปภาพ
+                width: 200, // ความกว้างของรูปภาพ
+                child: Image.asset('assets/logo/logoimage.png',
+                    fit: BoxFit.contain),
               ),
-              const SizedBox(height: 30),
-              Text('กรุณาเสียบบัตรประชาชน', style: AppTextStyle.getbody),
-              const SizedBox(height: 30),
-              ElevatedButton(
-                child: const Text('เริ่มรายการ'),
-                onPressed: () {
-                  // ส่ง data map ไปยัง SelectFloor
-                  Map<String, String> data = createIdCardData(); 
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>  SelectFloor(data: data)),
-                  );
-                },
-              ),
-            ],
+            ),
           ),
-        ),
+
+          // ใช้ GestureDetector เพื่อจับการกด
+          GestureDetector(
+            // เพิ่มการนับทุกครั้งที่มีการกด
+            onTap: _incrementTap,
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text("ระบบลงทะเบียนเข้าอาคารด้วยตนเอง",
+                      style: AppTextStyle.heading),
+                  const SizedBox(height: 30),
+                  LottieBuilder.asset(
+                    'assets/animations/animation.json',
+                    height: 250,
+                    width: 250,
+                  ),
+                  const SizedBox(height: 30),
+                  Text('กรุณาเสียบบัตรประชาชน', style: AppTextStyle.getbody),
+                  const SizedBox(height: 30),
+                  ElevatedButton(
+                    child: const Text('เริ่มรายการ'),
+                    onPressed: () {
+                      // ส่ง data map ไปยัง SelectFloor
+                      Map<String, String> data = createIdCardData();
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => SelectFloor(data: data)),
+                      );
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
