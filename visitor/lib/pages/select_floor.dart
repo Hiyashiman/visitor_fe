@@ -86,6 +86,7 @@ class _KeypadState extends State<Keypad> {
     setState(() {
       _isButtonSelected = true;
       _selectedKey = label;
+      _SelectedFloor = label;
     });
     _resetInactivityTimer(); // รีเซ็ต Timer เมื่อมีการโต้ตอบ
   }
@@ -155,19 +156,23 @@ class _KeypadState extends State<Keypad> {
           padding: const EdgeInsets.only(bottom: 100.0),
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.blue,
+              backgroundColor: _isButtonSelected
+                  ? Colors.blue
+                  : Colors.grey, // ปรับสีเมื่อปุ่มสามารถกดได้
               foregroundColor: Colors.white,
             ),
-            onPressed: () {
-              _inactivityTimer?.cancel();
-              mockSaveSelectedFloor(_selectedKey);
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const PersonalDataConsentScreen()),
-              ).then((_) => _resetInactivityTimer());
-            },
-            // ใช้ _isButtonSelected เพื่อควบคุมการเปิดใช้งานของปุ่ม
+            onPressed: _isButtonSelected
+                ? () {
+                    _inactivityTimer?.cancel();
+                    mockSaveSelectedFloor(_selectedKey);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              const PersonalDataConsentScreen()),
+                    ).then((_) => _resetInactivityTimer());
+                  }
+                : null, 
             child: const Text('ตกลง'),
           ),
         ),
