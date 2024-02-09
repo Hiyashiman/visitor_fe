@@ -31,17 +31,17 @@ class PersonalDataConsentScreen extends StatefulWidget {
 
 class _PersonalDataConsentScreenState extends State<PersonalDataConsentScreen> {
   Timer? _inactivityTimer;
+  String? _selectedPersonal = "";
+  @override
+  void initState() {
+    super.initState();
+    _resetInactivityTimer();
+  }
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _resetInactivityTimer();
-  // }
-
-  // void _resetInactivityTimer() {
-  //   _inactivityTimer?.cancel();
-  //   _inactivityTimer = Timer(const Duration(seconds: 5), _navigateToHomePage);
-  // }
+  void _resetInactivityTimer() {
+    _inactivityTimer?.cancel();
+    _inactivityTimer = Timer(const Duration(seconds: 60), _navigateToHomePage);
+  }
 
   // ignore: unused_element
   void _navigateToHomePage() {
@@ -69,12 +69,13 @@ class _PersonalDataConsentScreenState extends State<PersonalDataConsentScreen> {
             TextButton(
               child: const Text('ตกลง'),
               onPressed: () {
+                  _selectedPersonal = "ไม่ยินยอม";
+                print("User selection: $_selectedPersonal");
                 _inactivityTimer?.cancel(); // ยกเลิก Timer ก่อนนำทาง
                 Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => const MyApp()),
+                MaterialPageRoute(builder: (context) => const MyApp()),
+                ).then((_) => _resetInactivityTimer()
                 );
-                // .then((_) => _resetInactivityTimer()
-                // );
               },
             ),
           ],
@@ -152,6 +153,8 @@ class _PersonalDataConsentScreenState extends State<PersonalDataConsentScreen> {
                       ),
                       onPressed: () {
                         _inactivityTimer?.cancel(); // ยกเลิก Timer ก่อนนำทาง
+                         _selectedPersonal = "ยินยอม";
+                          print("User selection: $_selectedPersonal");
                         Navigator.push(
                           context,
                           MaterialPageRoute(
