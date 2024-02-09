@@ -25,6 +25,7 @@ class Keypad extends StatefulWidget {
   const Keypad({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _KeypadState createState() => _KeypadState();
 }
 
@@ -47,6 +48,7 @@ class _KeypadState extends State<Keypad> {
     '11',
     '12'
   ];
+  // ignore: unused_field
   bool _isButtonSelected = false;
   String _selectedKey = '';
   Timer? _inactivityTimer;
@@ -84,6 +86,11 @@ class _KeypadState extends State<Keypad> {
       _selectedKey = label;
     });
     _resetInactivityTimer(); // รีเซ็ต Timer เมื่อมีการโต้ตอบ
+<<<<<<< HEAD
+=======
+    // ignore: avoid_print
+    print('Button $label tapped');
+>>>>>>> select_floor
   }
 
   //_mockSelectedFloor
@@ -164,8 +171,12 @@ class _KeypadState extends State<Keypad> {
               ).then((_) => _resetInactivityTimer());
             },
             // ใช้ _isButtonSelected เพื่อควบคุมการเปิดใช้งานของปุ่ม
+<<<<<<< HEAD
             child: const Text('ตกลง'), 
 
+=======
+            child: const Text('ตกลง'),
+>>>>>>> select_floor
           ),
         ),
       ],
