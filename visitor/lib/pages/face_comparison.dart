@@ -41,7 +41,7 @@ class _MyFaceScanState extends State<MyFaceScan> {
 
   void _resetInactivityTimer() {
     _inactivityTimer?.cancel();
-    _inactivityTimer = Timer(const Duration(seconds: 60), _navigateToHomePage);
+    _inactivityTimer = Timer(const Duration(seconds: 5), _navigateToHomePage);
   }
 
   void _navigateToHomePage() {
@@ -60,39 +60,36 @@ class _MyFaceScanState extends State<MyFaceScan> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const SizedBox(
+    return Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          const SizedBox(
+            child: SizedBox(
               height: 150,
-              child: MyStepper(initialStep: 3),
+              child: MyStepper(initialStep: 1),
             ),
-            Text(
-              statusText[0],
-              style: AppTextStyle.heading,
-            ),
-            const SizedBox(height: 30),
-            LottieBuilder.asset(
-              'animations/animationscan.json',
-              height: 250,
-              width: 250,
-            ),
-            const SizedBox(height: 30),
-            ElevatedButton(
-              child: const Text('ตกลง'),
-              onPressed: () {
-                _inactivityTimer?.cancel(); // ยกเลิก Timer ก่อนการนำทาง
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => MyBusiness()),
-                );
-              },
-            ),
-          ],
-        ),
-      ),
-    );
+          ),
+          Text(
+            statusText[0],
+            style: AppTextStyle.heading,
+          ),
+          const SizedBox(height: 30),
+          LottieBuilder.asset(
+            'animations/animationscan.json',
+            height: 250,
+            width: 250,
+          ),
+          const SizedBox(height: 30),
+          ElevatedButton(
+            child: const Text('ตกลง'),
+            onPressed: () {
+              _inactivityTimer?.cancel(); // ยกเลิก Timer ก่อนการนำทาง
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => MyBusiness()),
+              );
+            },
+          ),
+        ]);
   }
 }
