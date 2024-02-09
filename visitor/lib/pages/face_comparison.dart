@@ -41,7 +41,7 @@ class _MyFaceScanState extends State<MyFaceScan> {
 
   void _resetInactivityTimer() {
     _inactivityTimer?.cancel();
-    _inactivityTimer = Timer(const Duration(seconds: 5), _navigateToHomePage);
+    _inactivityTimer = Timer(const Duration(seconds: 60), _navigateToHomePage);
   }
 
   void _navigateToHomePage() {

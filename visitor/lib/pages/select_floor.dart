@@ -4,13 +4,15 @@ import 'package:visitor/pages/personalDataCS.dart';
 import 'package:visitor/pages/registration-system.dart';
 import 'package:visitor/pages/stepper.dart';
 
-void main() => runApp(const SelectFloor());
+void main() => runApp(const SelectFloor(data: {},));
 
 class SelectFloor extends StatelessWidget {
-  const SelectFloor({Key? key}) : super(key: key);
+  final Map<String, String> data;
+  const SelectFloor({Key? key,required this.data}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+     print("IDcardUesr: $data");
     return const MaterialApp(
       home: Scaffold(
         body: Keypad(),
@@ -50,6 +52,7 @@ class _KeypadState extends State<Keypad> {
   bool _isButtonSelected = false;
   String _selectedKey = '';
   Timer? _inactivityTimer;
+  String _SelectedFloor = '';
 
   @override
   void initState() {
@@ -60,7 +63,7 @@ class _KeypadState extends State<Keypad> {
 
   void _resetInactivityTimer() {
     _inactivityTimer?.cancel();
-    _inactivityTimer = Timer(const Duration(seconds: 10), _navigateToHomePage);
+    _inactivityTimer = Timer(const Duration(seconds: 60), _navigateToHomePage);
   }
 
   void _navigateToHomePage() {
@@ -83,9 +86,19 @@ class _KeypadState extends State<Keypad> {
       _selectedKey = label;
     });
     _resetInactivityTimer(); // รีเซ็ต Timer เมื่อมีการโต้ตอบ
+<<<<<<< HEAD
     // ignore: avoid_print
     print('Button $label tapped');
+=======
+>>>>>>> d55b61609781b0961038f9c10ebd233e8cce1994
   }
+
+  //_mockSelectedFloor
+  // ที่นี่คุณสามารถจำลองการบันทึกข้อมูลไปยังฐานข้อมูลหรือการเรียกใช้งาน API
+  void mockSaveSelectedFloor(String floor) {
+  _SelectedFloor = floor;
+  print('selected floor: $_SelectedFloor');
+}
 
   @override
   Widget build(BuildContext context) {
@@ -150,6 +163,7 @@ class _KeypadState extends State<Keypad> {
             ),
             onPressed: () {
               _inactivityTimer?.cancel();
+              mockSaveSelectedFloor(_selectedKey);
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -157,7 +171,12 @@ class _KeypadState extends State<Keypad> {
               ).then((_) => _resetInactivityTimer());
             },
             // ใช้ _isButtonSelected เพื่อควบคุมการเปิดใช้งานของปุ่ม
+<<<<<<< HEAD
             child: const Text('ตกลง'),
+=======
+            child: const Text('ตกลง'), 
+
+>>>>>>> d55b61609781b0961038f9c10ebd233e8cce1994
           ),
         ),
       ],

@@ -1,9 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:visitor/pages/registration-system.dart';
-import 'package:visitor/pages/stepper.dart';
-import 'package:visitor/pages/succeed.dart';
+import 'package:visitor/pages/registration-system.dart'; // Update with correct import path
+import 'package:visitor/pages/stepper.dart'; // Update with correct import path
+import 'package:visitor/pages/succeed.dart'; // Update with correct import path
+import 'package:visitor/utils/style/style.dart'; // Update with correct import path
 
 void main() {
   runApp(MyBusiness());
@@ -23,17 +24,16 @@ class MyBusiness extends StatelessWidget {
   }
 }
 
-// Convert MyHomePage to a StatefulWidget to manage the button press state
 class MyHomePage extends StatefulWidget {
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-// Initialize a variable to track if any button has been pressed
 class _MyHomePageState extends State<MyHomePage> {
   bool _hasButtonBeenPressed = false;
   int? _selectedButtonIndex;
   Timer? _inactivityTimer;
+  String _SelectedBook = '';
 
   @override
   void initState() {
@@ -43,7 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _resetInactivityTimer() {
     _inactivityTimer?.cancel();
-    _inactivityTimer = Timer(const Duration(seconds: 10), _navigateToHomePage);
+    _inactivityTimer = Timer(const Duration(seconds: 60), _navigateToHomePage);
   }
 
   void _navigateToHomePage() {
@@ -58,6 +58,12 @@ class _MyHomePageState extends State<MyHomePage> {
   void dispose() {
     _inactivityTimer?.cancel();
     super.dispose();
+  }
+
+  void mockSaveSelectedbuttonLabels(String buttonLabels) {
+    // ที่นี่คุณสามารถจำลองการบันทึกข้อมูลไปยังฐานข้อมูลหรือการเรียกใช้งาน API
+    _SelectedBook = buttonLabels;
+    print('selected : $_SelectedBook');
   }
 
   @override
@@ -100,14 +106,14 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Text(
           'กรุณาเลือกธุระที่มาติดต่อ',
           textAlign: TextAlign
-              .center, // This ensures the text is centered if it wraps to a new line
+              .center,
           style: TextStyle(fontSize: 20),
         ),
       ),
     );
   }
 
-  // Add all button labels
+// Add all button labels
   Widget _buildButtonGrid() {
     List<String> buttonLabels = [
       'ส่งเอกสาร',
@@ -137,6 +143,7 @@ class _MyHomePageState extends State<MyHomePage> {
             setState(() {
               _hasButtonBeenPressed = true; // Update button press state
               _selectedButtonIndex = index; // Update the selected button index
+              mockSaveSelectedbuttonLabels(buttonLabels[index]);
             });
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => const PageSucceed()));
@@ -162,9 +169,7 @@ class _MyHomePageState extends State<MyHomePage> {
       child: const Center(
         child: Text(
           'ธุระอื่นๆนอกจากรายการข้างต้น  กรุณากดปุ่ม ยกเลิก',
-          textAlign: TextAlign
-              // This ensures the text is centered if it wraps to a new line
-              .center,
+          textAlign: TextAlign.center,
           style: TextStyle(fontSize: 20, color: Colors.red),
         ),
       ),
@@ -176,12 +181,11 @@ class _MyHomePageState extends State<MyHomePage> {
     return ElevatedButton(
       child: Text('ยกเลิก'),
       onPressed: () {
-        _inactivityTimer?.cancel();
-        // Your footer button text
+        _inactivityTimer?.cancel(); // ยกเลิก Timer ก่อนการนำทาง
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const MyApp()),
-        ).then((_) => _resetInactivityTimer());
+        );
       },
     );
   }
