@@ -4,15 +4,17 @@ import 'package:visitor/pages/personalDataCS.dart';
 import 'package:visitor/pages/registration-system.dart';
 import 'package:visitor/pages/stepper.dart';
 
-void main() => runApp(const SelectFloor(data: {},));
+void main() => runApp(const SelectFloor(
+      data: {},
+    ));
 
 class SelectFloor extends StatelessWidget {
   final Map<String, String> data;
-  const SelectFloor({Key? key,required this.data}) : super(key: key);
+  const SelectFloor({Key? key, required this.data}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-     print("IDcardUesr: $data");
+    print("IDcardUesr: $data");
     return const MaterialApp(
       home: Scaffold(
         body: Keypad(),
@@ -86,19 +88,14 @@ class _KeypadState extends State<Keypad> {
       _selectedKey = label;
     });
     _resetInactivityTimer(); // รีเซ็ต Timer เมื่อมีการโต้ตอบ
-<<<<<<< HEAD
-=======
-    // ignore: avoid_print
-    print('Button $label tapped');
->>>>>>> select_floor
   }
 
   //_mockSelectedFloor
   // ที่นี่คุณสามารถจำลองการบันทึกข้อมูลไปยังฐานข้อมูลหรือการเรียกใช้งาน API
   void mockSaveSelectedFloor(String floor) {
-  _SelectedFloor = floor;
-  print('selected floor: $_SelectedFloor');
-}
+    _SelectedFloor = floor;
+    print('selected floor: $_SelectedFloor');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -171,12 +168,7 @@ class _KeypadState extends State<Keypad> {
               ).then((_) => _resetInactivityTimer());
             },
             // ใช้ _isButtonSelected เพื่อควบคุมการเปิดใช้งานของปุ่ม
-<<<<<<< HEAD
-            child: const Text('ตกลง'), 
-
-=======
             child: const Text('ตกลง'),
->>>>>>> select_floor
           ),
         ),
       ],

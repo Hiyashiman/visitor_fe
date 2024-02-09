@@ -31,7 +31,6 @@ class PersonalDataConsentScreen extends StatefulWidget {
 
 class _PersonalDataConsentScreenState extends State<PersonalDataConsentScreen> {
   Timer? _inactivityTimer;
-  String? _selectedPersonal = "";
 
   // @override
   // void initState() {
@@ -39,17 +38,10 @@ class _PersonalDataConsentScreenState extends State<PersonalDataConsentScreen> {
   //   _resetInactivityTimer();
   // }
 
-<<<<<<< HEAD
-  void _resetInactivityTimer() {
-    _inactivityTimer?.cancel();
-    _inactivityTimer = Timer(const Duration(seconds: 60), _navigateToHomePage);
-  }
-=======
   // void _resetInactivityTimer() {
   //   _inactivityTimer?.cancel();
   //   _inactivityTimer = Timer(const Duration(seconds: 5), _navigateToHomePage);
   // }
->>>>>>> select_floor
 
   // ignore: unused_element
   void _navigateToHomePage() {
@@ -67,18 +59,16 @@ class _PersonalDataConsentScreenState extends State<PersonalDataConsentScreen> {
   }
 
   void _showDoNotConsentAlert(BuildContext context) {
-    print("User selection: $_selectedPersonal");
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
+          title: const Text(''),
           content: const Text('กรุณาติดต่อพนักงานแผนกต้อนรับ'),
           actions: <Widget>[
             TextButton(
               child: const Text('ตกลง'),
               onPressed: () {
-                _selectedPersonal = "ไม่ยินยอม";
-                print("User selection: $_selectedPersonal");
                 _inactivityTimer?.cancel(); // ยกเลิก Timer ก่อนนำทาง
                 Navigator.of(context).pushReplacement(
                   MaterialPageRoute(builder: (context) => const MyApp()),
@@ -109,104 +99,21 @@ class _PersonalDataConsentScreenState extends State<PersonalDataConsentScreen> {
               ),
             ),
             const SizedBox(
-<<<<<<< HEAD
-                height: 16), 
-=======
               height: 60,
             ),
->>>>>>> select_floor
             const Center(
               child: Padding(
                 padding: EdgeInsets.all(16.0),
                 child: Text(
-<<<<<<< HEAD
-                  'ข้อตกลง การใช้บริการPersonal Data Consent',
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                  textAlign: TextAlign.center, 
-=======
                   'ข้อตกลงการใช้บริการ  Personal Data Consent',
                   style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                   textAlign: TextAlign.center,
->>>>>>> select_floor
                 ),
               ),
             ),
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 300.0),
               child: Align(
-<<<<<<< HEAD
-                  alignment: Alignment.centerLeft,
-                  child: Center(
-                    child: Column(
-                      children: [
-                        Text(
-                          'ข้าพเจ้ายินยอมให้ไว้ซึ่งข้อมูลอันเป็นข้อมูลส่วนบุคคลของข้าพเจ้าแก่ผู้รับหน้าที่จัดเก็บข้อมูล',
-                          style: TextStyle(fontSize: 20),
-                          textAlign: TextAlign.center,
-                        ),
-                        Text(
-                          'และประมวลผลของระบบนี้เพื่อใช้ประโยชน์ในงานรักษาความปลอดภัยของอาคารสถานที่แห่งนี้',
-                          style: TextStyle(fontSize: 20),
-                          textAlign: TextAlign.center,
-                        ),
-                        Text(
-                          'โดยการจัดเก็บเป็นไปตามข้อกําหนดและผู้จัดเก็บสามารถลบทำลายข้อมูลทั้งหมดหรือบางส่วน',
-                          style: TextStyle(fontSize: 20),
-                          textAlign: TextAlign.center,
-                        ),
-                        Text(
-                          'ของข้าพเจ้าโดยไม่ต้องแจ้งให้ข้าพเจ้าทราบล่วงหน้า',
-                          style: TextStyle(fontSize: 20),
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
-                    ),
-                  )),
-            ),
-            
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 200.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.red,
-                        ),
-                        onPressed: () => _showDoNotConsentAlert(context),
-                        child: const Text(
-                          'ไม่ยินยอม',
-                          style: TextStyle(fontSize: 16, color: Colors.white),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.blue,
-                            textStyle: const TextStyle(color: Colors.white)),
-                        onPressed: () {
-                          _inactivityTimer?.cancel(); // ยกเลิก Timer ก่อนนำทาง
-                          _selectedPersonal = "ยินยอม";
-                          print("User selection: $_selectedPersonal");
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const MyFaceScanPage()),
-                          ).then((_) =>
-                              _resetInactivityTimer()); // รีเซ็ต Timer เมื่อกลับมา
-                        },
-                        child: const Text(
-                          'ยินยอม',
-                          style: TextStyle(color: Colors.white),
-                        ),
-=======
                 alignment: Alignment.centerLeft,
                 child: Text(
                   'ข้าพเจ้ายินยอมให้ไว้ซึ่งข้อมูลอันเป็นข้อมูลส่วนบุคคลของข้าพเจ้าแก่ผู้รับหน้าที่จัดเก็บข้อมูล'
@@ -254,7 +161,6 @@ class _PersonalDataConsentScreenState extends State<PersonalDataConsentScreen> {
                       child: const Text(
                         'ยินยอม',
                         style: TextStyle(fontSize: 16, color: Colors.white),
->>>>>>> select_floor
                       ),
                     ),
                   ],
