@@ -87,8 +87,8 @@ class _KeypadState extends State<Keypad> {
   }
 
   //_mockSelectedFloor
-  void mockSaveSelectedFloor(String floor) {
   // ที่นี่คุณสามารถจำลองการบันทึกข้อมูลไปยังฐานข้อมูลหรือการเรียกใช้งาน API
+  void mockSaveSelectedFloor(String floor) {
   _SelectedFloor = floor;
   print('selected floor: $_SelectedFloor');
 }

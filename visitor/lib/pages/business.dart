@@ -106,13 +106,14 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Text(
           'กรุณาเลือกธุระที่มาติดต่อ',
           textAlign: TextAlign
-              .center, // This ensures the text is centered if it wraps to a new line
+              .center,
           style: TextStyle(fontSize: 20),
         ),
       ),
     );
   }
 
+// Add all button labels
   Widget _buildButtonGrid() {
     List<String> buttonLabels = [
       'ส่งเอกสาร',
@@ -123,7 +124,6 @@ class _MyHomePageState extends State<MyHomePage> {
       'ทำโปรเจค',
       'ผู้รับเหมา',
       'มาร่วมงาน Event'
-      // Add all button labels
     ];
 
     return GridView.builder(

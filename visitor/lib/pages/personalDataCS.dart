@@ -99,7 +99,7 @@ class _PersonalDataConsentScreenState extends State<PersonalDataConsentScreen> {
               ),
             ),
             const SizedBox(
-                height: 16), // Add some space between the stepper and the text
+                height: 16), 
             const Center(
               // Center widget added
               child: Padding(
@@ -107,7 +107,7 @@ class _PersonalDataConsentScreenState extends State<PersonalDataConsentScreen> {
                 child: Text(
                   'ข้อตกลง การใช้บริการPersonal Data Consent',
                   style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                  textAlign: TextAlign.center, // Text alignment set to center
+                  textAlign: TextAlign.center, 
                 ),
               ),
             ),
@@ -138,11 +138,11 @@ class _PersonalDataConsentScreenState extends State<PersonalDataConsentScreen> {
                           style: TextStyle(fontSize: 20),
                           textAlign: TextAlign.center,
                         ),
-                        // Text('',style: TextStyle(fontSize: 16),textAlign: TextAlign.center,)
                       ],
                     ),
                   )),
             ),
+            
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 200.0),
               child: Row(

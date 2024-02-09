@@ -14,6 +14,7 @@ class MyApp extends StatefulWidget {
 
 class _HomePageState extends State<MyApp> {
   int _tapCount = 0; // สร้างตัวแปรเพื่อนับจำนวนการกด
+  //mock data
   String? identificationNumber = '1234567890';
   String? firstName = 'John';
   String? lastName = 'Doe';
@@ -23,6 +24,8 @@ class _HomePageState extends State<MyApp> {
   String? cardExpirationDate = '01-01-2030';
   String? cardholderPhoto = 'assets/images/cardholder_photo.png';
 
+
+  //mapค่าในdata
   Map<String, String> createIdCardData() {
     return {
       'IdNumber': identificationNumber!,
@@ -41,11 +44,12 @@ class _HomePageState extends State<MyApp> {
       _tapCount++;
     });
     if (_tapCount > 15) {
-      // ถ้าการกดมากกว่า 10 ครั้ง
+      // ถ้าการกดมากกว่า 15 ครั้ง
+       // ไปยังหน้า....
       Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) =>  PageSucceed()), // ไปยังหน้า....
+            builder: (context) =>  PageSucceed()),
       );
       _tapCount = 0;
     }
@@ -54,9 +58,10 @@ class _HomePageState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // ใช้ GestureDetector เพื่อจับการกด
       body: GestureDetector(
-        // ใช้ GestureDetector เพื่อจับการกด
-        onTap: _incrementTap, // เพิ่มการนับทุกครั้งที่มีการกด
+        // เพิ่มการนับทุกครั้งที่มีการกด
+        onTap: _incrementTap,
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -75,8 +80,8 @@ class _HomePageState extends State<MyApp> {
               ElevatedButton(
                 child: const Text('เริ่มรายการ'),
                 onPressed: () {
-                  Map<String, String> data = createIdCardData();
                   // ส่ง data map ไปยัง SelectFloor
+                  Map<String, String> data = createIdCardData(); 
                   Navigator.push(
                     context,
                     MaterialPageRoute(
