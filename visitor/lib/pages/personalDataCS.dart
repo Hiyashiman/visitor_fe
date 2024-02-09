@@ -89,7 +89,7 @@ class _PersonalDataConsentScreenState extends State<PersonalDataConsentScreen> {
     return Scaffold(
       body: GestureDetector(
         behavior: HitTestBehavior.opaque,
-        // onTap: _resetInactivityTimer, // รีเซ็ต Timer เมื่อมีการแตะหน้าจอ
+        onTap: _resetInactivityTimer, // รีเซ็ต Timer เมื่อมีการแตะหน้าจอ
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
