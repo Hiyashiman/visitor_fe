@@ -15,10 +15,6 @@ class SelectFloor extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-<<<<<<< HEAD
-=======
-    // ignore: avoid_print
->>>>>>> select_floor
     print("IDcardUesr: $data");
     return const MaterialApp(
       home: Scaffold(
@@ -101,10 +97,6 @@ class _KeypadState extends State<Keypad> {
   // ที่นี่คุณสามารถจำลองการบันทึกข้อมูลไปยังฐานข้อมูลหรือการเรียกใช้งาน API
   void mockSaveSelectedFloor(String floor) {
     _SelectedFloor = floor;
-<<<<<<< HEAD
-=======
-    // ignore: avoid_print
->>>>>>> select_floor
     print('selected floor: $_SelectedFloor');
   }
 
@@ -171,7 +163,6 @@ class _KeypadState extends State<Keypad> {
                   : Colors.grey, // ปรับสีเมื่อปุ่มสามารถกดได้
               foregroundColor: Colors.white,
             ),
-<<<<<<< HEAD
             onPressed: _isButtonSelected
                 ? () {
                     _inactivityTimer?.cancel();
@@ -183,19 +174,7 @@ class _KeypadState extends State<Keypad> {
                               const PersonalDataConsentScreen()),
                     ).then((_) => _resetInactivityTimer());
                   }
-                : null, 
-=======
-            onPressed: () {
-              _inactivityTimer?.cancel();
-              mockSaveSelectedFloor(_selectedKey);
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const PersonalDataConsentScreen()),
-              ).then((_) => _resetInactivityTimer());
-            },
-            // ใช้ _isButtonSelected เพื่อควบคุมการเปิดใช้งานของปุ่ม
->>>>>>> select_floor
+                : null,
             child: const Text('ตกลง'),
           ),
         ),
