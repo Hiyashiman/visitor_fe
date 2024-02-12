@@ -31,6 +31,7 @@ class PersonalDataConsentScreen extends StatefulWidget {
 
 class _PersonalDataConsentScreenState extends State<PersonalDataConsentScreen> {
   Timer? _inactivityTimer;
+<<<<<<< HEAD
   String? _selectedPersonal = "";
   @override
   void initState() {
@@ -42,6 +43,19 @@ class _PersonalDataConsentScreenState extends State<PersonalDataConsentScreen> {
     _inactivityTimer?.cancel();
     _inactivityTimer = Timer(const Duration(seconds: 60), _navigateToHomePage);
   }
+=======
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _resetInactivityTimer();
+  // }
+
+  // void _resetInactivityTimer() {
+  //   _inactivityTimer?.cancel();
+  //   _inactivityTimer = Timer(const Duration(seconds: 5), _navigateToHomePage);
+  // }
+>>>>>>> select_floor
 
   // ignore: unused_element
   void _navigateToHomePage() {
@@ -69,8 +83,11 @@ class _PersonalDataConsentScreenState extends State<PersonalDataConsentScreen> {
             TextButton(
               child: const Text('ตกลง'),
               onPressed: () {
+<<<<<<< HEAD
                   _selectedPersonal = "ไม่ยินยอม";
                 print("User selection: $_selectedPersonal");
+=======
+>>>>>>> select_floor
                 _inactivityTimer?.cancel(); // ยกเลิก Timer ก่อนนำทาง
                 Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (context) => const MyApp()),
@@ -114,6 +131,7 @@ class _PersonalDataConsentScreenState extends State<PersonalDataConsentScreen> {
             ),
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 300.0),
+<<<<<<< HEAD
              child: Align(
                   alignment: Alignment.centerLeft,
                   child: Center(
@@ -142,6 +160,19 @@ class _PersonalDataConsentScreenState extends State<PersonalDataConsentScreen> {
                       ],
                     ),
                   )),
+=======
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'ข้าพเจ้ายินยอมให้ไว้ซึ่งข้อมูลอันเป็นข้อมูลส่วนบุคคลของข้าพเจ้าแก่ผู้รับหน้าที่จัดเก็บข้อมูล'
+                  'และประมวลผลของระบบนี้เพื่อใช้ประโยชน์ในงานรักษาความปลอดภัยของอาคารสถานที่แห่งนี้'
+                  'โดยการจัดเก็บเป็นไปตามข้อกําหนดและผู้จัดเก็บสามารถลมทำลายข้อมูลทั้งหมดหรือบางส่วนของข้าพเจ้า'
+                  'โดยไม่ต้องแจ้งให้ข้าพเจ้าทราบล่วงหน้า',
+                  style: TextStyle(fontSize: 20),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+>>>>>>> select_floor
             ),
             Expanded(
               child: Padding(
