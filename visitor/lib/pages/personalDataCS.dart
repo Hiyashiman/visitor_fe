@@ -69,13 +69,14 @@ class _PersonalDataConsentScreenState extends State<PersonalDataConsentScreen> {
             TextButton(
               child: const Text('ตกลง'),
               onPressed: () {
-                  _selectedPersonal = "ไม่ยินยอม";
+                _selectedPersonal = "ไม่ยินยอม";
                 print("User selection: $_selectedPersonal");
                 _inactivityTimer?.cancel(); // ยกเลิก Timer ก่อนนำทาง
-                Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => const MyApp()),
-                ).then((_) => _resetInactivityTimer()
-                );
+                Navigator.of(context)
+                    .pushReplacement(
+                      MaterialPageRoute(builder: (context) => const MyApp()),
+                    )
+                    .then((_) => _resetInactivityTimer());
               },
             ),
           ],
@@ -114,7 +115,7 @@ class _PersonalDataConsentScreenState extends State<PersonalDataConsentScreen> {
             ),
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 300.0),
-             child: Align(
+              child: Align(
                   alignment: Alignment.centerLeft,
                   child: Center(
                     child: Column(
@@ -170,8 +171,8 @@ class _PersonalDataConsentScreenState extends State<PersonalDataConsentScreen> {
                       ),
                       onPressed: () {
                         _inactivityTimer?.cancel(); // ยกเลิก Timer ก่อนนำทาง
-                         _selectedPersonal = "ยินยอม";
-                          print("User selection: $_selectedPersonal");
+                        _selectedPersonal = "ยินยอม";
+                        print("User selection: $_selectedPersonal");
                         Navigator.push(
                           context,
                           MaterialPageRoute(

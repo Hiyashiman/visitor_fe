@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:visitor/pages/registration-system.dart'; // Update with correct import path
 import 'package:visitor/pages/stepper.dart'; // Update with correct import path
@@ -70,9 +69,9 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(2.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             SizedBox(
               child: Container(
@@ -86,8 +85,9 @@ class _MyHomePageState extends State<MyHomePage> {
             Expanded(child: _buildButtonGrid()),
             SizedBox(height: 32),
             _Text(),
-            SizedBox(height: 32),
+            SizedBox(height: 40),
             _buildFooterButton(context),
+            SizedBox(height: 100),
           ],
         ),
       ),
@@ -98,15 +98,14 @@ class _MyHomePageState extends State<MyHomePage> {
     return Container(
       padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Color.fromARGB(255, 255, 255, 255),
         borderRadius: BorderRadius.circular(3),
       ),
       child: const Center(
         // This will center the Text widget within the Container
         child: Text(
           'กรุณาเลือกธุระที่มาติดต่อ',
-          textAlign: TextAlign
-              .center,
+          textAlign: TextAlign.center,
           style: TextStyle(fontSize: 20),
         ),
       ),
@@ -148,9 +147,13 @@ class _MyHomePageState extends State<MyHomePage> {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => const PageSucceed()));
           },
-          child: Text(buttonLabels[index]),
+          // ignore: sort_child_properties_last
+          child: Text(
+            buttonLabels[index],
+            style: TextStyle(fontSize: 20),
+          ),
           style: ElevatedButton.styleFrom(
-            primary: isSelected
+            backgroundColor: isSelected
                 ? Colors.blue[800]
                 : Colors.grey[300], // Darken if selected
             onPrimary:
@@ -164,7 +167,9 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+  // ignore: non_constant_identifier_names
   Widget _Text() {
+    // ignore: avoid_unnecessary_containers
     return Container(
       child: const Center(
         child: Text(
@@ -179,7 +184,7 @@ class _MyHomePageState extends State<MyHomePage> {
   // Modify onPressed to check _hasButtonBeenPressed
   Widget _buildFooterButton(BuildContext context) {
     return ElevatedButton(
-      child: Text('ยกเลิก'),
+      child: const Text('ยกเลิก'),
       onPressed: () {
         _inactivityTimer?.cancel(); // ยกเลิก Timer ก่อนการนำทาง
         Navigator.push(

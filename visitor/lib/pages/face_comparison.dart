@@ -61,6 +61,7 @@ class _MyFaceScanState extends State<MyFaceScan> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+<<<<<<< HEAD
        body: Center(
       child: Padding(
         padding: const EdgeInsets.all(50.0), // ปรับค่านี้เพื่อเพิ่มระยะห่าง
@@ -76,26 +77,53 @@ class _MyFaceScanState extends State<MyFaceScan> {
             Text(
               statusText[0],
               style: AppTextStyle.heading,
+=======
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Padding(
+            padding: EdgeInsets.all(2.0),
+            // ปรับ padding สำหรับ MyStepper
+            child: SizedBox(
+              height: 180,
+              width: double.infinity, // ให้ MyStepper มีความกว้างเต็มพื้นที่
+              child: MyStepper(initialStep: 3),
             ),
-            const SizedBox(height: 30),
-            LottieBuilder.asset(
-              'animations/animationscan.json',
-              height: 250,
-              width: 250,
+          ),
+          Expanded(
+            child: Center(
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 80,
+                    child: Text(
+                      "AI กำลังเปรียบเทียบใบหน้ากรุณารอสักครู่",
+                      style: AppTextStyle.heading,
+                    ),
+                  ),
+                  const SizedBox(height: 30),
+                  LottieBuilder.asset(
+                    'animations/animationscan.json',
+                    height: 250,
+                    width: 250,
+                  ),
+                  const SizedBox(height: 40),
+                  ElevatedButton(
+                    child: const Text('ตกลง'),
+                    onPressed: () {
+                      _inactivityTimer?.cancel(); // ยกเลิก Timer ก่อนการนำทาง
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => MyBusiness()),
+                      );
+                    },
+                  ),
+                ],
+              ),
+>>>>>>> origin/select_floor
             ),
-            const SizedBox(height: 30),
-            ElevatedButton(
-              child: const Text('ตกลง'),
-              onPressed: () {
-                _inactivityTimer?.cancel(); // ยกเลิก Timer ก่อนการนำทาง
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => MyBusiness()),
-                );
-              },
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     )
     );
