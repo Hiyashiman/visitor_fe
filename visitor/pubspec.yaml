@@ -67,7 +67,8 @@ flutter:
   assets:
     - assets/animations/animation.json
     - assets/animations/animationscan.json
-
+    - assets/logo/codinglogo.png
+    - assets/logo/logoimage.png
 
   fonts:
     - family: Inter
