@@ -61,23 +61,6 @@ class _MyFaceScanState extends State<MyFaceScan> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-<<<<<<< HEAD
-       body: Center(
-      child: Padding(
-        padding: const EdgeInsets.all(50.0), // ปรับค่านี้เพื่อเพิ่มระยะห่าง
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const SizedBox(
-              height: 150,
-              width: double.infinity, // ทำให้ MyStepper มีความกว้างเต็มพื้นที่ที่มี
-              child: MyStepper(initialStep: 3),
-            ),
-    
-            Text(
-              statusText[0],
-              style: AppTextStyle.heading,
-=======
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -120,12 +103,10 @@ class _MyFaceScanState extends State<MyFaceScan> {
                   ),
                 ],
               ),
->>>>>>> origin/select_floor
             ),
           ),
         ],
       ),
-    )
     );
   }
 }
