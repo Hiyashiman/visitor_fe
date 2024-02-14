@@ -13,9 +13,9 @@ function createData(name, Idcard,trackingId, date, business) {
 }
 
 const rows = [
-  createData("Lasania Fri","110000000001","2 March 2022", 1,"ส่งเอกสาร"),
+  createData("Lasania Fri","110000000001","2 March 2022", 1,"สัมภาษณ์งาน"),
   createData("Big Bang ","110000000002","2 March 2022", 2,"ส่งเอกสาร"),
-  createData("Mouth Freshner","110000000003", "2 March 2022",3,"ส่งเอกสาร"),
+  createData("Mouth Freshner","110000000003", "2 March 2022",3,"ประชุม"),
   createData("Cupcake","110000000004","2 March 2022", 4,"ส่งเอกสาร" ),0
 ];
 
