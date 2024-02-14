@@ -59,11 +59,14 @@ class _MyHomePageState extends State<MyHomePage> {
     super.dispose();
   }
 
-  void mockSaveSelectedbuttonLabels(String buttonLabels) {
+  void mockSaveSelectedbuttonLabels(String buttonLabels, String pressedTime) {
     // ที่นี่คุณสามารถจำลองการบันทึกข้อมูลไปยังฐานข้อมูลหรือการเรียกใช้งาน API
     _SelectedBook = buttonLabels;
     print('selected : $_SelectedBook');
+    print('Time: $pressedTime ');
   }
+
+  
 
   @override
   Widget build(BuildContext context) {
@@ -130,34 +133,31 @@ class _MyHomePageState extends State<MyHomePage> {
         crossAxisCount: 4,
         crossAxisSpacing: 20,
         mainAxisSpacing: 16,
-        childAspectRatio: 3, // Adjust for your layout needs
+        childAspectRatio: 3,
       ),
       itemCount: buttonLabels.length,
       itemBuilder: (context, index) {
-        bool isSelected =
-            _selectedButtonIndex == index; // Check if this button is selected
         return ElevatedButton(
           onPressed: () {
+            var now = DateTime.now(); // บันทึกช่วงเวลาปัจจุบัน
+            print("Button '${buttonLabels[index]}' was pressed at $now");
             _inactivityTimer?.cancel();
             setState(() {
-              _hasButtonBeenPressed = true; // Update button press state
-              _selectedButtonIndex = index; // Update the selected button index
-              mockSaveSelectedbuttonLabels(buttonLabels[index]);
+              _hasButtonBeenPressed = true;
+              _selectedButtonIndex = index;
+              mockSaveSelectedbuttonLabels(
+                  buttonLabels[index], now.toString()); // ส่งช่วงเวลาไปด้วย
             });
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => const PageSucceed()));
           },
-          // ignore: sort_child_properties_last
-          child: Text(
-            buttonLabels[index],
-            style: TextStyle(fontSize: 20),
-          ),
+          child: Text(buttonLabels[index]),
           style: ElevatedButton.styleFrom(
-            backgroundColor: isSelected
+            backgroundColor: _selectedButtonIndex == index
                 ? Colors.blue[800]
-                : Colors.grey[300], // Darken if selected
+                : Colors.grey[300],
             onPrimary:
-                isSelected ? Colors.white : Colors.black, // Text color contrast
+                _selectedButtonIndex == index ? Colors.white : Colors.black,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8),
             ),
