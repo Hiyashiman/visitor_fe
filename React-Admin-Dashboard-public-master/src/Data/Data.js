@@ -19,20 +19,20 @@ import { keyboard } from "@testing-library/user-event/dist/keyboard";
 // import img3 from "../imgs/img3.png";
 
 // Sidebar Data
-export const SidebarData = [
-  {
-    icon: UilEstate,
-    heading: "Dashboard",
-  },
-  {
-    icon: UilUsersAlt,
-    heading: "editor",
-  },
-  {
-    icon: UilChart,
-    heading: 'Analytics'
-  },
-];
+// export const SidebarData = [
+//   {
+//     icon: UilEstate,
+//     heading: "Dashboard",
+//   },
+//   {
+//     icon: UilUsersAlt,
+//     heading: "editor",
+//   },
+//   {
+//     icon: UilChart,
+//     heading: 'Analytics'
+//   },
+// ];
 
 // Analytics Cards Data
 export const cardsData = [
