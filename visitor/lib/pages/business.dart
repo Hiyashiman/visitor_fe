@@ -157,15 +157,11 @@ class _MyHomePageState extends State<MyHomePage> {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => const PageSucceed()));
           },
-<<<<<<< HEAD
           // ignore: sort_child_properties_last
           child: Text(
             buttonLabels[index],
             style:const  TextStyle(fontSize: 20),
           ),
-=======
-          child: Text(businessNames[index]),
->>>>>>> origin/api
           style: ElevatedButton.styleFrom(
             backgroundColor: _selectedButtonIndex == index
                 ? Colors.blue[800]
