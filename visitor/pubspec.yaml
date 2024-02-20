@@ -37,7 +37,11 @@ dependencies:
   lottie: ^2.7.0
   camera: ^0.10.5+9
   easy_stepper: ^0.8.3
-
+  image_picker: ^0.8.4+4
+  image: ^3.3.0
+  flutter_tflite: ^1.0.1
+  get:
+  permission_handler: ^11.2.0
 
 dev_dependencies:
   flutter_test:
@@ -63,7 +67,8 @@ flutter:
   assets:
     - assets/animations/animation.json
     - assets/animations/animationscan.json
-
+    - assets/logo/codinglogo.png
+    - assets/logo/logoimage.png
 
   fonts:
     - family: Inter
