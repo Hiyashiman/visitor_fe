@@ -2,13 +2,14 @@ import './App.css'
 import MainDash from './components/MainDash/MainDash';
 import RightSide from './components/RigtSide/RightSide';
 import Sidebar from './components/Sidebar';
+import { BrowserRouter } from "react-router-dom";
 
 function App() {
   return (
     <div className="App">
       <div className="AppGlass">
         <Sidebar/>
-        <MainDash/>
+        <MainDash/> 
         <RightSide/>
       </div>
     </div>

@@ -4,6 +4,7 @@ import 'package:visitor/pages/registration-system.dart'; // Update with correct 
 import 'package:visitor/pages/stepper.dart'; // Update with correct import path
 import 'package:visitor/pages/succeed.dart'; // Update with correct import path
 import 'package:visitor/utils/style/style.dart'; // Update with correct import path
+import 'package:dio/dio.dart';
 
 void main() {
   runApp(MyBusiness());
@@ -32,17 +33,35 @@ class _MyHomePageState extends State<MyHomePage> {
   bool _hasButtonBeenPressed = false;
   int? _selectedButtonIndex;
   Timer? _inactivityTimer;
-  String _SelectedBook = '';
+  String? _SelectedBook = '';
+  final dio = Dio();
+  List<String> businessNames = [];
 
   @override
   void initState() {
     super.initState();
     _resetInactivityTimer();
+    _getBusiness();
   }
 
   void _resetInactivityTimer() {
     _inactivityTimer?.cancel();
     _inactivityTimer = Timer(const Duration(seconds: 60), _navigateToHomePage);
+  }
+
+  Future<void> _getBusiness() async {
+    try {
+      final response = await dio.get('http://192.168.1.120:8000/api/business/all/');
+      var businessData = response.data['data'];
+      if (businessData is List) {
+        setState(() {
+          businessNames = List<String>.from(
+              businessData.map((business) => business['name'].toString()));
+        });
+      }
+    } catch (e) {
+      print("Error fetching data: $e");
+    }
   }
 
   void _navigateToHomePage() {
@@ -59,10 +78,11 @@ class _MyHomePageState extends State<MyHomePage> {
     super.dispose();
   }
 
-  void mockSaveSelectedbuttonLabels(String buttonLabels) {
+  void mockSaveSelectedbuttonLabels(String buttonLabels, String pressedTime) {
     // ที่นี่คุณสามารถจำลองการบันทึกข้อมูลไปยังฐานข้อมูลหรือการเรียกใช้งาน API
     _SelectedBook = buttonLabels;
     print('selected : $_SelectedBook');
+    print('Time: $pressedTime ');
   }
 
   @override
@@ -114,50 +134,36 @@ class _MyHomePageState extends State<MyHomePage> {
 
 // Add all button labels
   Widget _buildButtonGrid() {
-    List<String> buttonLabels = [
-      'ส่งเอกสาร',
-      'สัมภาษณ์งาน',
-      'พบพนักงาน',
-      'ประชุม',
-      'อบรม',
-      'ทำโปรเจค',
-      'ผู้รับเหมา',
-      'มาร่วมงาน Event'
-    ];
 
     return GridView.builder(
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 4,
         crossAxisSpacing: 20,
         mainAxisSpacing: 16,
-        childAspectRatio: 3, // Adjust for your layout needs
+        childAspectRatio: 4.5,
       ),
-      itemCount: buttonLabels.length,
+      itemCount: businessNames.length,
       itemBuilder: (context, index) {
-        bool isSelected =
-            _selectedButtonIndex == index; // Check if this button is selected
         return ElevatedButton(
           onPressed: () {
+            var now = DateTime.now(); // บันทึกช่วงเวลาปัจจุบัน
             _inactivityTimer?.cancel();
             setState(() {
-              _hasButtonBeenPressed = true; // Update button press state
-              _selectedButtonIndex = index; // Update the selected button index
-              mockSaveSelectedbuttonLabels(buttonLabels[index]);
+              _hasButtonBeenPressed = true;
+              _selectedButtonIndex = index;
+              mockSaveSelectedbuttonLabels(
+                  businessNames[index], now.toString()); // ส่งช่วงเวลาไปด้วย
             });
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => const PageSucceed()));
           },
-          // ignore: sort_child_properties_last
-          child: Text(
-            buttonLabels[index],
-            style: TextStyle(fontSize: 20),
-          ),
+          child: Text(businessNames[index]),
           style: ElevatedButton.styleFrom(
-            backgroundColor: isSelected
+            backgroundColor: _selectedButtonIndex == index
                 ? Colors.blue[800]
-                : Colors.grey[300], // Darken if selected
+                : Colors.grey[300],
             onPrimary:
-                isSelected ? Colors.white : Colors.black, // Text color contrast
+                _selectedButtonIndex == index ? Colors.white : Colors.black,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8),
             ),
@@ -186,7 +192,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return ElevatedButton(
       child: const Text('ยกเลิก'),
       onPressed: () {
-        _inactivityTimer?.cancel(); // ยกเลิก Timer ก่อนการนำทาง
+        _inactivityTimer?.cancel(); 
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const MyApp()),
