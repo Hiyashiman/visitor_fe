@@ -93,7 +93,6 @@ class _KeypadState extends State<Keypad> {
     _resetInactivityTimer(); // รีเซ็ต Timer เมื่อมีการโต้ตอบ
   }
 
-  //_mockSelectedFloor
   // ที่นี่คุณสามารถจำลองการบันทึกข้อมูลไปยังฐานข้อมูลหรือการเรียกใช้งาน API
   // ignore: non_constant_identifier_names
   void Floor(String floor) {
@@ -161,7 +160,7 @@ class _KeypadState extends State<Keypad> {
             style: ElevatedButton.styleFrom(
               backgroundColor: _isButtonSelected
                   ? Colors.blue
-                  : Colors.grey, // ปรับสีเมื่อปุ่มสามารถกดได้
+                  : Colors.grey, 
               foregroundColor: Colors.white,
             ),
             onPressed: _isButtonSelected
