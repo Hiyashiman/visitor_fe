@@ -1,14 +1,23 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:visitor/pages/personalDataCS.dart';
 import 'package:visitor/pages/registration-system.dart';
 import 'package:visitor/pages/stepper.dart';
 import 'package:visitor/utils/style/style.dart';
 import 'package:dio/dio.dart';
+import 'package:visitor/widget/state.dart';
 
-void main() => runApp(const SelectFloor(
+void main() => runApp(
+  ChangeNotifierProvider(create: (_)=>Data(),
+  child: const SelectFloor(
       data: {},
-    ));
+    ))
+);
+
+  // const SelectFloor(
+  //     data: {},
+  //   );
 
 class SelectFloor extends StatelessWidget {
   final Map<String, String> data;
@@ -16,6 +25,7 @@ class SelectFloor extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     // ignore: avoid_print
     print("IDcardUesr: $data");
     return const MaterialApp(
@@ -36,11 +46,14 @@ class Keypad extends StatefulWidget {
 
 class _KeypadState extends State<Keypad> {
   final dio = Dio();
+
   Timer? _inactivityTimer;
   bool _isButtonSelected = false;
   String _selectedKey = '';
+  late int _selectFloor_id ;
   String? _SelectedFloor = '';
-    List<String> floorNames = [];
+  List<String> floorNames = [];
+  List<int> floorid = [];
 
   @override
   void initState() {
@@ -62,7 +75,9 @@ class _KeypadState extends State<Keypad> {
         setState(() {
           floorNames = List<String>.from(
               flororData.map((floor) => floor['floor_number'].toString()));
+            floorid = List<int>.from(flororData.map((e) => e['id']));
         });
+        
       }
     } catch (e) {
       // ignore: avoid_print
@@ -84,13 +99,20 @@ class _KeypadState extends State<Keypad> {
     super.dispose();
   }
 
-  void _onFloorTap(String label) {
+  void _onFloorTap(String label ,int id) {
     setState(() {
+
       _isButtonSelected = true;
       _selectedKey = label;
       _SelectedFloor = label;
+      _selectFloor_id = id;
+      
     });
     _resetInactivityTimer(); // รีเซ็ต Timer เมื่อมีการโต้ตอบ
+
+     final dataProvider = Provider.of<Data>(context, listen: false);
+    dataProvider.add_floor_id(id); // อัปเดต floor_id ใน Data
+
   }
 
   //_mockSelectedFloor
@@ -100,10 +122,12 @@ class _KeypadState extends State<Keypad> {
     _SelectedFloor = floor;
     // ignore: avoid_print
     print('selected floor: $_SelectedFloor');
+    print('select id: $_selectFloor_id');
   }
 
   @override
   Widget build(BuildContext context) {
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
@@ -144,7 +168,7 @@ class _KeypadState extends State<Keypad> {
                     borderRadius: BorderRadius.circular(20.0),
                   ),
                 ),
-                onPressed: () => _onFloorTap(floorNames[index]),
+                onPressed: () => _onFloorTap(floorNames[index] , floorid[index]),
                 child: Text(
                   floorNames[index],
                   style: TextStyle(

@@ -44,8 +44,7 @@ class Data with ChangeNotifier{
   user_id = Null as int;
   business_id = Null as int;
   floor_id = Null as int;
-  image_id = Null as int;
-  status = Null as String; // ตั้งค่าเริ่มต้นเป็นสตริงว่างหรือค่าที่เหมาะสมอื่นๆ
+  status = ''; // ตั้งค่าเริ่มต้นเป็นสตริงว่างหรือค่าที่เหมาะสมอื่นๆ
   notifyListeners();
 }
 
