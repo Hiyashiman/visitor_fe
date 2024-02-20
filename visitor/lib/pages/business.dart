@@ -74,20 +74,20 @@ class _MyHomePageState extends State<MyHomePage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             SizedBox(
-              child: Container(
+              child:  Container(
                 height: 150, // Example: Enforce a height constraint
-                child: MyStepper(initialStep: 4),
+                child: const MyStepper(initialStep: 4),
               ),
             ),
             // Step Progress Indicator
             _buildStepProgressIndicator(),
-            SizedBox(height: 32),
+            const SizedBox(height: 32),
             Expanded(child: _buildButtonGrid()),
-            SizedBox(height: 32),
+            const SizedBox(height: 32),
             _Text(),
-            SizedBox(height: 40),
+            const SizedBox(height: 40),
             _buildFooterButton(context),
-            SizedBox(height: 100),
+            const SizedBox(height: 100),
           ],
         ),
       ),
@@ -96,9 +96,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget _buildStepProgressIndicator() {
     return Container(
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Color.fromARGB(255, 255, 255, 255),
+        color: const Color.fromARGB(255, 255, 255, 255),
         borderRadius: BorderRadius.circular(3),
       ),
       child: const Center(
@@ -150,7 +150,7 @@ class _MyHomePageState extends State<MyHomePage> {
           // ignore: sort_child_properties_last
           child: Text(
             buttonLabels[index],
-            style: TextStyle(fontSize: 20),
+            style:const  TextStyle(fontSize: 20),
           ),
           style: ElevatedButton.styleFrom(
             backgroundColor: isSelected

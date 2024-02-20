@@ -1,3 +1,4 @@
+// ignore: file_names
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:visitor/pages/select_floor.dart';
@@ -49,7 +50,7 @@ class _HomePageState extends State<MyApp> {
       // ไปยังหน้า....
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => PageSucceed()),
+        MaterialPageRoute(builder: (context) => const PageSucceed()),
       );
       _tapCount = 0;
     }

@@ -14,7 +14,7 @@ class AppTextStyle {
     fontSize: 20,
     fontWeight: FontWeight.bold,
     fontFamily: 'inter',
-    color: Appcolors.heading,
+    color: Appcolors.title,
 
   );
     return textStyle;
