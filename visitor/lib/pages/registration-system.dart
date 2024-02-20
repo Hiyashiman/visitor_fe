@@ -61,6 +61,7 @@ class _HomePageState extends State<MyApp> {
        _imageBytes = base64.decode(base64String);
     });
   } catch (e) {
+    // ignore: avoid_print
     print("Error fetching image: $e");
   }
   }
@@ -84,7 +85,7 @@ class _HomePageState extends State<MyApp> {
   Widget build(BuildContext context) {
    Widget imageWidget = _imageBytes != null
       ? Image.memory(_imageBytes!, fit: BoxFit.cover)
-      : Text('Loading image...');
+      : const Text('Loading image...');
 
     return Scaffold(
       body: Stack(
