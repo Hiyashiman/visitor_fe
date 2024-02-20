@@ -4,6 +4,7 @@ import 'package:visitor/pages/personalDataCS.dart';
 import 'package:visitor/pages/registration-system.dart';
 import 'package:visitor/pages/stepper.dart';
 import 'package:visitor/utils/style/style.dart';
+import 'package:dio/dio.dart';
 
 void main() => runApp(const SelectFloor(
       data: {},
@@ -33,42 +34,39 @@ class Keypad extends StatefulWidget {
 }
 
 class _KeypadState extends State<Keypad> {
-  // You can use a list to manage the keypad labels
-  final List<String> _floor = [
-    'B',
-    'G',
-    'M',
-    '1',
-    '2',
-    '3',
-    '4',
-    '5',
-    '6',
-    '7',
-    '8',
-    '9',
-    '10',
-    '11',
-    '12'
-  ];
-  // ignore: unused_field
+  final dio = Dio();
+  Timer? _inactivityTimer;
   bool _isButtonSelected = false;
   String _selectedKey = '';
-  Timer? _inactivityTimer;
-  // ignore: non_constant_identifier_names
   String _SelectedFloor = '';
+    List<String> floorNames = [];
 
   @override
   void initState() {
     super.initState();
-    // _startInactivityTimer();
     _resetInactivityTimer();
+    _getFloor();
+
   }
 
   void _resetInactivityTimer() {
     _inactivityTimer?.cancel();
     _inactivityTimer = Timer(const Duration(seconds: 60), _navigateToHomePage);
   }
+    Future<void> _getFloor() async {
+      try {
+     final response = await dio.get('http://192.168.1.120:8000/api/floor/');
+      var flororData = response.data['data'];
+      if (flororData is List) {
+        setState(() {
+          floorNames = List<String>.from(
+              flororData.map((floor) => floor['floor_number'].toString()));
+        });
+      }
+    } catch (e) {
+      print("Error fetching data: $e");
+    }
+    }
 
   void _navigateToHomePage() {
     if (!mounted) return;
@@ -95,7 +93,7 @@ class _KeypadState extends State<Keypad> {
 
   //_mockSelectedFloor
   // ที่นี่คุณสามารถจำลองการบันทึกข้อมูลไปยังฐานข้อมูลหรือการเรียกใช้งาน API
-  void mockSaveSelectedFloor(String floor) {
+  void Floor(String floor) {
     _SelectedFloor = floor;
     print('selected floor: $_SelectedFloor');
   }
@@ -128,13 +126,12 @@ class _KeypadState extends State<Keypad> {
                       ? 3
                       : 5, // ปรับจำนวนปุ่มในแนวนอนตามแนวนอนหรือแนวตั้งของหน้าจอ
               childAspectRatio: 2.0,
-              crossAxisSpacing: MediaQuery.of(context).size.width *
-                  0.1, // ปรับระยะห่างในแนวนอนของปุ่ม
+              crossAxisSpacing: MediaQuery.of(context).size.width * 0.1,
               mainAxisSpacing: 10,
             ),
-            itemCount: _floor.length,
+            itemCount:  floorNames.length,
             itemBuilder: (BuildContext context, int index) {
-              bool isSelected = _selectedKey == _floor[index];
+              bool isSelected = _selectedKey == floorNames[index];
 
               return ElevatedButton(
                 style: ElevatedButton.styleFrom(
@@ -143,9 +140,9 @@ class _KeypadState extends State<Keypad> {
                     borderRadius: BorderRadius.circular(20.0),
                   ),
                 ),
-                onPressed: () => _onFloorTap(_floor[index]),
+                onPressed: () => _onFloorTap(floorNames[index]),
                 child: Text(
-                  _floor[index],
+                  floorNames[index],
                   style: TextStyle(
                     color: isSelected ? Colors.white : Colors.black,
                   ),
@@ -166,7 +163,7 @@ class _KeypadState extends State<Keypad> {
             onPressed: _isButtonSelected
                 ? () {
                     _inactivityTimer?.cancel();
-                    mockSaveSelectedFloor(_selectedKey);
+                    Floor(_selectedKey);
                     Navigator.push(
                       context,
                       MaterialPageRoute(
