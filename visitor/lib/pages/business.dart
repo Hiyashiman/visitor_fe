@@ -94,20 +94,20 @@ class _MyHomePageState extends State<MyHomePage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             SizedBox(
-              child:  Container(
+              child: Container(
                 height: 150, // Example: Enforce a height constraint
-                child: const MyStepper(initialStep: 4),
+                child: MyStepper(initialStep: 4),
               ),
             ),
             // Step Progress Indicator
             _buildStepProgressIndicator(),
-            const SizedBox(height: 32),
+            SizedBox(height: 32),
             Expanded(child: _buildButtonGrid()),
-            const SizedBox(height: 32),
+            SizedBox(height: 32),
             _Text(),
-            const SizedBox(height: 40),
+            SizedBox(height: 40),
             _buildFooterButton(context),
-            const SizedBox(height: 100),
+            SizedBox(height: 100),
           ],
         ),
       ),
@@ -116,9 +116,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget _buildStepProgressIndicator() {
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: const Color.fromARGB(255, 255, 255, 255),
+        color: Color.fromARGB(255, 255, 255, 255),
         borderRadius: BorderRadius.circular(3),
       ),
       child: const Center(
@@ -157,11 +157,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => const PageSucceed()));
           },
-          // ignore: sort_child_properties_last
-          child: Text(
-            buttonLabels[index],
-            style:const  TextStyle(fontSize: 20),
-          ),
+          child: Text(businessNames[index]),
           style: ElevatedButton.styleFrom(
             backgroundColor: _selectedButtonIndex == index
                 ? Colors.blue[800]
