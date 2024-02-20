@@ -1,3 +1,4 @@
+// ignore: file_names
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:visitor/pages/select_floor.dart';
