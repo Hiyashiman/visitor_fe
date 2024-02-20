@@ -16,6 +16,7 @@ class SelectFloor extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: avoid_print
     print("IDcardUesr: $data");
     return const MaterialApp(
       home: Scaffold(
@@ -38,7 +39,7 @@ class _KeypadState extends State<Keypad> {
   Timer? _inactivityTimer;
   bool _isButtonSelected = false;
   String _selectedKey = '';
-  String _SelectedFloor = '';
+  String? _SelectedFloor = '';
     List<String> floorNames = [];
 
   @override
@@ -64,6 +65,7 @@ class _KeypadState extends State<Keypad> {
         });
       }
     } catch (e) {
+      // ignore: avoid_print
       print("Error fetching data: $e");
     }
     }
@@ -93,8 +95,10 @@ class _KeypadState extends State<Keypad> {
 
   //_mockSelectedFloor
   // ที่นี่คุณสามารถจำลองการบันทึกข้อมูลไปยังฐานข้อมูลหรือการเรียกใช้งาน API
+  // ignore: non_constant_identifier_names
   void Floor(String floor) {
     _SelectedFloor = floor;
+    // ignore: avoid_print
     print('selected floor: $_SelectedFloor');
   }
 
