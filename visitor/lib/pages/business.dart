@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:visitor/pages/registration-system.dart'; // Update with correct import path
 import 'package:visitor/pages/stepper.dart'; // Update with correct import path
 import 'package:visitor/pages/succeed.dart'; // Update with correct import path
-import 'package:visitor/utils/style/style.dart'; // Update with correct import path
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -11,6 +10,7 @@ void main() {
   runApp(MyBusiness());
 }
 
+// ignore: use_key_in_widget_constructors
 class MyBusiness extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -25,8 +25,10 @@ class MyBusiness extends StatelessWidget {
   }
 }
 
+// ignore: use_key_in_widget_constructors
 class MyHomePage extends StatefulWidget {
   @override
+  // ignore: library_private_types_in_public_api
   _MyHomePageState createState() => _MyHomePageState();
 }
 
@@ -70,6 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
         });
       }
     } catch (e) {
+      // ignore: avoid_print
       print("Error fetching data: $e");
     }
   }
@@ -95,8 +98,11 @@ class _MyHomePageState extends State<MyHomePage> {
     final SharedPreferences prefs = await _prefs;
     await prefs.setInt('business_id',busineesId);
     var data = prefs.getInt('floor_id');
+    // ignore: avoid_print
     print("floor_id:$data");
+    // ignore: avoid_print
     print('selected : $_SelectedBook');
+    // ignore: avoid_print
     print('Time: $pressedTime ');
   }
 
@@ -109,20 +115,21 @@ class _MyHomePageState extends State<MyHomePage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             SizedBox(
+              // ignore: sized_box_for_whitespace
               child: Container(
                 height: 150, // Example: Enforce a height constraint
-                child: MyStepper(initialStep: 4),
+                child: const MyStepper(initialStep: 4),
               ),
             ),
             // Step Progress Indicator
             _buildStepProgressIndicator(),
-            SizedBox(height: 32),
+            const SizedBox(height: 32),
             Expanded(child: _buildButtonGrid()),
-            SizedBox(height: 32),
+            const SizedBox(height: 32),
             _Text(),
-            SizedBox(height: 40),
+            const SizedBox(height: 40),
             _buildFooterButton(context),
-            SizedBox(height: 100),
+            const SizedBox(height: 100),
           ],
         ),
       ),
@@ -131,9 +138,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget _buildStepProgressIndicator() {
     return Container(
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Color.fromARGB(255, 255, 255, 255),
+        color: const Color.fromARGB(255, 255, 255, 255),
         borderRadius: BorderRadius.circular(3),
       ),
       child: const Center(
@@ -173,11 +180,13 @@ class _MyHomePageState extends State<MyHomePage> {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => const PageSucceed()));
           },
+          // ignore: sort_child_properties_last
           child: Text(businessNames[index]),
           style: ElevatedButton.styleFrom(
             backgroundColor: _selectedButtonIndex == index
                 ? Colors.blue[800]
                 : Colors.grey[300],
+            // ignore: deprecated_member_use
             onPrimary:
                 _selectedButtonIndex == index ? Colors.white : Colors.black,
             shape: RoundedRectangleBorder(

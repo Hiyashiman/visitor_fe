@@ -1,4 +1,4 @@
-// ignore: file_names
+
 import 'dart:async';
 import 'package:flutter/material.dart';
 // ignore: unused_import
@@ -70,6 +70,7 @@ class _PersonalDataConsentScreenState extends State<PersonalDataConsentScreen> {
               child: const Text('ตกลง'),
               onPressed: () {
                 _selectedPersonal = "ไม่ยินยอม";
+                // ignore: avoid_print
                 print("User selection: $_selectedPersonal");
                 _inactivityTimer?.cancel(); // ยกเลิก Timer ก่อนนำทาง
                 Navigator.of(context)

@@ -33,6 +33,7 @@ class _HomeState extends State<Mycamer> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(
+              // ignore: sized_box_for_whitespace
               child: Container(
                 height: 150, // Example: Enforce a height constraint
                 child: const MyStepper(initialStep: 1),

@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:visitor/pages/registration-system.dart'; // ตรวจสอบ path ที่ถูกต้อง
 import 'package:visitor/pages/stepper.dart';
 import 'package:visitor/utils/style/style.dart';

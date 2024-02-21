@@ -65,13 +65,10 @@ class _KeypadState extends State<Keypad> {
       if (floorData is List) {
         setState(() {
           floorNames = List<String>.from(
-<<<<<<< HEAD
-              flororData.map((floor) => floor['floor_number'].toString()));
-          floorId = List<int>.from(flororData.map((e) => e['id']));
-        print(floorId);
-=======
               floorData.map((floor) => floor['floor_number'].toString()));
->>>>>>> ecf24b7de9a833c2642e64a3997d2a278d2d7494
+          floorId = List<int>.from(floorData.map((e) => e['id']));
+        // ignore: avoid_print
+        print(floorId);
         });
       }
     } catch (e) {
@@ -100,6 +97,7 @@ class _KeypadState extends State<Keypad> {
     floor_id = id ; 
     await prefs.setInt('floor_id', floor_id);
 
+    // ignore: avoid_print
     print("floor id :$floor_id");
     setState(() {
 
