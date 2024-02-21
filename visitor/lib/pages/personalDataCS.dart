@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 // ignore: unused_import
 import 'package:visitor/pages/business.dart';
-import 'package:visitor/pages/face_comparison.dart';
+import 'package:visitor/pages/camera.dart';
 import 'package:visitor/pages/registration-system.dart';
 import 'package:visitor/pages/stepper.dart';
 
@@ -96,7 +96,7 @@ class _PersonalDataConsentScreenState extends State<PersonalDataConsentScreen> {
           children: [
             const SizedBox(
               child: SizedBox(
-                height: 150,
+                height: 100,
                 child: MyStepper(initialStep: 2),
               ),
             ),
@@ -105,7 +105,7 @@ class _PersonalDataConsentScreenState extends State<PersonalDataConsentScreen> {
             ),
             const Center(
               child: Padding(
-                padding: EdgeInsets.all(16.0),
+                padding: EdgeInsets.all(12.0),
                 child: Text(
                   'ข้อตกลงการใช้บริการ  Personal Data Consent',
                   style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
@@ -114,39 +114,31 @@ class _PersonalDataConsentScreenState extends State<PersonalDataConsentScreen> {
               ),
             ),
             const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 300.0),
+              padding: EdgeInsets.symmetric(horizontal: 150.0),
               child: Align(
                   alignment: Alignment.centerLeft,
                   child: Center(
                     child: Column(
                       children: [
                         Text(
-                          'ข้าพเจ้ายินยอมให้ไว้ซึ่งข้อมูลอันเป็นข้อมูลส่วนบุคคลของข้าพเจ้าแก่ผู้รับหน้าที่จัดเก็บข้อมูล',
+                          'ข้าพเจ้ายินยอมให้ไว้ซึ่งข้อมูลอันเป็นข้อมูลส่วนบุคคลของข้าพเจ้าแก่ผู้รับหน้าที่จัดเก็บข้อมูลและประมวลผลของระบบนี้เพื่อใช้ประโยชน์ในงานรักษาความปลอดภัยของอาคารสถานที่แห่งนี้',
                           style: TextStyle(fontSize: 20),
                           textAlign: TextAlign.center,
                         ),
+                        
                         Text(
-                          'และประมวลผลของระบบนี้เพื่อใช้ประโยชน์ในงานรักษาความปลอดภัยของอาคารสถานที่แห่งนี้',
+                          'โดยการจัดเก็บเป็นไปตามข้อกําหนดและผู้จัดเก็บสามารถลบทำลายข้อมูลทั้งหมดหรือบางส่วนของข้าพเจ้าโดยไม่ต้องแจ้งให้ข้าพเจ้าทราบล่วงหน้า',
                           style: TextStyle(fontSize: 20),
                           textAlign: TextAlign.center,
                         ),
-                        Text(
-                          'โดยการจัดเก็บเป็นไปตามข้อกําหนดและผู้จัดเก็บสามารถลบทำลายข้อมูลทั้งหมดหรือบางส่วน',
-                          style: TextStyle(fontSize: 20),
-                          textAlign: TextAlign.center,
-                        ),
-                        Text(
-                          'ของข้าพเจ้าโดยไม่ต้องแจ้งให้ข้าพเจ้าทราบล่วงหน้า',
-                          style: TextStyle(fontSize: 20),
-                          textAlign: TextAlign.center,
-                        ),
+                     
                       ],
                     ),
                   )),
             ),
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 200.0),
+                padding: const EdgeInsets.symmetric(horizontal: 150.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -176,7 +168,7 @@ class _PersonalDataConsentScreenState extends State<PersonalDataConsentScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const MyFaceScanPage()),
+                              builder: (context) => const Mycamer()),
                         );
                       },
                       child: const Text(

@@ -40,8 +40,8 @@ class _HomeState extends State<Mycamer> {
             ),
             if (imageFile != null)
               Container(
-                width: 640,
-                height: 480,
+                width: 550,
+                height: 400,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                   color: Colors.grey,
@@ -53,8 +53,8 @@ class _HomeState extends State<Mycamer> {
               )
             else
               Container(
-                width: 640,
-                height: 480,
+                width: 550,
+                height: 400,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                   color: Colors.grey,
@@ -80,12 +80,7 @@ class _HomeState extends State<Mycamer> {
                 const SizedBox(
                   width: 20,
                 ),
-                // Expanded(
-                //   child: ElevatedButton(
-                //       onPressed: () => getImage(source: ImageSource.gallery),
-                //       child: const Text('Select Image',
-                //           style: TextStyle(fontSize: 18))),
-                // )
+             
               ],
             ),
           ],
