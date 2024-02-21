@@ -61,13 +61,17 @@ class _KeypadState extends State<Keypad> {
     Future<void> _getFloor() async {
       try {
      final response = await dio.get('http://192.168.1.120:8000/api/floor/');
-      var flororData = response.data['data'];
-      if (flororData is List) {
+      var floorData = response.data['data'];
+      if (floorData is List) {
         setState(() {
           floorNames = List<String>.from(
+<<<<<<< HEAD
               flororData.map((floor) => floor['floor_number'].toString()));
           floorId = List<int>.from(flororData.map((e) => e['id']));
         print(floorId);
+=======
+              floorData.map((floor) => floor['floor_number'].toString()));
+>>>>>>> ecf24b7de9a833c2642e64a3997d2a278d2d7494
         });
       }
     } catch (e) {
