@@ -5,6 +5,7 @@ import 'package:visitor/pages/stepper.dart'; // Update with correct import path
 import 'package:visitor/pages/succeed.dart'; // Update with correct import path
 import 'package:visitor/utils/style/style.dart'; // Update with correct import path
 import 'package:dio/dio.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(MyBusiness());
@@ -30,12 +31,16 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+  late int  busineesId;
+
   bool _hasButtonBeenPressed = false;
   int? _selectedButtonIndex;
   Timer? _inactivityTimer;
   String? _SelectedBook = '';
   final dio = Dio();
   List<String> businessNames = [];
+  List<int> busineesIds = [];
 
   @override
   void initState() {
@@ -57,6 +62,11 @@ class _MyHomePageState extends State<MyHomePage> {
         setState(() {
           businessNames = List<String>.from(
               businessData.map((business) => business['name'].toString()));
+        
+          busineesIds = List<int>.from(
+              businessData.map((e) => e['id'])
+
+          );
         });
       }
     } catch (e) {
@@ -78,9 +88,12 @@ class _MyHomePageState extends State<MyHomePage> {
     super.dispose();
   }
 
-  void mockSaveSelectedbuttonLabels(String buttonLabels, String pressedTime) {
+  void mockSaveSelectedbuttonLabels(String buttonLabels, String pressedTime  ,int id)async {
     // ที่นี่คุณสามารถจำลองการบันทึกข้อมูลไปยังฐานข้อมูลหรือการเรียกใช้งาน API
     _SelectedBook = buttonLabels;
+    busineesId = id ;
+    final SharedPreferences prefs = await _prefs;
+    await prefs.setInt('business_id',busineesId);
     print('selected : $_SelectedBook');
     print('Time: $pressedTime ');
   }
@@ -149,10 +162,11 @@ class _MyHomePageState extends State<MyHomePage> {
             var now = DateTime.now(); // บันทึกช่วงเวลาปัจจุบัน
             _inactivityTimer?.cancel();
             setState(() {
+
               _hasButtonBeenPressed = true;
               _selectedButtonIndex = index;
               mockSaveSelectedbuttonLabels(
-                  businessNames[index], now.toString()); // ส่งช่วงเวลาไปด้วย
+                  businessNames[index], now.toString() , busineesIds[index]); // ส่งช่วงเวลาไปด้วย
             });
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => const PageSucceed()));
