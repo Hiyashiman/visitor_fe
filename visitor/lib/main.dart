@@ -3,8 +3,8 @@ import 'package:visitor/pages/registration-system.dart';
 
 
 void main() {
-  runApp(const MaterialApp(
+  runApp( const MaterialApp(
     title: 'Visitor',
-    home: MyApp(),
+    home: MyApp(),  
   ));
 }

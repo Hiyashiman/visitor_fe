@@ -86,7 +86,7 @@ class _MyFaceScanState extends State<MyFaceScan> {
                   ),
                   const SizedBox(height: 30),
                   LottieBuilder.asset(
-                    'animations/animationscan.json',
+                    'assets/animations/animationscan.json',
                     height: 250,
                     width: 250,
                   ),
