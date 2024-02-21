@@ -15,7 +15,6 @@ class PageSucceed extends StatefulWidget {
 
 class _PageSucceedState extends State<PageSucceed> {
   Timer? _inactivityTimer;
- 
 
   @override
   void initState() {
@@ -23,10 +22,9 @@ class _PageSucceedState extends State<PageSucceed> {
     _resetInactivityTimer();
   }
 
-  void _resetInactivityTimer()async {
-
+  void _resetInactivityTimer() {
     _inactivityTimer?.cancel();
-    _inactivityTimer = Timer(const Duration(seconds: 180), _navigateToHomePage);
+    _inactivityTimer = Timer(const Duration(seconds: 60), _navigateToHomePage);
   }
 
   void _navigateToHomePage() {
@@ -45,44 +43,45 @@ class _PageSucceedState extends State<PageSucceed> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        const SizedBox(
-          child: SizedBox(
-            height: 150,
-            child: MyStepper(initialStep: 6),
-          ),
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+          
+            SizedBox(
+              // ignore: sized_box_for_whitespace
+              child: Container(
+                height: 150,
+                child: const MyStepper(initialStep: 6),
+              ),
+            ),
+            Text("ลงทะเบียนสำเร็จกรุณาดึงบัตรประชาชนออก",
+            style: AppTextStyle.textsuccess),
+            const SizedBox(height: 30),
+            LottieBuilder.asset(
+              'assets/animations/animation.json',
+              height: 250,
+              width: 250,
+            ),
+            const SizedBox(height: 30),
+            Text('สแกนหน้าหน้าเข้าอาคารได้เลย', style: AppTextStyle.getbody),
+            const SizedBox(height: 30),
+            ElevatedButton(
+              child: const Text('เริ่มรายการใหม่'),
+              onPressed: () {
+                _inactivityTimer?.cancel();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          const MyApp()), // อัพเดตตามหน้าเริ่มต้นของคุณ
+                ).then((_) => _resetInactivityTimer());
+              },
+            ),
+          ],
         ),
-        Padding(
-          padding: const EdgeInsets.all(50.0),
-          child: Text(
-            'ลงทะเบียนสำเร็จกรุณาดึงบัตรประชาชนออก',
-            style: AppTextStyle.textsuccess,
-          ),
-        ),
-        const SizedBox(height: 50),
-        LottieBuilder.asset(
-          'assets/animations/animation.json',
-          height: 250,
-          width: 250,
-        ),
-        const SizedBox(height: 30),
-        Text('สแกนหน้าหน้าเข้าอาคารได้เลย', style: AppTextStyle.getbody),
-        const SizedBox(height: 30),
-        ElevatedButton(
-          child: const Text('เริ่มรายการใหม่'),
-          onPressed: () {
-            _inactivityTimer?.cancel();
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) =>
-                      const MyApp()), // อัพเดตตามหน้าเริ่มต้นของคุณ
-            ).then((_) => _resetInactivityTimer());
-          },
-        ),
-      ],
+      ),
     );
   }
 }

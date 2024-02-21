@@ -36,9 +36,11 @@ class _MyHomePageState extends State<MyHomePage> {
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
   late int  busineesId;
 
+  // ignore: unused_field
   bool _hasButtonBeenPressed = false;
   int? _selectedButtonIndex;
   Timer? _inactivityTimer;
+  // ignore: non_constant_identifier_names
   String? _SelectedBook = '';
   final dio = Dio();
   List<String> businessNames = [];

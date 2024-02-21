@@ -1,9 +1,10 @@
-
+// ignore_for_file: file_names
 import 'dart:async';
 import 'package:flutter/material.dart';
 // ignore: unused_import
 import 'package:visitor/pages/business.dart';
-import 'package:visitor/pages/camera.dart';
+// import 'package:visitor/pages/camera.dart';
+import 'package:visitor/pages/face_comparison.dart';
 import 'package:visitor/pages/registration-system.dart';
 import 'package:visitor/pages/stepper.dart';
 
@@ -165,11 +166,12 @@ class _PersonalDataConsentScreenState extends State<PersonalDataConsentScreen> {
                       onPressed: () {
                         _inactivityTimer?.cancel(); // ยกเลิก Timer ก่อนนำทาง
                         _selectedPersonal = "ยินยอม";
+                        // ignore: avoid_print
                         print("User selection: $_selectedPersonal");
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const Mycamer()),
+                              builder: (context) => const MyFaceScan()),
                         );
                       },
                       child: const Text(

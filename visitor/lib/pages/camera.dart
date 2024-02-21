@@ -23,10 +23,6 @@ class _HomeState extends State<Mycamer> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Capturing Images'),
-        centerTitle: true,
-      ),
       body: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Column(

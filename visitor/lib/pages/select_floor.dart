@@ -37,11 +37,13 @@ class Keypad extends StatefulWidget {
 
 class _KeypadState extends State<Keypad> {
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+  // ignore: non_constant_identifier_names
   late int floor_id ; 
   final dio = Dio();
   Timer? _inactivityTimer;
   bool _isButtonSelected = false;
   String _selectedKey = '';
+  // ignore: non_constant_identifier_names
   String? _SelectedFloor = '';
   List<String> floorNames = [];
   List<int> floorId = [];
