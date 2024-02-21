@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:visitor/pages/personalDataCS.dart';
 import 'package:visitor/pages/registration-system.dart';
 import 'package:visitor/pages/stepper.dart';
@@ -35,12 +36,15 @@ class Keypad extends StatefulWidget {
 }
 
 class _KeypadState extends State<Keypad> {
+  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+  late int floor_id ; 
   final dio = Dio();
   Timer? _inactivityTimer;
   bool _isButtonSelected = false;
   String _selectedKey = '';
   String? _SelectedFloor = '';
-    List<String> floorNames = [];
+  List<String> floorNames = [];
+  List<int> floorId = [];
 
   @override
   void initState() {
@@ -62,6 +66,8 @@ class _KeypadState extends State<Keypad> {
         setState(() {
           floorNames = List<String>.from(
               flororData.map((floor) => floor['floor_number'].toString()));
+          floorId = List<int>.from(flororData.map((e) => e['id']));
+        print(floorId);
         });
       }
     } catch (e) {
@@ -84,8 +90,15 @@ class _KeypadState extends State<Keypad> {
     super.dispose();
   }
 
-  void _onFloorTap(String label) {
+  void _onFloorTap(String label , int id) async {
+
+    final SharedPreferences prefs = await _prefs;
+    floor_id = id ; 
+    await prefs.setInt('floor_id', floor_id);
+
+    print("floor id :$floor_id");
     setState(() {
+
       _isButtonSelected = true;
       _selectedKey = label;
       _SelectedFloor = label;
@@ -144,7 +157,7 @@ class _KeypadState extends State<Keypad> {
                     borderRadius: BorderRadius.circular(20.0),
                   ),
                 ),
-                onPressed: () => _onFloorTap(floorNames[index]),
+                onPressed: () => _onFloorTap(floorNames[index] , floorId[index]),
                 child: Text(
                   floorNames[index],
                   style: TextStyle(

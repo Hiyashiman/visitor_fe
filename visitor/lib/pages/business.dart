@@ -94,6 +94,8 @@ class _MyHomePageState extends State<MyHomePage> {
     busineesId = id ;
     final SharedPreferences prefs = await _prefs;
     await prefs.setInt('business_id',busineesId);
+    var data = prefs.getInt('floor_id');
+    print("floor_id:$data");
     print('selected : $_SelectedBook');
     print('Time: $pressedTime ');
   }
