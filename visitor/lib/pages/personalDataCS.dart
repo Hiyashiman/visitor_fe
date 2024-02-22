@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 // ignore: unused_import
 import 'package:visitor/pages/business.dart';
-// import 'package:visitor/pages/camera.dart';
+import 'package:visitor/pages/camera.dart';
 import 'package:visitor/pages/face_comparison.dart';
 import 'package:visitor/pages/registration-system.dart';
 import 'package:visitor/pages/stepper.dart';
@@ -171,7 +171,7 @@ class _PersonalDataConsentScreenState extends State<PersonalDataConsentScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const MyFaceScan()),
+                              builder: (context) => const Mycamer()),
                         );
                       },
                       child: const Text(

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:visitor/pages/face_comparison.dart';
 import 'package:visitor/pages/stepper.dart';
 
 void main() {
@@ -19,6 +20,32 @@ class Mycamer extends StatefulWidget {
 
 class _HomeState extends State<Mycamer> {
   File? imageFile;
+
+    void getImage({required ImageSource source}) async {
+    final file = await ImagePicker().pickImage(
+        source: source,
+        maxWidth: 640,
+        maxHeight: 480,
+        imageQuality: 70 
+        );
+
+    if (file?.path != null) {
+      setState(() {
+        imageFile = File(file!.path);
+        navigateToNextPage();
+      });
+    }
+  }
+
+  void navigateToNextPage() {
+  if (imageFile != null) {
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => MyFaceScan()), 
+    );
+  }
+}
 
   @override
   Widget build(BuildContext context) {
@@ -86,18 +113,5 @@ class _HomeState extends State<Mycamer> {
     );
   }
 
-  void getImage({required ImageSource source}) async {
-    final file = await ImagePicker().pickImage(
-        source: source,
-        maxWidth: 640,
-        maxHeight: 480,
-        imageQuality: 70 //0 - 100
-        );
 
-    if (file?.path != null) {
-      setState(() {
-        imageFile = File(file!.path);
-      });
-    }
-  }
 }
