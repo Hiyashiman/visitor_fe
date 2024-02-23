@@ -51,8 +51,6 @@ class _HomePageState extends State<MyApp> {
     };
   }
 
- 
-
 
   void _incrementTap() {
     setState(() {
@@ -71,17 +69,18 @@ class _HomePageState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: Stack(
-           children: [
-        const Positioned(
-          top: 0,
-          left: 0,
-          child: Padding(
-            padding: EdgeInsets.all(8.0),
-            child: MyLogo(),
+        children: [
+          const Positioned(
+            top: 0,
+            left: 0,
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: MyLogo(),
+            ),
           ),
-        ),
 
           // ใช้ GestureDetector เพื่อจับการกด
           GestureDetector(

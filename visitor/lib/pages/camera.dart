@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -29,11 +30,15 @@ class _HomeState extends State<Mycamer> {
         imageQuality: 70 
         );
 
-    if (file?.path != null) {
+    if (file != null) {
+      final bytes = await File(file.path).readAsBytes();
+      String base64Image = base64Encode(bytes);
       setState(() {
-        imageFile = File(file!.path);
+        imageFile = File(file.path);
         navigateToNextPage();
       });
+      // ignore: avoid_print
+      print(base64Image);
     }
   }
 
