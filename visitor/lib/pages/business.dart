@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:visitor/pages/registration-system.dart'; // Update with correct import path
-import 'package:visitor/pages/stepper.dart'; // Update with correct import path
+import 'package:visitor/widget/stepper.dart';
 import 'package:visitor/pages/succeed.dart'; // Update with correct import path
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -119,7 +119,7 @@ class _MyHomePageState extends State<MyHomePage> {
             SizedBox(
               // ignore: sized_box_for_whitespace
               child: Container(
-                height: 150, // Example: Enforce a height constraint
+                height: 200,
                 child: const MyStepper(initialStep: 4),
               ),
             ),
@@ -140,9 +140,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget _buildStepProgressIndicator() {
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(300),
       decoration: BoxDecoration(
-        color: const Color.fromARGB(255, 255, 255, 255),
         borderRadius: BorderRadius.circular(3),
       ),
       child: const Center(
@@ -183,6 +182,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 MaterialPageRoute(builder: (context) => const PageSucceed()));
           },
           // ignore: sort_child_properties_last
+          
           child: Text(businessNames[index]),
           style: ElevatedButton.styleFrom(
             backgroundColor: _selectedButtonIndex == index

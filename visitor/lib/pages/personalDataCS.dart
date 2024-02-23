@@ -6,7 +6,7 @@ import 'package:visitor/pages/business.dart';
 import 'package:visitor/pages/camera.dart';
 import 'package:visitor/pages/face_comparison.dart';
 import 'package:visitor/pages/registration-system.dart';
-import 'package:visitor/pages/stepper.dart';
+import 'package:visitor/widget/stepper.dart';
 
 void main() => runApp(const Agreement());
 
@@ -98,16 +98,16 @@ class _PersonalDataConsentScreenState extends State<PersonalDataConsentScreen> {
           children: [
             const SizedBox(
               child: SizedBox(
-                height: 100,
+                height: 200,
                 child: MyStepper(initialStep: 2),
               ),
             ),
             const SizedBox(
-              height: 60,
+              height: 30,
             ),
             const Center(
               child: Padding(
-                padding: EdgeInsets.all(12.0),
+                padding: EdgeInsets.all(250.0),
                 child: Text(
                   'ข้อตกลงการใช้บริการ  Personal Data Consent',
                   style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
@@ -123,13 +123,13 @@ class _PersonalDataConsentScreenState extends State<PersonalDataConsentScreen> {
                     child: Column(
                       children: [
                         Text(
-                          'ข้าพเจ้ายินยอมให้ไว้ซึ่งข้อมูลอันเป็นข้อมูลส่วนบุคคลของข้าพเจ้าแก่ผู้รับหน้าที่จัดเก็บข้อมูลและประมวลผลของระบบนี้เพื่อใช้ประโยชน์ในงานรักษาความปลอดภัยของอาคารสถานที่แห่งนี้',
+                          'ข้าพเจ้ายินยอมให้ไว้ซึ่งข้อมูลอันเป็นข้อมูลส่วนบุคคลของข้าพเจ้าแก่ผู้รับหน้าที่จัดเก็บข้อมูลและประมวลผลของระบบนี้เพื่อใช้ประโยชน์ในงานรักษาความปลอดภัยของอาคารสถานที่',
                           style: TextStyle(fontSize: 20),
                           textAlign: TextAlign.center,
                         ),
                         
                         Text(
-                          'โดยการจัดเก็บเป็นไปตามข้อกําหนดและผู้จัดเก็บสามารถลบทำลายข้อมูลทั้งหมดหรือบางส่วนของข้าพเจ้าโดยไม่ต้องแจ้งให้ข้าพเจ้าทราบล่วงหน้า',
+                          'แห่งนี้โดยการจัดเก็บเป็นไปตามข้อกําหนดและผู้จัดเก็บสามารถลบทำลายข้อมูลทั้งหมดหรือบางส่วนของข้าพเจ้าโดยไม่ต้องแจ้งให้ข้าพเจ้าทราบล่วงหน้า',
                           style: TextStyle(fontSize: 20),
                           textAlign: TextAlign.center,
                         ),

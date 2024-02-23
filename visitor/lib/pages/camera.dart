@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:visitor/pages/face_comparison.dart';
-import 'package:visitor/pages/stepper.dart';
+import 'package:visitor/widget/stepper.dart';
 
 void main() {
   runApp(const MaterialApp(
@@ -58,8 +58,8 @@ class _HomeState extends State<Mycamer> {
             SizedBox(
               // ignore: sized_box_for_whitespace
               child: Container(
-                height: 150, // Example: Enforce a height constraint
-                child: const MyStepper(initialStep: 1),
+                height: 200, 
+                child: const MyStepper(initialStep: 3),
               ),
             ),
             if (imageFile != null)

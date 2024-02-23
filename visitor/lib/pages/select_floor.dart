@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:visitor/pages/personalDataCS.dart';
 import 'package:visitor/pages/registration-system.dart';
-import 'package:visitor/pages/stepper.dart';
+import 'package:visitor/widget/stepper.dart';
 import 'package:visitor/utils/style/style.dart';
 import 'package:dio/dio.dart';
+import 'dart:typed_data';
 
 void main() => runApp(const SelectFloor(
       data: {},
@@ -39,7 +40,8 @@ class _KeypadState extends State<Keypad> {
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
   // ignore: non_constant_identifier_names
   late int floor_id ; 
-  final dio = Dio();
+    final dio = Dio();
+  Uint8List? _imageBytes;
   Timer? _inactivityTimer;
   bool _isButtonSelected = false;
   String _selectedKey = '';
@@ -118,6 +120,7 @@ class _KeypadState extends State<Keypad> {
     print('selected floor: $_SelectedFloor');
   }
 
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -125,12 +128,12 @@ class _KeypadState extends State<Keypad> {
       children: <Widget>[
         const SizedBox(
           child: SizedBox(
-            height: 150,
+            height: 200,
             child: MyStepper(initialStep: 1),
           ),
         ),
         Padding(
-          padding: const EdgeInsets.all(50.0),
+          padding: const EdgeInsets.all(250.0),
           child: Text(
             'กรุณาเลือกชั้นที่ต้องการทำธุระ',
             style: AppTextStyle.heading,
@@ -199,3 +202,4 @@ class _KeypadState extends State<Keypad> {
     );
   }
 }
+

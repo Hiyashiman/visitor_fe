@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:visitor/pages/registration-system.dart';
 import 'package:visitor/utils/style/style.dart';
-import 'package:visitor/pages/stepper.dart';
+import 'package:visitor/widget/stepper.dart';
 import 'package:lottie/lottie.dart';
 import 'package:visitor/pages/business.dart';
 
@@ -68,17 +68,19 @@ class _MyFaceScanState extends State<MyFaceScan> {
             padding: EdgeInsets.all(2.0),
             // ปรับ padding สำหรับ MyStepper
             child: SizedBox(
-              height: 180,
-              width: double.infinity, // ให้ MyStepper มีความกว้างเต็มพื้นที่
+              height: 200,
+              width: double.infinity, 
               child: MyStepper(initialStep: 3),
             ),
           ),
+
+           const SizedBox(height: 300),
           Expanded(
             child: Center(
               child: Column(
                 children: [
                   SizedBox(
-                    height: 80,
+                    height: 200,
                     child: Text(
                       "AI กำลังเปรียบเทียบใบหน้ากรุณารอสักครู่",
                       style: AppTextStyle.heading,

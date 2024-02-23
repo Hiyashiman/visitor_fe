@@ -2,31 +2,34 @@ import 'package:easy_stepper/easy_stepper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-
 /*
 How to Use
 
-import 'package:visitor/widget/stepper.dart';
+import 'package:visitor/pages/stepper.dart';
 MyStepper(initialStep: <int 0-6>),
 
 
 example  
-MyStepper(initialStep: 1),
+*
+SizedBox(
+        child: Container(
+        height: 150, // Example: Enforce a height constraint
+        child: MyStepper(initialStep: 1),
+      ),
+     )   
 
-*/ 
+*/
 
 class MyStepper extends StatefulWidget {
-
   final int initialStep;
-  const MyStepper({super.key , this.initialStep = 0});
+  const MyStepper({super.key, this.initialStep = 0});
 
   @override
   State<MyStepper> createState() => _MyStepperState();
-  
 }
 
 class _MyStepperState extends State<MyStepper> {
-  late int activeStep ;
+  late int activeStep;
   int activeStep2 = 0;
   int reachedStep = 0;
   int upperBound = 5;
@@ -42,10 +45,11 @@ class _MyStepperState extends State<MyStepper> {
   }
 
   @override
-  void initState(){
+  void initState() {
     super.initState();
     activeStep = widget.initialStep;
   }
+
   // ignore: annotate_overrides
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,65 +59,59 @@ class _MyStepperState extends State<MyStepper> {
             child: Column(
               children: [
                 EasyStepper(
-                    activeStep: activeStep,
-                    lineStyle: const LineStyle(
-                      lineLength: 50,
+                  activeStep: activeStep,
+                  lineStyle: const LineStyle(
+                      lineLength: 100,
                       lineType: LineType.normal,
-                      lineThickness: 2,
-                      lineSpace: 0,
+                      lineThickness: 3,
+                      lineSpace: 3,
                       lineWidth: 2,
                       unreachedLineType: LineType.normal,
-                      activeLineColor: Colors.black,
-                      defaultLineColor: Colors.black,
-                      finishedLineColor: Colors.green
-                      
-                      
-                    ),
-                    defaultStepBorderType: BorderType.normal,
-                    stepBorderRadius: 8,
+                      activeLineColor: Colors.amberAccent,
+                      defaultLineColor: Colors.amberAccent,
+                      finishedLineColor: Colors.green),
+                  defaultStepBorderType: BorderType.normal,
+                  stepBorderRadius: 10,
 
-                    borderThickness: 2,//ปรับความกว้างของ ขอบ
-                    internalPadding: 0, //ปรับความห่างของกล่อง 
-                    
-                    padding: const EdgeInsetsDirectional.symmetric(
-                      horizontal: 30,
-                      vertical: 20,
-                    ),
-                    stepRadius: 30, //ความใหญ่ของกล่อง 
-                    activeStepTextColor: Colors.black,
-                    activeStepBorderColor: Colors.black,
-                    activeStepIconColor: Colors.black,
-                    finishedStepBorderColor: Colors.green,
-                    finishedStepTextColor: Colors.green,
-                    finishedStepBackgroundColor: Colors.green,
-                    
-                    finishedStepIconColor: Colors.white,
-                    showLoadingAnimation: false,
+                  borderThickness: 5, //ปรับความกว้างของ ขอบ
+                  internalPadding: 10, //ปรับความห่างของกล่อง
 
-                    steps:  const [
-                      EasyStep(
+                  padding: const EdgeInsetsDirectional.symmetric(
+                    horizontal: 30,
+                    vertical: 20,
+                  ),
+                  stepRadius: 30, //ความใหญ่ของกล่อง
+                  activeStepTextColor: Colors.black,
+                  activeStepBorderColor: Colors.amberAccent,
+                  activeStepBackgroundColor: Colors.amberAccent,
+                  activeStepIconColor: Colors.black,
+                  finishedStepBorderColor: Colors.green,
+                  finishedStepTextColor: Colors.green,
+                  finishedStepBackgroundColor: Colors.green,
+                  finishedStepIconColor: Colors.white,
+                  showLoadingAnimation: false,
+
+                  steps: const [
+                    EasyStep(
                         icon: Icon(CupertinoIcons.creditcard),
-                      ),
-                      EasyStep(
+                        title: "Insert Id Card"),
+                    EasyStep(
                         icon: Icon(CupertinoIcons.square_stack_3d_up_fill),
-                      ), 
-                      EasyStep(
-                        icon: Icon(CupertinoIcons.info),
-                      ),
-                       EasyStep(
+                        title: "Select floor"),
+                    EasyStep(icon: Icon(CupertinoIcons.info), title: "Info"),
+                    EasyStep(
                         icon: Icon(CupertinoIcons.person),
-                      ),
-                       EasyStep(
+                        title: "Verify person"),
+                    EasyStep(
                         icon: Icon(CupertinoIcons.search),
-                      ),
-                       EasyStep(
+                        title: "Select the business "),
+                    EasyStep(
                         icon: Icon(CupertinoIcons.check_mark_circled),
-                      ),
-                    ],
-                    onStepReached: (index) => setState(() => activeStep = index),
-                    ) 
+                        title: "Success"),
+                  ],
+                  onStepReached: (index) => setState(() => activeStep = index),
+                )
               ],
-              
             ),
           ),
         ),

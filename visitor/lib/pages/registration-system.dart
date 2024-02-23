@@ -5,9 +5,9 @@ import 'package:lottie/lottie.dart';
 import 'package:visitor/pages/select_floor.dart';
 import 'package:visitor/pages/succeed.dart';
 import 'package:visitor/utils/style/style.dart';
-import 'dart:convert';
 import 'dart:typed_data';
 import 'package:dio/dio.dart';
+import 'package:visitor/widget/logo.dart';
 
 
 class MyApp extends StatefulWidget {
@@ -30,13 +30,11 @@ class _HomePageState extends State<MyApp> {
   String? cardExpirationDate = '01-01-2030';
   String? cardholderPhoto = 'assets/images/cardholder_photo.png';
   final dio = Dio();
-  Uint8List? _imageBytes;
   
 
   @override
   void initState() {
     super.initState();
-    _getLogo();
   }
 
   //mapค่าในdata
@@ -53,19 +51,8 @@ class _HomePageState extends State<MyApp> {
     };
   }
 
-   Future<void> _getLogo() async {
-     try {
-    final response = await dio.get('http://192.168.1.120:8000/api/logo/');
-    final base64String = response.data['data']['file']; 
-    // print(response.data['data']['file']);
-    setState(() {
-       _imageBytes = base64.decode(base64String);
-    });
-  } catch (e) {
-    // ignore: avoid_print
-    print("Error fetching image: $e");
-  }
-  }
+ 
+
 
   void _incrementTap() {
     setState(() {
@@ -84,24 +71,17 @@ class _HomePageState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-   Widget imageWidget = _imageBytes != null
-      ? Image.memory(_imageBytes!, fit: BoxFit.cover)
-      : const Text('Loading image...');
-
     return Scaffold(
       body: Stack(
-        children: [
-          Positioned(
-            top: 0, 
-            left: 0, 
-            child: Padding(
-              padding: const EdgeInsets.all(8.0), // ระยะห่างจากขอบ
-              child: SizedBox(
-                width: 200,
-                child: imageWidget,
-              ),
-            ),
+           children: [
+        const Positioned(
+          top: 0,
+          left: 0,
+          child: Padding(
+            padding: EdgeInsets.all(8.0),
+            child: MyLogo(),
           ),
+        ),
 
           // ใช้ GestureDetector เพื่อจับการกด
           GestureDetector(
