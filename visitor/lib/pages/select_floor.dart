@@ -72,7 +72,7 @@ class _KeypadState extends State<Keypad> {
 
   Future<void> _getFloor() async {
     try {
-      final response = await dio.get('http://192.168.1.120:8000/api/floor/');
+      final response = await dio.get('http://192.168.1.126:8000/api/floor/');
       var floorData = response.data['data'];
       if (floorData is List) {
         setState(() {
@@ -105,7 +105,8 @@ class _KeypadState extends State<Keypad> {
 
   void _onFloorTap(int index) {
     setState(() {
-      isSelected[index] = !isSelected[index]; // Toggle สถานะการเลือก
+      isSelected[index] = !isSelected[index]; 
+      _isButtonSelected = isSelected.any((element) => element);
     });
   }
 

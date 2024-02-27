@@ -60,7 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Future<void> _getBusiness() async {
     try {
-      final response = await dio.get('http://192.168.1.120:8000/api/business/all/');
+      final response = await dio.get('http://192.168.1.126:8000/api/business/all/');
       var businessData = response.data['data'];
       if (businessData is List) {
         setState(() {
